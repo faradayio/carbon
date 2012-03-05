@@ -1,6 +1,6 @@
 require 'singleton'
 require 'logger'
-require 'faraday'
+require 'httpclient'
 require 'active_support/core_ext'
 require 'hashie/mash'
 require 'multi_json'
@@ -14,22 +14,23 @@ module BrighterPlanet
 
     def self.query(emitter, characteristics = {})
       characteristics ||= {}
-      # raise ::ArgumentError, %{Emitter "#{emitter}" not recognized} unless BrighterPlanet.metadata.emitters.include?(emitter)
-      conn = ::Faraday.new(:url => domain) do |builder|
-        builder.request :url_encoded
-        builder.adapter :net_http
+      raw_response = ::HTTPClient.post("http://#{domain}/#{emitter.underscore.pluralize}.json", characteristics.merge(:key => config[:key]))
+      if (200..299).include?(raw_response.status)
+        response = ::Hashie::Mash.new ::MultiJson.decode(raw_response.body)
+        response.status = raw_response.status
+        response.success = true
+      else
+        response = ::Hashie::Mash.new
+        response.status = raw_response.status
+        response.success = false
+        response.errors = [raw_response.body]
       end
-      raw_response = conn.post do |req|
-        req.url "/#{emitter.underscore.pluralize}.json"
-        req.params = characteristics.merge(:key => config[:key])
-      end
-      response = ::Hashie::Mash.new ::MultiJson.decode(raw_response.body)
-      response.success = true
       response
     rescue ::Exception
       response = ::Hashie::Mash.new
+      response.status = 500
       response.success = false
-      response.errors = $!
+      response.errors = [$!]
       response
     end
 
@@ -61,7 +62,7 @@ module BrighterPlanet
     end
 
     def self.domain
-      'http://' + config.fetch(:domain, DEFAULT_DOMAIN)
+      config.fetch(:domain, DEFAULT_DOMAIN)
     end
 
     def self.threads

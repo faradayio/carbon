@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
 
   s.files         = ['brighter_planet_api.rb']
   s.require_path  = '.'
-  s.add_runtime_dependency 'faraday'
+  s.add_runtime_dependency 'httpclient'
   s.add_runtime_dependency 'activesupport'
   s.add_runtime_dependency 'concur'
   s.add_runtime_dependency 'multi_json'

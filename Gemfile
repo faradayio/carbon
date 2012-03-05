@@ -6,3 +6,4 @@ gemspec
 gem 'minitest'
 gem 'minitest-reporters'
 gem 'timeframe'
+gem 'webmock'

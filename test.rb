@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'benchmark'
+require 'webmock/minitest'
+WebMock.disable!
 require 'minitest/spec'
 require 'minitest/autorun'
 require 'minitest/reporters'
@@ -29,6 +31,17 @@ describe BrighterPlanetApi do
     it "is gentle about errors" do
       response = BrighterPlanetApi.query('Monkey')
       response.success.must_equal false
+    end
+    it "tells you what the server response was in case of 500" do
+      begin
+        WebMock.enable!
+        WebMock.disable_net_connect!
+        WebMock.stub_request(:post, 'http://impact.brighterplanet.com/monkeys.json').to_return(:status => 500, :body => 'too many monkeys')
+        response = BrighterPlanetApi.query('Monkey')
+        response.errors.first.must_include 'too many monkeys'
+      ensure
+        WebMock.disable!
+      end
     end
     it "sends timeframe properly" do
       response = BrighterPlanetApi.query('Flight', :timeframe => Timeframe.new(:year => 2009))
