@@ -9,10 +9,13 @@ require 'concur'
 
 module BrighterPlanet
   module Api
+    DEFAULT_DOMAIN = 'impact.brighterplanet.com'
+    DEFAULT_THREADS = 10
+
     def self.query(emitter, characteristics = {})
       characteristics ||= {}
       # raise ::ArgumentError, %{Emitter "#{emitter}" not recognized} unless BrighterPlanet.metadata.emitters.include?(emitter)
-      conn = ::Faraday.new(:url => 'http://impact.brighterplanet.com') do |builder|
+      conn = ::Faraday.new(:url => domain) do |builder|
         builder.request :url_encoded
         builder.adapter :net_http
       end
@@ -33,7 +36,7 @@ module BrighterPlanet
     # Where each query is [emitter, characteristics]
     def self.multi(queries)
       ::Concur.logger = logger
-      executor = ::Concur::Executor.new_thread_pool_executor(config[:threads] || 10)
+      executor = ::Concur::Executor.new_thread_pool_executor(threads)
       queries.map do |emitter, characteristics|
         executor.execute do
           query emitter, characteristics
@@ -55,6 +58,14 @@ module BrighterPlanet
         config[:logger] = default_logger
       end
       config[:logger]
+    end
+
+    def self.domain
+      'http://' + config.fetch(:domain, DEFAULT_DOMAIN)
+    end
+
+    def self.threads
+      config.fetch(:domain, DEFAULT_THREADS)
     end
   end
 end

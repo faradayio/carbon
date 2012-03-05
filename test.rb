@@ -6,6 +6,7 @@ require 'minitest/autorun'
 require 'minitest/reporters'
 MiniTest::Unit.runner = MiniTest::SuiteRunner.new
 MiniTest::Unit.runner.reporters << MiniTest::Reporters::SpecReporter.new
+require 'timeframe'
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'brighter_planet_api'
 
@@ -28,6 +29,17 @@ describe BrighterPlanetApi do
     it "is gentle about errors" do
       response = BrighterPlanetApi.query('Monkey')
       response.success.must_equal false
+    end
+    it "sends timeframe properly" do
+      response = BrighterPlanetApi.query('Flight', :timeframe => Timeframe.new(:year => 2009))
+      response.timeframe.startDate.must_equal '2009-01-01'
+      response.timeframe.endDate.must_equal '2010-01-01'
+    end
+    it "lets you configure what endpoint you want to hit" do
+      BrighterPlanetApi.config[:domain] = 'carbon.brighterplanet.com'
+      response = BrighterPlanetApi.query('Flight')
+      response.emission.must_be :>, 0
+      BrighterPlanetApi.config.delete :domain
     end
   end
   describe '#multi' do
