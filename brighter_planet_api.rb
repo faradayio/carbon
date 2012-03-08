@@ -7,14 +7,14 @@ require 'active_support/core_ext'
 
 module BrighterPlanet
   module Api
-    DEFAULT_DOMAIN = 'impact.brighterplanet.com'
-    
-    def self.query(emitter, characteristics = {})
-      characteristics ||= {}
-      characteristics = characteristics.merge(:key => config[:key])
+    DOMAIN = 'http://impact.brighterplanet.com'
+
+    def self.query(emitter, params = {})
+      params ||= {}
+      params = params.merge(:key => config[:key]) if config.has_key?(:key)
       response = ::Hashie::Mash.new
       ::EventMachine.run do
-        http = ::EventMachine::HttpRequest.new("http://#{domain}").post :path => "/#{emitter.underscore.pluralize}.json", :body => characteristics
+        http = ::EventMachine::HttpRequest.new(DOMAIN).post :path => "/#{emitter.underscore.pluralize}.json", :body => params
         http.errback do
           response.status = http.response_header.status
           response.success = false
@@ -36,15 +36,15 @@ module BrighterPlanet
       response
     end
 
-    # Where each query is [emitter, characteristics]
+    # Where each query is [emitter, params]
     def self.multi(queries)
       unsorted = {}
       multi = ::EventMachine::MultiRequest.new
       ::EventMachine.run do
-        queries.each_with_index do |(emitter, characteristics), query_idx|
-          characteristics ||= {}
-          characteristics = characteristics.merge(:key => config[:key])
-          multi.add query_idx, ::EventMachine::HttpRequest.new("http://#{domain}").post(:path => "/#{emitter.underscore.pluralize}.json", :body => characteristics)
+        queries.each_with_index do |(emitter, params), query_idx|
+          params ||= {}
+          params = params.merge(:key => config[:key]) if config.has_key?(:key)
+          multi.add query_idx, ::EventMachine::HttpRequest.new(DOMAIN).post(:path => "/#{emitter.underscore.pluralize}.json", :body => params)
         end
         multi.callback do
           multi.responses[:callback].each do |query_idx, http|
@@ -76,13 +76,66 @@ module BrighterPlanet
       end
     end
 
-    class Config < ::Hash; include ::Singleton; end
+    class Config < ::Hash
+      include ::Singleton
+    end
     def self.config
       Config.instance
     end
 
-    def self.domain
-      config.fetch(:domain, DEFAULT_DOMAIN)
+    class Registry < ::Hash
+      include ::Singleton
+    end
+
+    class Aspirant
+      def initialize(klass, emitter)
+        @klass = klass
+        Registry.instance[klass.name] ||= {}
+        Registry.instance[klass.name][:emitter] = emitter
+        Registry.instance[klass.name][:options] ||= {}
+      end
+      def provide(param, options = {})
+        Registry.instance[@klass.name][:options][param] = options
+      end
+    end
+
+    module ClassMethods
+      def emit_as(emitter, &blk)
+        aspirant = Aspirant.new self, emitter
+        aspirant.instance_eval(&blk)
+      end
+
+      def impact_estimates(*args)
+        emitter = Registry.instance[name][:emitter]
+        queries = send(*args).map do |instance|
+          [ emitter, instance.impact_params ]
+        end
+        Api.multi queries
+      end
+    end
+
+    def self.included(klass)
+      klass.extend ClassMethods
+    end
+
+    # What will be sent to BP
+    def impact_params
+      return unless registration = Registry.instance[self.class.name]
+      registration[:options].inject({}) do |memo, (param, options)|
+        k = options.has_key?(:as) ? options[:as] : param
+        if options.has_key?(:key)
+          k = "#{k}[#{options[:key]}]"
+        end
+        v = send(param)
+        memo[k] = v
+        memo
+      end
+    end
+
+    # The API response
+    def impact_estimate
+      return unless registration = Registry.instance[self.class.name]
+      Api.query registration[:emitter], impact_params
     end
   end
 end

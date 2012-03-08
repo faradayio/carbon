@@ -10,10 +10,9 @@ One way to reduce the number of connections by a constant... but it makes it slo
           ::EventMachine::HttpRequest.new("http://#{domain}")
         end
         pool_idx = 0
-        queries.each_with_index do |(emitter, characteristics), query_idx|
-          characteristics ||= {}
-          characteristics = characteristics.merge(:key => config[:key])
-          multi.add query_idx, pool[pool_idx].post(:path => "/#{emitter.underscore.pluralize}.json", :body => characteristics, :keepalive => true)
+        queries.each_with_index do |(emitter, params), query_idx|
+          params ||= {}
+          multi.add query_idx, pool[pool_idx].post(:path => "/#{emitter.underscore.pluralize}.json", :body => params, :keepalive => true)
           pool_idx = (pool_idx + 1) % pool_size
         end
         multi.callback do
