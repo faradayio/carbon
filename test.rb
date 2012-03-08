@@ -49,16 +49,19 @@ describe BrighterPlanetApi do
       response.timeframe.endDate.must_equal '2010-01-01'
     end
     it "lets you configure what endpoint you want to hit" do
-      BrighterPlanetApi.config[:domain] = 'carbon.brighterplanet.com'
-      response = BrighterPlanetApi.query('Flight')
-      response.emission.must_be :>, 0
-      BrighterPlanetApi.config.delete :domain
+      begin
+        BrighterPlanetApi.config[:domain] = 'carbon.brighterplanet.com'
+        response = BrighterPlanetApi.query('Flight')
+        response.emission.must_be :>, 0
+      ensure
+        BrighterPlanetApi.config.delete :domain
+      end
     end
   end
   describe '#multi' do
     before do
       @queries = []
-      5.times do
+      10.times do
         @queries << ['Flight', {:origin_airport => 'LAX', :destination_airport => 'SFO', :segments_per_trip => 1, :trips => 1}]
         @queries << ['RailTrip', {:distance => 25}]
         @queries << ['AutomobileTrip', {:make => 'Nissan', :model => 'Altima'}]
@@ -78,7 +81,7 @@ describe BrighterPlanetApi do
           error_count += 1
         end
       end
-      error_count.must_equal 5
+      error_count.must_equal 10
       @queries.each_with_index do |query, i|
         reference_response = BrighterPlanetApi.query(*query)
         if reference_response.success
@@ -96,6 +99,11 @@ describe BrighterPlanetApi do
       multi_threaded_time = ::Benchmark.realtime do
         BrighterPlanetApi.multi(@queries)
       end
+      # BrighterPlanet::Api::#multi
+      #    PASS test_0001_runs_multiple_queries_at_once (12.10s)
+      #    Multi-threaded was 95% faster - aw yah
+      #    PASS test_0002_is_faster_than_just_calling_query_over_and_over (23.73s)
+      $stderr.puts "    Multi-threaded was #{((single_threaded_time - multi_threaded_time) / single_threaded_time * 100).round}% faster"
       multi_threaded_time.must_be :<, single_threaded_time
     end
   end
