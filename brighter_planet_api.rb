@@ -76,6 +76,13 @@ module BrighterPlanet
       end
     end
 
+    def self.impacts(enumerable)
+      queries = enumerable.map do |instance|
+        [ Registry.instance[instance.class.name][:emitter], instance.impact_params ]
+      end
+      Api.multi queries
+    end
+
     class Config < ::Hash
       include ::Singleton
     end
@@ -104,14 +111,6 @@ module BrighterPlanet
         aspirant = Aspirant.new self, emitter
         aspirant.instance_eval(&blk)
       end
-
-      def impact_estimates(*args)
-        emitter = Registry.instance[name][:emitter]
-        queries = send(*args).map do |instance|
-          [ emitter, instance.impact_params ]
-        end
-        Api.multi queries
-      end
     end
 
     def self.included(klass)
@@ -133,7 +132,7 @@ module BrighterPlanet
     end
 
     # The API response
-    def impact_estimate
+    def impact
       return unless registration = Registry.instance[self.class.name]
       Api.query registration[:emitter], impact_params
     end

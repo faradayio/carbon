@@ -127,9 +127,9 @@ describe BrighterPlanetApi do
       end
     end
   end
-  describe '#impact_estimate' do
+  describe '#impact' do
     it "works" do
-      impact = MyNissanAltima.new(2006).impact_estimate
+      impact = MyNissanAltima.new(2006).impact
       impact.decisions.carbon.object.value.must_be :>, 0
       impact.characteristics.make.description.must_match %r{Nissan}i
       impact.characteristics.model.description.must_match %r{Altima}i
@@ -137,9 +137,9 @@ describe BrighterPlanetApi do
       impact.characteristics.automobile_fuel.description.must_match %r{regular gasoline}
     end
   end
-  describe :impact_estimates do
+  describe :impacts do
     it "works" do
-      impacts = MyNissanAltima.impact_estimates(:all, :order => :year)
+      impacts = BrighterPlanetApi.impacts(MyNissanAltima.all(:order => :year))
       impacts.length.must_equal 5
       impacts.map do |impact|
         impact.decisions.carbon.object.value.round

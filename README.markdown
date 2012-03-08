@@ -22,6 +22,8 @@ Tested on MRI 1.8 and MRI 1.9. Won't work right on JRuby until https://github.co
 
 Then you can call
 
-    MyNissanAltima.first.impact_estimate #=> one estimate
+    MyNissanAltima.first.impact #=> one estimate
 
-    MyNissanAltima.impact_estimates(:all, :where => { :year => 2006}) #=> many estimates
+or
+
+    BrighterPlanetApi.impacts(MyNissanAltima.all, :where => { :year => 2006}) #=> many estimates
