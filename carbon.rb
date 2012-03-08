@@ -4,12 +4,16 @@ require 'hashie/mash'
 require 'multi_json'
 require 'active_support/core_ext'
 
-module BrighterPlanetApi
+module Carbon
   DOMAIN = 'http://impact.brighterplanet.com'
+
+  def self.key=(key)
+    Config.instance[:key] = key
+  end
 
   def self.query(emitter, params = {})
     params ||= {}
-    params = params.merge(:key => config[:key]) if config.has_key?(:key)
+    params = params.merge(:key => Config.instance[:key]) if Config.instance.has_key?(:key)
     response = ::Hashie::Mash.new
     ::EventMachine.run do
       http = ::EventMachine::HttpRequest.new(DOMAIN).post :path => "/#{emitter.underscore.pluralize}.json", :body => params
@@ -41,7 +45,7 @@ module BrighterPlanetApi
     ::EventMachine.run do
       queries.each_with_index do |(emitter, params), query_idx|
         params ||= {}
-        params = params.merge(:key => config[:key]) if config.has_key?(:key)
+        params = params.merge(:key => Config.instance[:key]) if Config.instance.has_key?(:key)
         multi.add query_idx, ::EventMachine::HttpRequest.new(DOMAIN).post(:path => "/#{emitter.underscore.pluralize}.json", :body => params)
       end
       multi.callback do
@@ -84,9 +88,6 @@ module BrighterPlanetApi
   class Config < ::Hash
     include ::Singleton
   end
-  def self.config
-    Config.instance
-  end
 
   class Registry < ::Hash
     include ::Singleton
@@ -111,7 +112,7 @@ module BrighterPlanetApi
     def emit_as(emitter, &blk)
       emitter = emitter.to_s.camelcase
       if existing_registration = Registry.instance[name] and existing_registration.emitter != emitter
-        raise ::RuntimeError, "[brighter_planet_api] Can't register #{name} to emit as #{emitter}, already emitting as #{existing_registration.emitter}"
+        raise ::RuntimeError, "[carbon] Can't register #{name} to emit as #{emitter}, already emitting as #{existing_registration.emitter}"
       end
       aspirant = Aspirant.new self, emitter
       aspirant.instance_eval(&blk)
@@ -139,6 +140,6 @@ module BrighterPlanetApi
   # The API response
   def impact
     return unless registration = Registry.instance[self.class.name]
-    BrighterPlanetApi.query registration.emitter, impact_params
+    Carbon.query registration.emitter, impact_params
   end
 end

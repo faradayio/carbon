@@ -17,9 +17,9 @@ MiniTest::Unit.runner = MiniTest::SuiteRunner.new
 MiniTest::Unit.runner.reporters << MiniTest::Reporters::SpecReporter.new
 require 'timeframe'
 $LOAD_PATH.unshift(File.dirname(__FILE__))
-require 'brighter_planet_api'
+require 'carbon'
 
-BrighterPlanetApi.config[:key] = 'brighter_planet_api_test'
+Carbon.key = 'carbon_test'
 
 class MyNissanAltima
   class << self
@@ -35,7 +35,7 @@ class MyNissanAltima
   def      model; 'Altima'    end
   def model_year; @model_year end # what BP knows as "year"
   def  fuel_type; 'R'         end # what BP knows as "automobile_fuel" and keys on "code"
-  include BrighterPlanetApi
+  include Carbon
   emit_as 'Automobile' do
     provide :make
     provide :model
@@ -44,34 +44,34 @@ class MyNissanAltima
   end
 end
 
-describe BrighterPlanetApi do
+describe Carbon do
   # args could be mmm(:post, 'http://impact.brighterplanet.com/monkeys.json').to_return(:status => 500, :body => 'too many monkeys')
   describe :query do
     it "calculates flight impact" do
-      response = BrighterPlanetApi.query('Flight', :origin_airport => 'LAX', :destination_airport => 'SFO', :segments_per_trip => 1, :trips => 1)
+      response = Carbon.query('Flight', :origin_airport => 'LAX', :destination_airport => 'SFO', :segments_per_trip => 1, :trips => 1)
       response.decisions.carbon.object.value.must_be_close_to 200, 50
     end
     it "gets back characteristics" do
-      response = BrighterPlanetApi.query('Flight', :origin_airport => 'LAX', :destination_airport => 'SFO', :segments_per_trip => 1, :trips => 1)
+      response = Carbon.query('Flight', :origin_airport => 'LAX', :destination_airport => 'SFO', :segments_per_trip => 1, :trips => 1)
       response.characteristics.origin_airport.description.must_match %r{lax}i
     end
     it "tells you if the query is successful" do
-      response = BrighterPlanetApi.query('Flight')
+      response = Carbon.query('Flight')
       response.success.must_equal true
     end
     it "is gentle about errors" do
-      response = BrighterPlanetApi.query('Monkey')
+      response = Carbon.query('Monkey')
       response.success.must_equal false
     end
     it "sends timeframe properly" do
-      response = BrighterPlanetApi.query('Flight', :timeframe => Timeframe.new(:year => 2009))
+      response = Carbon.query('Flight', :timeframe => Timeframe.new(:year => 2009))
       response.timeframe.startDate.must_equal '2009-01-01'
       response.timeframe.endDate.must_equal '2010-01-01'
     end
     it "sends key properly" do
       with_web_mock do
-        WebMock.stub_request(:post, 'http://impact.brighterplanet.com/flights.json').with(:key => 'brighter_planet_api_test').to_return(:status => 500, :body => 'Good job')
-        response = BrighterPlanetApi.query('Flight')
+        WebMock.stub_request(:post, 'http://impact.brighterplanet.com/flights.json').with(:key => 'carbon_test').to_return(:status => 500, :body => 'Good job')
+        response = Carbon.query('Flight')
         response.errors.first.must_equal 'Good job'
       end
     end
@@ -90,7 +90,7 @@ describe BrighterPlanetApi do
         @queries = @queries.sort_by { rand }
       end
       it "runs multiple queries at once" do
-        responses = BrighterPlanetApi.multi(@queries)
+        responses = Carbon.multi(@queries)
         error_count = 0
         responses.each do |response|
           if response.success
@@ -102,7 +102,7 @@ describe BrighterPlanetApi do
         end
         error_count.must_equal 10
         @queries.each_with_index do |query, i|
-          reference_response = BrighterPlanetApi.query(*query)
+          reference_response = Carbon.query(*query)
           if reference_response.success
             responses[i].decisions.must_equal reference_response.decisions
           end
@@ -110,17 +110,17 @@ describe BrighterPlanetApi do
       end
       it "is faster than just calling #query over and over" do
         # dry run
-        @queries.each { |query| BrighterPlanetApi.query(*query) }
+        @queries.each { |query| Carbon.query(*query) }
         # --
         single_threaded_time = ::Benchmark.realtime do
-          @queries.each { |query| BrighterPlanetApi.query(*query) }
+          @queries.each { |query| Carbon.query(*query) }
         end
         multi_threaded_time = ::Benchmark.realtime do
-          BrighterPlanetApi.multi(@queries)
+          Carbon.multi(@queries)
         end
-        # BrighterPlanet::Api::#multi
+        # Carbon::#multi
         #    PASS test_0001_runs_multiple_queries_at_once (12.10s)
-        #    Multi-threaded was 95% faster - aw yah
+        #    Multi-threaded was 95% faster
         #    PASS test_0002_is_faster_than_just_calling_query_over_and_over (23.73s)
         $stderr.puts "   Multi-threaded was #{((single_threaded_time - multi_threaded_time) / single_threaded_time * 100).round}% faster"
         multi_threaded_time.must_be :<, single_threaded_time
@@ -129,7 +129,7 @@ describe BrighterPlanetApi do
   end
   describe :impacts do
     it "works" do
-      impacts = BrighterPlanetApi.impacts(MyNissanAltima.all(:order => :year))
+      impacts = Carbon.impacts(MyNissanAltima.all(:order => :year))
       impacts.length.must_equal 5
       impacts.map do |impact|
         impact.decisions.carbon.object.value.round
@@ -145,7 +145,7 @@ describe BrighterPlanetApi do
     describe :emit_as do
       it "does not overwrite if you call more than once" do
         eval "MyNissanAltima.emit_as('Automobile') { }"
-        BrighterPlanetApi::Registry.instance['MyNissanAltima'].options.keys.must_include :make
+        Carbon::Registry.instance['MyNissanAltima'].options.keys.must_include :make
       end
       it "doesn't let you register as emitting as more than one emitter" do
         lambda {
