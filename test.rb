@@ -127,16 +127,6 @@ describe BrighterPlanetApi do
       end
     end
   end
-  describe '#impact' do
-    it "works" do
-      impact = MyNissanAltima.new(2006).impact
-      impact.decisions.carbon.object.value.must_be :>, 0
-      impact.characteristics.make.description.must_match %r{Nissan}i
-      impact.characteristics.model.description.must_match %r{Altima}i
-      impact.characteristics.year.description.to_i.must_equal 2006
-      impact.characteristics.automobile_fuel.description.must_match %r{regular gasoline}
-    end
-  end
   describe :impacts do
     it "works" do
       impacts = BrighterPlanetApi.impacts(MyNissanAltima.all(:order => :year))
@@ -148,6 +138,32 @@ describe BrighterPlanetApi do
         impact.decisions.carbon.object.value.must_be :>, 0
         impact.characteristics.make.description.must_match %r{Nissan}i
         impact.characteristics.year.description.to_i.must_equal(2000+idx)
+      end
+    end
+  end
+  describe "Carbon-style mixin" do
+    describe :emit_as do
+      it "does not overwrite if you call more than once" do
+        eval "MyNissanAltima.emit_as('Automobile') { }"
+        BrighterPlanetApi::Registry.instance['MyNissanAltima'].options.keys.must_include :make
+      end
+      it "doesn't let you register as emitting as more than one emitter" do
+        lambda {
+          eval "MyNissanAltima.emit_as(:flight) { }"
+        }.must_raise RuntimeError, /already emitting/
+      end
+      it "accepts old-style symbols like :automobile instead of proper Automobile" do
+        eval "MyNissanAltima.emit_as(:automobile) { }"
+      end
+    end
+    describe '#impact' do
+      it "works" do
+        impact = MyNissanAltima.new(2006).impact
+        impact.decisions.carbon.object.value.must_be :>, 0
+        impact.characteristics.make.description.must_match %r{Nissan}i
+        impact.characteristics.model.description.must_match %r{Altima}i
+        impact.characteristics.year.description.to_i.must_equal 2006
+        impact.characteristics.automobile_fuel.description.must_match %r{regular gasoline}
       end
     end
   end
