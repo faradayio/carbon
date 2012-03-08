@@ -2,8 +2,10 @@ source :rubygems
 
 gemspec
 
-# development dependencies
+# dev deps
 gem 'minitest'
 gem 'minitest-reporters'
 gem 'timeframe'
 gem 'webmock'
+gem 'aruba'
+gem 'cucumber'

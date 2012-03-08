@@ -141,19 +141,14 @@ describe Carbon do
       end
     end
   end
-  describe "Carbon-style mixin" do
+  describe "mixin" do
     describe :emit_as do
-      it "does not overwrite if you call more than once" do
-        eval "MyNissanAltima.emit_as('Automobile') { }"
-        Carbon::Registry.instance['MyNissanAltima'].options.keys.must_include :make
-      end
-      it "doesn't let you register as emitting as more than one emitter" do
-        lambda {
-          eval "MyNissanAltima.emit_as(:flight) { }"
-        }.must_raise RuntimeError, /already emitting/
-      end
-      it "accepts old-style symbols like :automobile instead of proper Automobile" do
-        eval "MyNissanAltima.emit_as(:automobile) { }"
+      it "overwrites old emit_as blocks" do
+        eval %{class MyFoo; include Carbon; end}
+        MyFoo.emit_as('Automobile') { provide(:make) }
+        Carbon::Registry.instance['MyFoo'].options.keys.must_equal [:make]
+        MyFoo.emit_as('Automobile') { provide(:model) }
+        Carbon::Registry.instance['MyFoo'].options.keys.must_equal [:model]
       end
     end
     describe '#impact' do
@@ -164,6 +159,12 @@ describe Carbon do
         impact.characteristics.model.description.must_match %r{Altima}i
         impact.characteristics.year.description.to_i.must_equal 2006
         impact.characteristics.automobile_fuel.description.must_match %r{regular gasoline}
+      end
+      it "takes timeframe" do
+        impact_2010 = MyNissanAltima.new(2006).impact(:timeframe => Timeframe.new(:year => 2010))
+        impact_2011 = MyNissanAltima.new(2006).impact(:timeframe => Timeframe.new(:year => 2011))
+        impact_2010.timeframe.startDate.must_equal '2010-01-01'
+        impact_2011.timeframe.startDate.must_equal '2011-01-01'
       end
     end
   end

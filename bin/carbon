@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+
+$LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__)) unless $LOAD_PATH.include?(File.expand_path('../../lib', __FILE__))
+require 'carbon/shell'
+
+Bombshell.launch(Carbon::Shell)
