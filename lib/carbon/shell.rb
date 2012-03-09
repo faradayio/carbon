@@ -4,8 +4,10 @@ require 'conversions'
 require 'brighter_planet_metadata'
 
 module Carbon
+  # @private
   class Shell < Bombshell::Environment
     class << self
+      # @private
       def emitters
         ::BrighterPlanet.metadata.emitters
       end
@@ -28,15 +30,18 @@ module Carbon
     
     prompt_with 'carbon-'
 
+    # @private
     def help
       puts "  => #{self.class.emitters.join ', '}"
     end
 
+    # @private
     def key(k)
       ::Carbon.key = k
       puts "  => Using key #{::Carbon.key}"
     end
 
+    # @private
     def emitter(e, saved = {})
       Emitter.launch e, saved
     end

@@ -4,10 +4,12 @@ require 'conversions'
 
 module Carbon
   class Shell
+    # @private
     class Emitter < Bombshell::Environment
       include Bombshell::Shell
       include Carbon
       
+      # @private
       def initialize(name, input = {})
         @emitter = name.to_s.singularize.camelcase
         @input = input
@@ -36,6 +38,7 @@ module Carbon
         end
       end
       
+      # @private
       def timeframe(t = nil)
         if t
           @timeframe = t
@@ -47,23 +50,28 @@ module Carbon
         end
       end
       
+      # @private
       def emission
         puts "  => #{emission_in_kilograms} kg CO2e"
       end
       
+      # @private
       def emission_in_kilograms
         impact(:timeframe => @timeframe).decisions.carbon.object.value
       end
       
+      # @private
       def lbs
         puts "  => #{emission_in_kilograms.kilograms.to :pounds} lbs CO2e"
       end
       alias :pounds :lbs
       
+      # @private
       def tons
         puts "  => #{emission_in_kilograms.kilograms.to :tons} lbs CO2e"
       end
       
+      # @private
       def characteristics
         if @input.empty?
           puts "  => (none)"
@@ -80,10 +88,12 @@ module Carbon
         end
       end
       
+      # @private
       def url
         puts "  => #{impact(:timeframe => @timeframe).methodology}"
       end
       
+      # @private
       def methodology
         first = true
         impact(:timeframe => @timeframe).decisions.each do |name, report|
@@ -97,6 +107,7 @@ module Carbon
         end
       end
       
+      # @private
       def reports
         first = true
         impact(:timeframe => @timeframe).decisions.each do |name, report|
@@ -110,6 +121,7 @@ module Carbon
         end
       end
       
+      # @private
       def help
         puts "  => #{@characteristics.keys.join ', '}"
       end
@@ -122,29 +134,27 @@ module Carbon
         end
       end
       
+      # @private
       def _name
         @emitter
       end
       
+      # @private
       def _timeframe
         @timeframe
       end
       
+      # @private
       def inspect
         "#<Emitter[#{@emitter}]: #{@input.inspect}>"
       end
       
+      # @private
       def done
         $emitters[@emitter] ||= []
         $emitters[@emitter] << @input
         puts "  => Saved as #{@emitter} ##{$emitters[@emitter].length - 1}"
         quit
-      end
-      
-      class << self
-        def emitter_name
-          @name
-        end
       end
     end
   end

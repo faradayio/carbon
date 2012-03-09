@@ -80,106 +80,17 @@ For more, see the "Console" section below.
 
 <b>You'll need a Brighter Planet API key. See the "API keys" section below for details.</b>
 
-Carbon works by extending any Ruby class to be an emission source. For instance, let's say you have a `MyFlight` class that represents a flight in your data warehouse. (Note that ActiveRecord::Base classes work great with this gem.)
+Carbon works by extending any Ruby class to be an emission source. You `include Carbon` and then use the `emit_as` DSL...
 
-Here's the class, with a note as to what kind of object each method returns:
+{render:Carbon::ClassMethods#emit_as}
 
-    class MyFlight
-      def airline
-        # ... => MyAirline(:name, :icao_code, ...)
-      end
-      def aircraft
-        # ... => MyAircraft(:name, :icao_code, ...)
-      end
-      def origin
-        # ... => String
-      end
-      def destination
-        # ... => String
-      end
-      def segments_per_trip
-        # ... => Integer
-      end
-      def trips
-        # ... => Integer
-      end
-    end
-
-In order to calculate carbon emissions, we need to map the flights's relevant methods to characteristics that the [web service](http://impact.brighterplanet.com) will recognize. In this case, a review of the [characteristics API for Flight](http://impact.brighterplanet.com/flights/options) yields the following map:
-
-    require 'carbon'
-    class MyFlight
-      # [...]
-      include Carbon
-      emit_as 'Flight' do
-        provide :segments_per_trip
-        provide :trips
-
-        provide :origin, :as => :origin_airport, :key => :iata_code
-        provide :destination, :as => :destination_airport, :key => :iata_code
-        
-        provide(:airline, :key => :iata_code) { |f| f.airline.iata_code }
-        provide(:aircraft, :key => :icao_code) { { |f| f.aircraft.icao_code }
-      end
-      # [...]
-    end
-
-This will result in an API request like:
+The final URL will be something like
 
     http://impact.brighterplanet.com/flights.json?segments_per_trip=1&trips=1&origin_airport[iata_code]=MSN&destination_airport[iata_code]=ORD&airline[iata_code]=UA&aircraft[icao_code]=B737
 
-Things to note:
-
-* Sending `:origin` to Brighter Planet **as** `:origin_airport`. Otherwise Brighter Planet won't recognize `:origin`.
-* Saying we're **keying** on one code or another. Otherwise Brighter Planet will first try against full names and possibly other columns.
-* Giving **blocks** to pull codes from `MyAircraft` and `MyAirline` objects. Otherwise you might get a querystring like `airline[iata_code]=#<MyAirline [...]>`
-
 When you want to calculate impacts, simply call `MyFlight#impact`.
 
-    ?> my_flight = MyFlight.new([...])
-    => #<MyFlight [...]>
-    ?> my_impact = my_flight.impact
-    => #<Hashie::Mash [...]>
-    ?> my_impact.decisions.carbon.object.value
-    => 1014.92
-    ?> my_impact.decisions.carbon.object.units
-    => "kilograms"
-    ?> my_impact.methodology
-    => "http://impact.brighterplanet.com/flights?[...]"
-
-## Return values
-
-The return value is a [`Hashie::Mash`](http://rdoc.info/github/intridea/hashie/Hashie/Mash), given you access semantics like:
-
-    ?> mash['hello']
-    >> "world"
-    ?> mash.hello
-    >> "world"
-    ?> mash.keys
-    >> ["hello"]
-
-Here's what you get on a successful response:
-
-    certification
-    characteristics.{}.description
-    characteristics.{}.object
-    compliance.[]
-    decisions.{}.description
-    decisions.{}.methodology
-    decisions.{}.object
-    emitter
-    equivalents.{}
-    errors.[]
-    methodology
-    scope
-    timeframe.endDate
-    timeframe.startDate
-
-Hence
-
-    my_impact.carbon.object.value
-    my_impact.characteristics.airline.description
-    my_impact.equivalents.lightbulbs_for_a_week
+{render:Carbon#impact}
 
 ## API keys
 

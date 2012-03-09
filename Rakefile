@@ -13,6 +13,8 @@ require 'cucumber/rake/task'
 Cucumber::Rake::Task.new
 
 require 'yard'
-YARD::Rake::YardocTask.new
+YARD::Rake::YardocTask.new do |y|
+  y.options << '--no-private' << '--title' << "Brighter Planet CM1 client for Ruby"
+end
 
 task :default => [:test, :cucumber]

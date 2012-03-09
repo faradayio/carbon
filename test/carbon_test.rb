@@ -21,6 +21,16 @@ require 'carbon'
 
 Carbon.key = 'carbon_test'
 
+class MyNissan
+  def name
+    'Nissan'
+  end
+  def to_s
+    raise "Not fair!"
+  end
+  alias :inspect :to_s
+end
+
 class MyNissanAltima
   class << self
     def all(options)
@@ -31,13 +41,13 @@ class MyNissanAltima
   def initialize(model_year)
     @model_year = model_year
   end
-  def       make; 'Nissan'    end
-  def      model; 'Altima'    end
-  def model_year; @model_year end # what BP knows as "year"
-  def  fuel_type; 'R'         end # what BP knows as "automobile_fuel" and keys on "code"
+  def       make; MyNissan.new end
+  def      model; 'Altima'     end
+  def model_year; @model_year  end # what BP knows as "year"
+  def  fuel_type; 'R'          end # what BP knows as "automobile_fuel" and keys on "code"
   include Carbon
   emit_as 'Automobile' do
-    provide :make
+    provide(:make) { |my_nissan_altima| my_nissan_altima.make.name }
     provide :model
     provide :model_year, :as => :year
     provide :fuel_type, :as => :automobile_fuel, :key => :code
