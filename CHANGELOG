@@ -1,0 +1,11 @@
+2.0.0 / 2012-03-09
+
+* Breaking changes
+
+  * #emission_estimate has been removed in favor of #impact
+  * Response structure now mirrors what you get from http://impact.brighterplanet.com
+
+* Enhancements
+
+  * Carbon.multi method for parallelizing requests
+  * Tested with MRI 1.8 and MRI 1.9
