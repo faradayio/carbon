@@ -72,7 +72,7 @@ describe Carbon do
       with_web_mock do
         WebMock.stub_request(:post, 'http://impact.brighterplanet.com/flights.json').with(:key => 'carbon_test').to_return(:status => 500, :body => 'Good job')
         response = Carbon.query('Flight')
-        response.errors.first.must_equal 'Good job'
+        response.error_body.must_equal 'Good job'
       end
     end
   end
@@ -127,28 +127,14 @@ describe Carbon do
       end
     end
   end
-  describe :impacts do
-    it "works" do
-      impacts = Carbon.impacts(MyNissanAltima.all(:order => :year))
-      impacts.length.must_equal 5
-      impacts.map do |impact|
-        impact.decisions.carbon.object.value.round
-      end.uniq.length.must_be :>, 3
-      impacts.each_with_index do |impact, idx|
-        impact.decisions.carbon.object.value.must_be :>, 0
-        impact.characteristics.make.description.must_match %r{Nissan}i
-        impact.characteristics.year.description.to_i.must_equal(2000+idx)
-      end
-    end
-  end
   describe "mixin" do
     describe :emit_as do
       it "overwrites old emit_as blocks" do
         eval %{class MyFoo; include Carbon; end}
         MyFoo.emit_as('Automobile') { provide(:make) }
-        Carbon::Registry.instance['MyFoo'].options.keys.must_equal [:make]
+        Carbon::Registry.instance['MyFoo'].characteristics.keys.must_equal [:make]
         MyFoo.emit_as('Automobile') { provide(:model) }
-        Carbon::Registry.instance['MyFoo'].options.keys.must_equal [:model]
+        Carbon::Registry.instance['MyFoo'].characteristics.keys.must_equal [:model]
       end
     end
     describe '#impact' do
