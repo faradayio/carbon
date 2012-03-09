@@ -127,7 +127,7 @@ module Carbon
     klass.extend ClassMethods
   end
 
-  # Mixed into any class that includes `Carbon`.
+  # Mixed into any class that includes +Carbon+.
   module ClassMethods
     # DSL for declaring how to represent this class an an emitter.
     #
