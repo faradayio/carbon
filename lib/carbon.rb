@@ -121,7 +121,6 @@ module Carbon
   end
 
   # Called when you +include Carbon+ and adds the class method +emit_as+.
-  #
   # @private
   def self.included(klass)
     klass.extend ClassMethods
