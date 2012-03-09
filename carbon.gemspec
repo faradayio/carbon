@@ -1,6 +1,9 @@
+# -*- encoding: utf-8 -*-
+require File.expand_path('../lib/carbon/version', __FILE__)
+
 Gem::Specification.new do |s|
   s.name        = 'carbon'
-  s.version     = '0.0.1'
+  s.version     = Carbon::VERSION
   s.author      = 'Seamus Abshere'
   s.email       = ['seamus@abshere.net', 'dkastner@gmail.com', 'andy@rossmeissl.net']
   s.summary     = 'Brighter Planet API client for Ruby'
