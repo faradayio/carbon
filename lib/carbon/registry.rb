@@ -7,8 +7,9 @@ module Carbon
     include ::Singleton
 
     # Used internally to record the emitter and parameters (characteristics) provided by a class that has called `emit_as`.
+    # Can't use my magic sprinkles (::Struct) because of yardoc
     # @private
-    class Registration < ::Struct.new(:emitter, :characteristics)
+    class Registration < Struct.new(:emitter, :characteristics)
     end
 
     # Used internally when instance-eval'ing the `emit_as` DSL.
