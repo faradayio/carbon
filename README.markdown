@@ -82,7 +82,38 @@ For more, see the "Console" section below.
 
 Carbon works by extending any Ruby class to be an emission source. You `include Carbon` and then use the `emit_as` DSL...
 
-{render:Carbon::ClassMethods#emit_as}
+    # see Carbon::ClassMethods#emit_as for more details
+    class MyFlight
+      def airline
+        # ... => MyAirline(:name, :icao_code, ...)
+      end
+      def aircraft
+        # ... => MyAircraft(:name, :icao_code, ...)
+      end
+      def origin
+        # ... => String
+      end
+      def destination
+        # ... => String
+      end
+      def segments_per_trip
+        # ... => Integer
+      end
+      def trips
+        # ... => Integer
+      end
+      include Carbon
+      emit_as 'Flight' do
+        provide :segments_per_trip
+        provide :trips
+        provide :origin, :as => :origin_airport, :key => :iata_code
+        provide :destination, :as => :destination_airport, :key => :iata_code
+        provide(:airline, :key => :iata_code) { |f| f.airline.iata_code }
+        provide(:aircraft, :key => :icao_code) { { |f| f.aircraft.icao_code }
+      end
+    end
+
+See [RDoc on `Carbon::ClassMethods#emit_as`](http://rdoc.info/github/brighterplanet/carbon/Carbon/ClassMethods#emit_as-instance_method) for all the details.
 
 The final URL will be something like
 
@@ -90,7 +121,18 @@ The final URL will be something like
 
 When you want to calculate impacts, simply call `MyFlight#impact`.
 
-{render:Carbon#impact}
+    ?> my_flight = MyFlight.new([...])
+    => #<MyFlight [...]>
+    ?> my_impact = my_flight.impact(:timeframe => Timeframe.new(:year => 2009))
+    => #<Hashie::Mash [...]>
+    ?> my_impact.decisions.carbon.object.value
+    => 1014.92
+    ?> my_impact.decisions.carbon.object.units
+    => "kilograms"
+    ?> my_impact.methodology
+    => "http://impact.brighterplanet.com/flights?[...]"
+
+See [RDoc on `Carbon#impact`](http://rdoc.info/github/brighterplanet/carbon/Carbon#impact-instance_method) for all the details.
 
 ## API keys
 
