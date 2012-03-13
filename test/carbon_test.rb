@@ -1,23 +1,4 @@
-require 'rubygems'
-require 'bundler/setup'
-require 'benchmark'
-require 'webmock/minitest'
-WebMock.disable!
-def with_web_mock
-  WebMock.enable!
-  WebMock.disable_net_connect!
-  yield
-ensure
-  WebMock.disable!
-end
-require 'minitest/spec'
-require 'minitest/autorun'
-require 'minitest/reporters'
-MiniTest::Unit.runner = MiniTest::SuiteRunner.new
-MiniTest::Unit.runner.reporters << MiniTest::Reporters::SpecReporter.new
-require 'timeframe'
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-require 'carbon'
+require File.expand_path("../helper", __FILE__)
 
 Carbon.key = 'carbon_test'
 
@@ -60,7 +41,7 @@ class MyNissanAltima
 end
 
 describe Carbon do
-  # args could be mmm(:post, 'http://impact.brighterplanet.com/monkeys.json').to_return(:status => 500, :body => 'too many monkeys')
+
   describe :query do
     it "calculates flight impact" do
       response = Carbon.query('Flight', :origin_airport => 'LAX', :destination_airport => 'SFO', :segments_per_trip => 1, :trips => 1)
@@ -91,6 +72,7 @@ describe Carbon do
       end
     end
   end
+
   describe :multi do
     before do
       @queries = []
@@ -143,6 +125,7 @@ describe Carbon do
       multi_threaded_time.must_be :<, single_threaded_time
     end
   end
+  
   describe "mixin" do
     describe :emit_as do
       it "overwrites old emit_as blocks" do
