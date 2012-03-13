@@ -1,9 +1,7 @@
-require 'net/http'
-require 'hashie/mash'
-require 'multi_json'
 require 'active_support/core_ext'
 
 require 'carbon/registry'
+require 'carbon/future'
 
 module Carbon
   DOMAIN = 'http://impact.brighterplanet.com'
@@ -17,14 +15,14 @@ module Carbon
   # @param [String] key The alphanumeric key.
   #
   # @return [nil]
-  def self.key=(key)
+  def Carbon.key=(key)
     @@key = key
   end
 
   # Get the key you've set.
   #
   # @return [String] The key you set.
-  def self.key
+  def Carbon.key
     @@key
   end
 
@@ -39,39 +37,24 @@ module Carbon
   # @option params [Array<Symbol>] :comply ([]) What {http://impact.brighterplanet.com/protocols.json calculation protocols} to require.
   # @option params [String, Numeric] _characteristic_ Pieces of data about an emitter. The {http://impact.brighterplanet.com/flights/options Flight characteristics API} lists valid keys like +:aircraft+, +:origin_airport+, etc.
   #
-  # @return [Hashie::Mash] An {file:README.html#API_response API response as documented in the README}
+  # @return [Hashie::Mash, Carbon::Future] An {file:README.html#API_response API response as documented in the README}
   #
   # @example A flight taken in 2009
   #   Carbon.query('Flight', :origin_airport => 'MSN', :destination_airport => 'ORD', :date => '2009-01-01', :timeframe => Timeframe.new(:year => 2009), :comply => [:tcr])
-  def self.query(emitter, params = {})
-    params ||= {}
-    params = params.reverse_merge(:key => key) if key
-    uri = ::URI.parse("#{DOMAIN}/#{emitter.underscore.pluralize}.json")
-    raw_response = ::Net::HTTP.post_form(uri, params)
-    response = ::Hashie::Mash.new
-    case raw_response
-    when ::Net::HTTPSuccess
-      response.status = raw_response.code.to_i
-      response.success = true
-      response.merge! ::MultiJson.decode(raw_response.body)
-    else
-      response.status = raw_response.code.to_i
-      response.success = false
-      response.error_body = raw_response.respond_to?(:body) ? raw_response.body : ''
-      response.errors = [raw_response.class.name]
-    end
-    response
+  def Carbon.query(emitter, params = {})
+    future = Future.new emitter, params
+    future.result
   end
 
-  # Perform many queries in parallel. Can be >90% faster than doing them serially (one after the other).
+  # Perform many queries in parallel. Can be *more than 90% faster* than doing them serially (one after the other).
   #
   # See the {file:README.html#API_response section about API responses} for an explanation of +Hashie::Mash+.
   #
   # @param [Array<Array>] queries Multiple queries like you would pass to {Carbon.query}
   #
-  # @return [Array<Hashie::Mash>] An array of {file:README.html#API_response API responses} in the same order as the queries.
+  # @return [Array<Hashie::Mash>] An array of {file:README.html#API_response API responses}, each a +Hashie::Mash+, in the same order as the queries.
   #
-  # @note Not supported on JRuby because it uses {https://github.com/igrigorik/em-http-request em-http-request}, which suffers from {https://github.com/eventmachine/eventmachine/issues/155 an issue with +pending_connect_timeout+}.
+  # @note You may get errors like +SOCKET: SET COMM INACTIVITY UNIMPLEMENTED 10+ on JRuby because under the hood we're using {https://github.com/igrigorik/em-http-request em-http-request}, which suffers from {https://github.com/eventmachine/eventmachine/issues/155 an issue with +pending_connect_timeout+}.
   #
   # @example Two flights and an automobile trip
   #   queries = [
@@ -80,50 +63,20 @@ module Carbon
   #     ['AutomobileTrip', :make => 'Nissan', :model => 'Altima', :timeframe => Timeframe.new(:year => 2008), :comply => [:tcr]]
   #   ]
   #   Carbon.multi(queries)
-  def self.multi(queries)
-    return [] if queries.empty?
-    require 'em-http-request'
-    unsorted = {}
-    multi = ::EventMachine::MultiRequest.new
-    ::EventMachine.run do
-      queries.each_with_index do |(emitter, params), query_idx|
-        params ||= {}
-        params = params.reverse_merge(:key => key) if key
-        multi.add query_idx, ::EventMachine::HttpRequest.new(DOMAIN).post(:path => "/#{emitter.underscore.pluralize}.json", :body => params)
-      end
-      multi.callback do
-        multi.responses[:callback].each do |query_idx, http|
-          response = ::Hashie::Mash.new
-          response.status = http.response_header.status
-          if (200..299).include?(response.status)
-            response.success = true
-            response.merge! ::MultiJson.decode(http.response)
-          else
-            response.success = false
-            response.errors = [http.response]
-          end
-          unsorted[query_idx] = response
-        end
-        multi.responses[:errback].each do |query_idx, http|
-          response = ::Hashie::Mash.new
-          response.status = http.response_header.status
-          response.success = false
-          response.errors = ['Timeout or other network error.']
-          unsorted[query_idx] = response
-        end
-        ::EventMachine.stop
-      end
+  def Carbon.multi(queries)
+    futures = queries.map do |emitter, params|
+      future = Future.new emitter, params
+      future.multi!
+      future
     end
-    unsorted.sort_by do |query_idx, _|
-      query_idx
-    end.map do |_, response|
-      response
+    Future.multi(futures).map do |future|
+      future.result
     end
   end
 
   # Called when you +include Carbon+ and adds the class method +emit_as+.
   # @private
-  def self.included(klass)
+  def Carbon.included(klass)
     klass.extend ClassMethods
   end
 
@@ -181,7 +134,7 @@ module Carbon
     end
   end
 
-  # An array of emitter and parameters fit to be passed to +Carbon.multi+
+  # A query like what you could pass into +Carbon.query+.
   def as_impact_query(extra_params = {})
     registration = Registry.instance[self.class.name]
     params = registration.characteristics.inject({}) do |memo, (method_id, translation_options)|
@@ -258,6 +211,7 @@ module Carbon
   #   my_impact.characteristics.airline.description
   #   my_impact.equivalents.lightbulbs_for_a_week
   def impact(extra_params = {})
-    Carbon.query *as_impact_query(extra_params)
+    future = Future.new(*as_impact_query(extra_params))
+    future.result
   end
 end

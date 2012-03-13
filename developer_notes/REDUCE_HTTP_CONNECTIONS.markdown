@@ -17,30 +17,30 @@ One way to reduce the number of connections by a constant... but it makes it slo
         end
         multi.callback do
           multi.responses[:callback].each do |query_idx, http|
-            response = ::Hashie::Mash.new
-            response.status = http.response_header.status
-            if (200..299).include?(response.status)
-              response.success = true
-              response.merge! ::MultiJson.decode(http.response)
+            result = ::Hashie::Mash.new
+            result.status = http.response_header.status
+            if (200..299).include?(result.status)
+              result.success = true
+              result.merge! ::MultiJson.decode(http.response)
             else
-              response.success = false
-              response.errors = [http.response]
+              result.success = false
+              result.errors = [http.response]
             end
-            unsorted[query_idx] = response
+            unsorted[query_idx] = result
           end
           multi.responses[:errback].each do |query_idx, http|
-            response = ::Hashie::Mash.new
-            response.status = http.response_header.status
-            response.success = false
-            response.errors = ['Timeout or other network error.']
-            unsorted[query_idx] = response
+            result = ::Hashie::Mash.new
+            result.status = http.response_header.status
+            result.success = false
+            result.errors = ['Timeout or other network error.']
+            unsorted[query_idx] = result
           end
           ::EventMachine.stop
         end
       end
       unsorted.sort_by do |query_idx, _|
         query_idx
-      end.map do |_, response|
-        response
+      end.map do |_, result|
+        result
       end
     end

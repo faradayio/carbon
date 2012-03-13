@@ -17,3 +17,9 @@ MiniTest::Unit.runner = MiniTest::SuiteRunner.new
 MiniTest::Unit.runner.reporters << MiniTest::Reporters::SpecReporter.new
 require 'timeframe'
 require 'carbon'
+
+class MiniTest::Spec
+  def flush_cache!
+    CacheMethod.config.storage.flush
+  end
+end
