@@ -91,55 +91,56 @@ describe Carbon do
       end
     end
   end
-  unless ENV['SKIP_MULTI'] == 'true'
-    describe :multi do
-      before do
-        @queries = []
-        10.times do
-          @queries << ['Flight', {:origin_airport => 'LAX', :destination_airport => 'SFO', :segments_per_trip => 1, :trips => 1}]
-          @queries << ['RailTrip', {:distance => 25}]
-          @queries << ['AutomobileTrip', {:make => 'Nissan', :model => 'Altima'}]
-          @queries << ['Residence']
-          @queries << ['Monkey']
-        end
-        @queries = @queries.sort_by { rand }
+  describe :multi do
+    before do
+      @queries = []
+      3.times do
+        @queries << ['Flight', {:origin_airport => 'LAX', :destination_airport => 'SFO', :segments_per_trip => 1, :trips => 1}]
+        @queries << ['RailTrip', {:distance => 25}]
+        @queries << ['AutomobileTrip', {:make => 'Nissan', :model => 'Altima'}]
+        @queries << ['Residence']
+        @queries << ['Monkey']
       end
-      it "runs multiple queries at once" do
-        responses = Carbon.multi(@queries)
-        error_count = 0
-        responses.each do |response|
-          if response.success
-            response.decisions.carbon.object.value.must_be :>, 0
-            response.decisions.carbon.object.value.must_be :<, 10_000
-          else
-            error_count += 1
-          end
-        end
-        error_count.must_equal 10
-        @queries.each_with_index do |query, i|
-          reference_response = Carbon.query(*query)
-          if reference_response.success
-            responses[i].decisions.must_equal reference_response.decisions
-          end
+      @queries = @queries.sort_by { rand }
+    end
+    it "doesn't hang up on 0 queries" do
+      Timeout.timeout(0.5) { Carbon.multi([]) }.must_equal []
+    end
+    it "runs multiple queries at once" do
+      responses = Carbon.multi(@queries)
+      error_count = 0
+      responses.each do |response|
+        if response.success
+          response.decisions.carbon.object.value.must_be :>, 0
+          response.decisions.carbon.object.value.must_be :<, 10_000
+        else
+          error_count += 1
         end
       end
-      it "is faster than just calling #query over and over" do
-        # dry run
+      error_count.must_equal 3
+      @queries.each_with_index do |query, i|
+        reference_response = Carbon.query(*query)
+        if reference_response.success
+          responses[i].decisions.must_equal reference_response.decisions
+        end
+      end
+    end
+    it "is faster than just calling #query over and over" do
+      # dry run
+      @queries.each { |query| Carbon.query(*query) }
+      # --
+      single_threaded_time = ::Benchmark.realtime do
         @queries.each { |query| Carbon.query(*query) }
-        # --
-        single_threaded_time = ::Benchmark.realtime do
-          @queries.each { |query| Carbon.query(*query) }
-        end
-        multi_threaded_time = ::Benchmark.realtime do
-          Carbon.multi(@queries)
-        end
-        # Carbon::#multi
-        #    PASS test_0001_runs_multiple_queries_at_once (12.10s)
-        #    Multi-threaded was 95% faster
-        #    PASS test_0002_is_faster_than_just_calling_query_over_and_over (23.73s)
-        $stderr.puts "   Multi-threaded was #{((single_threaded_time - multi_threaded_time) / single_threaded_time * 100).round}% faster"
-        multi_threaded_time.must_be :<, single_threaded_time
       end
+      multi_threaded_time = ::Benchmark.realtime do
+        Carbon.multi(@queries)
+      end
+      # Carbon::#multi
+      #    PASS test_0001_runs_multiple_queries_at_once (12.10s)
+      #    Multi-threaded was 95% faster
+      #    PASS test_0002_is_faster_than_just_calling_query_over_and_over (23.73s)
+      $stderr.puts "   Multi-threaded was #{((single_threaded_time - multi_threaded_time) / single_threaded_time * 100).round}% faster"
+      multi_threaded_time.must_be :<, single_threaded_time
     end
   end
   describe "mixin" do

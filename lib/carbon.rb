@@ -81,6 +81,7 @@ module Carbon
   #   ]
   #   Carbon.multi(queries)
   def self.multi(queries)
+    return [] if queries.empty?
     require 'em-http-request'
     unsorted = {}
     multi = ::EventMachine::MultiRequest.new

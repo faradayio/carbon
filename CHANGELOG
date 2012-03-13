@@ -1,3 +1,9 @@
+2.0.2 / 2012-03-13
+
+* Bug fixes
+
+  * Don't hang up on Carbon.multi if 0 queries are passed
+
 2.0.1 / 2012-03-12
 
 * Bug fixes
