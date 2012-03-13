@@ -136,11 +136,16 @@ describe Carbon do
         Carbon::Registry.instance['MyFoo'].characteristics.keys.must_equal [:model]
       end
     end
-    describe '#impact_params' do
-      it "only takes non-nil params" do
+    describe '#as_impact_query' do
+      it "sets up an query to be run by Carbon.multi" do
         a = MyNissanAltima.new(2006)
-        a.impact_params.keys.wont_include :nil_model
-        a.impact_params.keys.wont_include :nil_make
+        a.as_impact_query.must_equal ["Automobile", {:make=>"Nissan", :model=>"Altima", :year=>2006, "automobile_fuel[code]"=>"R"}]
+      end
+      it "only includes non-nil params" do
+        a = MyNissanAltima.new(2006)
+        a.as_impact_query[1].keys.must_include :year
+        a.as_impact_query[1].keys.wont_include :nil_model
+        a.as_impact_query[1].keys.wont_include :nil_make
       end
     end
     describe '#impact' do

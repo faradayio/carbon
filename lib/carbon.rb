@@ -181,11 +181,10 @@ module Carbon
     end
   end
 
-  # What will be sent to Brighter Planet CM1.
-  # @private
-  def impact_params
-    return unless registration = Registry.instance[self.class.name]
-    registration.characteristics.inject({}) do |memo, (method_id, translation_options)|
+  # An array of emitter and parameters fit to be passed to +Carbon.multi+
+  def as_impact_query(extra_params = {})
+    registration = Registry.instance[self.class.name]
+    params = registration.characteristics.inject({}) do |memo, (method_id, translation_options)|
       k = translation_options.has_key?(:as) ? translation_options[:as] : method_id
       if translation_options.has_key?(:key)
         k = "#{k}[#{translation_options[:key]}]"
@@ -200,6 +199,7 @@ module Carbon
       end
       memo
     end
+    [ registration.emitter, params.merge(extra_params) ]
   end
 
   # Get an impact estimate from Brighter Planet CM1.
@@ -258,7 +258,6 @@ module Carbon
   #   my_impact.characteristics.airline.description
   #   my_impact.equivalents.lightbulbs_for_a_week
   def impact(extra_params = {})
-    return unless registration = Registry.instance[self.class.name]
-    Carbon.query registration.emitter, impact_params.merge(extra_params)
+    Carbon.query *as_impact_query(extra_params)
   end
 end
