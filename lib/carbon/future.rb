@@ -98,7 +98,7 @@ module Carbon
         @result = Future.single(self)
       end
     end
-    cache_method :result
+    cache_method :result, 3_600 # one hour
 
     def as_cache_key
       [ @emitter, @params ]
