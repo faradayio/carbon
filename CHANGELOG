@@ -1,3 +1,13 @@
+2.0.1 / 2012-03-12
+
+* Bug fixes
+
+  * Don't send blank (incl. nil) characteristics
+
+* Documentation changes
+
+  * Recommend people use Object#try when passing a block to #provide
+
 2.0.0 / 2012-03-09
 
 * Breaking changes

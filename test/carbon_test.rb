@@ -45,12 +45,17 @@ class MyNissanAltima
   def      model; 'Altima'     end
   def model_year; @model_year  end # what BP knows as "year"
   def  fuel_type; 'R'          end # what BP knows as "automobile_fuel" and keys on "code"
+  def   nil_make; nil          end
+  def  nil_model; nil          end
   include Carbon
   emit_as 'Automobile' do
-    provide(:make) { |my_nissan_altima| my_nissan_altima.make.name }
+    provide(:make) { |my_nissan_altima| my_nissan_altima.make.try(:name) }
     provide :model
     provide :model_year, :as => :year
     provide :fuel_type, :as => :automobile_fuel, :key => :code
+    
+    provide(:nil_make) { |my_nissan_altima| my_nissan_altima.nil_make.try(:blam!) }
+    provide :nil_model
   end
 end
 
@@ -145,6 +150,13 @@ describe Carbon do
         Carbon::Registry.instance['MyFoo'].characteristics.keys.must_equal [:make]
         MyFoo.emit_as('Automobile') { provide(:model) }
         Carbon::Registry.instance['MyFoo'].characteristics.keys.must_equal [:model]
+      end
+    end
+    describe '#impact_params' do
+      it "only takes non-nil params" do
+        a = MyNissanAltima.new(2006)
+        a.impact_params.keys.wont_include :nil_model
+        a.impact_params.keys.wont_include :nil_make
       end
     end
     describe '#impact' do

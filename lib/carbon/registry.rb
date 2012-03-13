@@ -2,7 +2,6 @@ require 'singleton'
 
 module Carbon
   # Used internally to hold the information about how each class that has called `emit_as`.
-  # @private
   class Registry < ::Hash
     include ::Singleton
 
@@ -12,8 +11,7 @@ module Carbon
     class Registration < Struct.new(:emitter, :characteristics)
     end
 
-    # Used internally when instance-eval'ing the `emit_as` DSL.
-    # @private
+    # Used internally when instance-eval'ing the +emit_as+ DSL.
     class Registrar
       # @private
       def initialize(klass, emitter)
@@ -30,16 +28,20 @@ module Carbon
       # @option translation_options [Symbol] :as (name of the method) If your method name does not match the Brighter Planet characteristic name.
       # @option translation_options [Symbol] :key (a number of columns) What you are keying on. By default, we do a fuzzy match against a number of fields, including full names and various codes.
       #
+      # @return [nil]
+      #
+      # @note It's suggested that you use {http://api.rubyonrails.org/classes/Object.html#method-i-try Object#try} to cheaply avoid +undefined method `iata_code` for nil:NilClass+. It will be available because this class includes +active_support/core_ext+ anyway.
+      #
       # @yield [] Pass a block for the common use case of calling a method on a object.
       #
       # @example Your method is named one thing but should be sent +:as+ something else.
       #   provide :my_distance, :as => :distance
       #
       # @example You are keying on something well-known like {http://en.wikipedia.org/wiki/Airline_codes IATA airline codes}.
-      #   provide(:airline, :key => :iata_code) { |f| f.airline.iata_code }
+      #   provide(:airline, :key => :iata_code) { |f| f.airline.try(:iata_code) }
       #
       # @example Better to use a block
-      #   provide(:airline, :key => :iata_code) { |f| f.airline.iata_code }
+      #   provide(:airline, :key => :iata_code) { |f| f.airline.try(:iata_code) }
       #   # is equivalent to
       #   def airline_iata_code
       #     airline.iata_code

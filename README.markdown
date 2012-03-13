@@ -108,8 +108,8 @@ Carbon works by extending any Ruby class to be an emission source. You `include 
         provide :trips
         provide :origin, :as => :origin_airport, :key => :iata_code
         provide :destination, :as => :destination_airport, :key => :iata_code
-        provide(:airline, :key => :iata_code) { |f| f.airline.iata_code }
-        provide(:aircraft, :key => :icao_code) { { |f| f.aircraft.icao_code }
+        provide(:airline, :key => :iata_code) { |f| f.airline.try(:iata_code) }
+        provide(:aircraft, :key => :icao_code) { { |f| f.aircraft.try(:icao_code) }
       end
     end
 
