@@ -17,6 +17,7 @@ module Carbon
   # @return [nil]
   def Carbon.key=(key)
     @@key = key
+    nil
   end
 
   # Get the key you've set.
@@ -26,33 +27,71 @@ module Carbon
     @@key
   end
 
-  # Do a simple query.
+  # Get an impact estimate from Brighter Planet CM1; low-level method that does _not_ require you to define {Carbon::ClassMethods#emit_as} blocks; just pass +[emitter, params]+.
   #
-  # See the {file:README.html#API_response section about API responses} for an explanation of +Hashie::Mash+.
+  # The return value is a {http://rdoc.info/github/intridea/hashie/Hashie/Mash Hashie::Mash} because it's a simple way to access a deep response object.
+  #
+  # Here's a map of what's included in a response:
+  #
+  #     certification
+  #     characteristics.{}.description
+  #     characteristics.{}.object
+  #     compliance.[]
+  #     decisions.{}.description
+  #     decisions.{}.methodology
+  #     decisions.{}.object
+  #     emitter
+  #     equivalents.{}
+  #     errors.[]
+  #     methodology
+  #     scope
+  #     timeframe.endDate
+  #     timeframe.startDate
   #
   # @param [String] emitter The {http://impact.brighterplanet.com/emitters.json camelcased emitter name}.
   # @param [Hash] params Characteristics, your API key (if you didn't set it globally), timeframe, compliance, etc.
   #
   # @option params [Timeframe] :timeframe (Timeframe.this_year) What time period to focus the calculation on. See {https://github.com/rossmeissl/timeframe timeframe} documentation.
   # @option params [Array<Symbol>] :comply ([]) What {http://impact.brighterplanet.com/protocols.json calculation protocols} to require.
-  # @option params [String, Numeric] _characteristic_ Pieces of data about an emitter. The {http://impact.brighterplanet.com/flights/options Flight characteristics API} lists valid keys like +:aircraft+, +:origin_airport+, etc.
+  # @option params [String, Numeric] <i>characteristic</i> Pieces of data about an emitter. The {http://impact.brighterplanet.com/flights/options Flight characteristics API} lists valid keys like +:aircraft+, +:origin_airport+, etc.
   #
-  # @return [Hashie::Mash, Carbon::Future] An {file:README.html#API_response API response as documented in the README}
+  # @return [Hashie::Mash] The API response, contained in an easy-to-use +Hashie::Mash+
   #
   # @example A flight taken in 2009
   #   Carbon.query('Flight', :origin_airport => 'MSN', :destination_airport => 'ORD', :date => '2009-01-01', :timeframe => Timeframe.new(:year => 2009), :comply => [:tcr])
+  #
+  # @example How do I use a +Hashie::Mash+?
+  #   1.8.7 :001 > require 'rubygems'
+  #    => true 
+  #   1.8.7 :002 > require 'hashie/mash'
+  #    => true 
+  #   1.8.7 :003 > mash = Hashie::Mash.new(:hello => 'world')
+  #    => #<Hashie::Mash hello="world"> 
+  #   1.8.7 :004 > mash.hello
+  #    => "world" 
+  #   1.8.7 :005 > mash['hello']
+  #    => "world" 
+  #   1.8.7 :006 > mash[:hello]
+  #    => "world" 
+  #   1.8.7 :007 > mash.keys
+  #    => ["hello"] 
+  #
+  # @example Other examples of what's in the response
+  #   my_impact.carbon.object.value
+  #   my_impact.characteristics.airline.description
+  #   my_impact.equivalents.lightbulbs_for_a_week
   def Carbon.query(emitter, params = {})
     future = Future.new emitter, params
     future.result
   end
 
-  # Perform many queries in parallel. Can be *more than 90% faster* than doing them serially (one after the other).
+  # Perform many queries in parallel; can be *more than 90% faster* than doing them serially (one after the other).
   #
-  # See the {file:README.html#API_response section about API responses} for an explanation of +Hashie::Mash+.
+  # See {Carbon.query} for an explanation of the return value, a +Hashie::Mash+.
   #
   # @param [Array<Array>] queries Multiple queries like you would pass to {Carbon.query}
   #
-  # @return [Array<Hashie::Mash>] An array of {file:README.html#API_response API responses}, each a +Hashie::Mash+, in the same order as the queries.
+  # @return [Array<Hashie::Mash>] An array of +Hashie::Mash+ objects in the same order as the queries.
   #
   # @note You may get errors like +SOCKET: SET COMM INACTIVITY UNIMPLEMENTED 10+ on JRuby because under the hood we're using {https://github.com/igrigorik/em-http-request em-http-request}, which suffers from {https://github.com/eventmachine/eventmachine/issues/155 an issue with +pending_connect_timeout+}.
   #
@@ -62,6 +101,12 @@ module Carbon
   #     ['Flight', :origin_airport => 'SFO', :destination_airport => 'LAX', :date => '2011-09-29', :timeframe => Timeframe.new(:year => 2011), :comply => [:iso]],
   #     ['AutomobileTrip', :make => 'Nissan', :model => 'Altima', :timeframe => Timeframe.new(:year => 2008), :comply => [:tcr]]
   #   ]
+  #   Carbon.multi(queries)
+  #
+  # @example Taking advantage of {Carbon::ClassMethods#emit_as} blocks
+  #   queries = MyFlight.all.map do |my_flight|
+  #     my_flight.as_impact_query
+  #   end
   #   Carbon.multi(queries)
   def Carbon.multi(queries)
     futures = queries.map do |emitter, params|
@@ -84,17 +129,13 @@ module Carbon
   module ClassMethods
     # DSL for declaring how to represent this class an an emitter.
     #
+    # See also {Carbon::Registry::Registrar#provide}.
+    #
     # You get this when you +include Carbon+ in a class.
     #
     # @param [String] emitter The {http://impact.brighterplanet.com/emitters.json camelcased emitter name}.
     #
     # @return [nil]
-    #
-    # Things to note in the MyFlight example:
-    #
-    # * Sending +:origin+ to Brighter Planet *as* +:origin_airport+. Otherwise Brighter Planet won't recognize +:origin+.
-    # * Saying we're *keying* on one code or another. Otherwise Brighter Planet will first try against full names and possibly other columns.
-    # * Giving *blocks* to pull codes from +MyAircraft+ and +MyAirline+ objects. Otherwise you might get a querystring like +airline[iata_code]=#<MyAirline [...]>+
     #
     # @example MyFlight
     #   # A a flight in your data warehouse
@@ -135,6 +176,14 @@ module Carbon
   end
 
   # A query like what you could pass into +Carbon.query+.
+  #
+  # @param [Hash] extra_params Anything you want to override.
+  #
+  # @option extra_params [Timeframe] :timeframe
+  # @option extra_params [Array<Symbol>] :comply
+  # @option extra_params [String] :key In case you didn't define it globally, or want to use a different one here.
+  #
+  # @return [Array] Something you could pass into +Carbon.query+ or (along with others) into +Carbon.multi+
   def as_impact_query(extra_params = {})
     registration = Registry.instance[self.class.name]
     params = registration.characteristics.inject({}) do |memo, (method_id, translation_options)|
@@ -155,30 +204,13 @@ module Carbon
     [ registration.emitter, params.merge(extra_params) ]
   end
 
-  # Get an impact estimate from Brighter Planet CM1.
+  # Get an impact estimate from Brighter Planet CM1; high-level convenience method that requires a {Carbon::ClassMethods#emit_as} block.
   #
   # You get this when you +include Carbon+ in a class.
   #
-  # The return value is a {http://rdoc.info/github/intridea/hashie/Hashie/Mash Hashie::Mash} because it's a simple way to access a deep response object.
+  # See {Carbon.query} for an explanation of the return value, a +Hashie::Mash+.
   #
-  # Here's a map of what's included in a response:
-  #
-  #       certification
-  #       characteristics.{}.description
-  #       characteristics.{}.object
-  #       compliance.[]
-  #       decisions.{}.description
-  #       decisions.{}.methodology
-  #       decisions.{}.object
-  #       emitter
-  #       equivalents.{}
-  #       errors.[]
-  #       methodology
-  #       scope
-  #       timeframe.endDate
-  #       timeframe.startDate
-  #
-  # @param [Hash] extra_params Anything that your +emit_as+ won't include.
+  # @param [Hash] extra_params Anything you want to override.
   #
   # @option extra_params [Timeframe] :timeframe
   # @option extra_params [Array<Symbol>] :comply
@@ -197,19 +229,6 @@ module Carbon
   #   => "kilograms"
   #   ?> my_impact.methodology
   #   => "http://impact.brighterplanet.com/flights?[...]"
-  #
-  # @example How do I use a Hashie::Mash?
-  #   ?> mash['hello']
-  #   => "world"
-  #   ?> mash.hello
-  #   => "world"
-  #   ?> mash.keys
-  #   => ["hello"]
-  #
-  # @example Other examples of what's in the response
-  #   my_impact.carbon.object.value
-  #   my_impact.characteristics.airline.description
-  #   my_impact.equivalents.lightbulbs_for_a_week
   def impact(extra_params = {})
     future = Future.new(*as_impact_query(extra_params))
     future.result

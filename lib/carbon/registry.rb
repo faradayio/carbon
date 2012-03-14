@@ -23,6 +23,8 @@ module Carbon
       
       # Indicate that you will send in a piece of data about the emitter.
       #
+      # Called inside of {Carbon::ClassMethods#emit_as} blocks.
+      #
       # @param [Symbol] method_id What method to call to get the value in question.
       #
       # @option translation_options [Symbol] :as (name of the method) If your method name does not match the Brighter Planet characteristic name.
@@ -33,6 +35,22 @@ module Carbon
       # @note It's suggested that you use {http://api.rubyonrails.org/classes/Object.html#method-i-try Object#try} to cheaply avoid +undefined method `iata_code` for nil:NilClass+. It will be available because this class includes +active_support/core_ext+ anyway.
       #
       # @yield [] Pass a block for the common use case of calling a method on a object.
+      #
+      # Things to note in the MyFlight example:
+      #
+      # * Sending +:origin+ to Brighter Planet *as* +:origin_airport+. Otherwise Brighter Planet won't recognize +:origin+.
+      # * Saying we're *keying* on one code or another. Otherwise Brighter Planet will first try against full names and possibly other columns.
+      # * Giving *blocks* to pull codes from +MyAircraft+ and +MyAirline+ objects. Otherwise you might get a querystring like +airline[iata_code]=#<MyAirline [...]>+
+      #
+      # @example The canonical MyFlight example
+      #   emit_as 'Flight' do
+      #     provide :segments_per_trip
+      #     provide :trips
+      #     provide :origin, :as => :origin_airport, :key => :iata_code
+      #     provide :destination, :as => :destination_airport, :key => :iata_code
+      #     provide(:airline, :key => :iata_code) { |f| f.airline.try(:iata_code) }
+      #     provide(:aircraft, :key => :icao_code) { { |f| f.aircraft.try(:icao_code) }
+      #   end
       #
       # @example Your method is named one thing but should be sent +:as+ something else.
       #   provide :my_distance, :as => :distance
