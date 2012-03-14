@@ -176,10 +176,10 @@ This library includes a special console for performing calculations interactivel
 :  Set the [developer key](http://keys.brighterplanet.com) that should be used for this session. Alternatively, put this key in `~/.brighter_planet` and it will be auto-selected on console startup.
 
 _emitter_
-:  (e.g. `Flight`) Enters emitter mode using this emitter type.
+:  (e.g. `flight`) Enters emitter mode using this emitter type.
 
 _emitter num_
-:  (e.g. `Flight 0`) Recalls a previous emitter from this session.
+:  (e.g. `flight 0`) Recalls a previous emitter from this session.
 
 `exit`
 :  Quits.
