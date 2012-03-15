@@ -4,6 +4,7 @@
 
   * Simplified API down to just Carbon.query. It has three method signatures.
   * Simplified EventMachine reactor
+  * Limited concurrency to 16 connections at a time
 
 * Breaking changes
 
