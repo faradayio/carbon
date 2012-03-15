@@ -77,9 +77,15 @@ describe Carbon do
           result.errors.first.must_equal 'Good job'
         end
       end
+      it "raises ArgumentError if args are bad" do
+        lambda {
+          Carbon.query(['Flight'])
+        }.must_raise ArgumentError
+      end
     end
     describe '(in parallel)' do
       before do
+        flunk if ENV['SKIP_MULTI'] == 'true'
         @queries = []
         @queries << ['Flight', {:origin_airport => 'LAX', :destination_airport => 'SFO', :segments_per_trip => 1, :trips => 1}]
         @queries << ['Flight', {:origin_airport => 'MSN', :destination_airport => 'ORD', :segments_per_trip => 1, :trips => 1}]

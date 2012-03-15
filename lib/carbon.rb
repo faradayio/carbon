@@ -72,6 +72,8 @@ module Carbon
   #
   # @note Using concurrency on JRuby, you may get errors like SOCKET: SET COMM INACTIVITY UNIMPLEMENTED 10 because under the hood we're using {https://github.com/igrigorik/em-http-request em-http-request}, which suffers from {https://github.com/eventmachine/eventmachine/issues/155 an issue with +pending_connect_timeout+}.
   #
+  # @raise [ArgumentError] If your arguments don't match any of the method signatures.
+  #
   # @example A flight taken in 2009
   #   Carbon.query('Flight', :origin_airport => 'MSN', :destination_airport => 'ORD', :date => '2009-01-01', :timeframe => Timeframe.new(:year => 2009), :comply => [:tcr])
   #
@@ -134,6 +136,8 @@ module Carbon
       Future.multi(futures).map do |future|
         future.result
       end
+    else
+      raise ::ArgumentError, "Didn't match any of the method signatures. If you want multiple queries, make sure to pass an unsplatted Array."
     end
   end
 
