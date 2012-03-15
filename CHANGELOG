@@ -1,3 +1,14 @@
+2.1.0 / 2012-03-14
+
+* Enhancements
+
+  * Simplified API down to just Carbon.query. It has three method signatures.
+  * Simplified EventMachine reactor
+
+* Breaking changes
+
+  * Simplified API down to just Carbon.query :)
+
 2.0.3 / 2012-03-13
 
 * Enhancements

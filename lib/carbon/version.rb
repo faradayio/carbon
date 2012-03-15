@@ -1,3 +1,3 @@
 module Carbon
-  VERSION = "2.0.3"
+  VERSION = "2.1.0"
 end

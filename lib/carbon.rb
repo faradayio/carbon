@@ -5,6 +5,7 @@ require 'carbon/future'
 
 module Carbon
   DOMAIN = 'http://impact.brighterplanet.com'
+  CONCURRENCY = 16
 
   # @private
   # Make sure there are no warnings about class vars.
@@ -27,9 +28,9 @@ module Carbon
     @@key
   end
 
-  # Get an impact estimate from Brighter Planet CM1; low-level method that does _not_ require you to define {Carbon::ClassMethods#emit_as} blocks; just pass +[emitter, params]+.
+  # Get impact estimates from Brighter Planet CM1; low-level method that does _not_ require you to define {Carbon::ClassMethods#emit_as} blocks; just pass emitter/param or objects that respond to +#as_impact_query+.
   #
-  # The return value is a {http://rdoc.info/github/intridea/hashie/Hashie/Mash Hashie::Mash} because it's a simple way to access a deep response object.
+  # Return values are {http://rdoc.info/github/intridea/hashie/Hashie/Mash Hashie::Mash} objects because they are a simple way to access a deeply nested response.
   #
   # Here's a map of what's included in a response:
   #
@@ -48,14 +49,28 @@ module Carbon
   #     timeframe.endDate
   #     timeframe.startDate
   #
-  # @param [String] emitter The {http://impact.brighterplanet.com/emitters.json camelcased emitter name}.
-  # @param [Hash] params Characteristics, your API key (if you didn't set it globally), timeframe, compliance, etc.
+  # @overload query(emitter, params)
+  #   Simplest form.
+  #   @param [String] emitter The {http://impact.brighterplanet.com/emitters.json emitter name}.
+  #   @param [optional, Hash] params Characteristics like airline/airport/etc., your API key (if you didn't set it globally), timeframe, compliance, etc.
+  #   @option params [Timeframe] :timeframe (Timeframe.this_year) What time period to focus the calculation on. See {https://github.com/rossmeissl/timeframe timeframe} documentation.
+  #   @option params [Array<Symbol>] :comply ([]) What {http://impact.brighterplanet.com/protocols.json calculation protocols} to require.
+  #   @option params [String, Numeric] <i>characteristic</i> Pieces of data about an emitter. The {http://impact.brighterplanet.com/flights/options Flight characteristics API} lists valid keys like +:aircraft+, +:origin_airport+, etc.
+  #   @return [Hashie::Mash] The API response, contained in an easy-to-use +Hashie::Mash+
   #
-  # @option params [Timeframe] :timeframe (Timeframe.this_year) What time period to focus the calculation on. See {https://github.com/rossmeissl/timeframe timeframe} documentation.
-  # @option params [Array<Symbol>] :comply ([]) What {http://impact.brighterplanet.com/protocols.json calculation protocols} to require.
-  # @option params [String, Numeric] <i>characteristic</i> Pieces of data about an emitter. The {http://impact.brighterplanet.com/flights/options Flight characteristics API} lists valid keys like +:aircraft+, +:origin_airport+, etc.
+  # @overload query(o)
+  #   Pass in a single query-able object.
+  #   @param [#as_impact_query] o An object that responds to +#as_impact_query+, generally because you've declared {Carbon::ClassMethods#emit_as} on its parent class.
+  #   @return [Hashie::Mash] The API response, contained in an easy-to-use +Hashie::Mash+
   #
-  # @return [Hashie::Mash] The API response, contained in an easy-to-use +Hashie::Mash+
+  # @overload query(os)
+  #   Get multiple impact estimates for arrays and/or query-able objects concurrently.
+  #   @param [Array<Array, #as_impact_query>] os An array of arrays in +[emitter, params]+ format and/or objects that respond to +#as_impact_query+.
+  #   @return [Array<Hashie::Mash>] An array of +Hashie::Mash+ objects in the same order.
+  #
+  # @note We make up to 16 requests concurrently (hardcoded, per the Brighter Planet Terms of Service) and it can be more than 90% faster than running queries serially!
+  #
+  # @note Using concurrency on JRuby, you may get errors like SOCKET: SET COMM INACTIVITY UNIMPLEMENTED 10 because under the hood we're using {https://github.com/igrigorik/em-http-request em-http-request}, which suffers from {https://github.com/eventmachine/eventmachine/issues/155 an issue with +pending_connect_timeout+}.
   #
   # @example A flight taken in 2009
   #   Carbon.query('Flight', :origin_airport => 'MSN', :destination_airport => 'ORD', :date => '2009-01-01', :timeframe => Timeframe.new(:year => 2009), :comply => [:tcr])
@@ -80,42 +95,79 @@ module Carbon
   #   my_impact.carbon.object.value
   #   my_impact.characteristics.airline.description
   #   my_impact.equivalents.lightbulbs_for_a_week
-  def Carbon.query(emitter, params = {})
-    future = Future.new emitter, params
-    future.result
+  #
+  # @example Flights and cars (concurrently, as arrays)
+  #   queries = [
+  #     ['Flight', {:origin_airport => 'MSN', :destination_airport => 'ORD', :date => '2009-01-01', :timeframe => Timeframe.new(:year => 2009), :comply => [:tcr]}],
+  #     ['Flight', {:origin_airport => 'SFO', :destination_airport => 'LAX', :date => '2011-09-29', :timeframe => Timeframe.new(:year => 2011), :comply => [:iso]}],
+  #     ['Automobile', {:make => 'Nissan', :model => 'Altima', :timeframe => Timeframe.new(:year => 2008), :comply => [:tcr]}]
+  #   ]
+  #   Carbon.query(queries)
+  #
+  # @example Flights and cars (concurrently, as query-able objects)
+  #   Carbon.query(MyFlight.all+MyCar.all)
+  #
+  # @example Cars month-by-month
+  #   cars_by_month = MyCar.all.inject([]) do |memo, my_car|
+  #     months.each do |first_day_of_the_month|
+  #       my_car.as_impact_query(:date => first_day_of_the_month)
+  #     end
+  #   end
+  #   Carbon.query(cars_by_month)
+  def Carbon.query(*args)
+    case Carbon.method_signature(*args)
+    when :query_array
+      query_array = args
+      future = Future.wrap query_array
+      future.result
+    when :o
+      o = args.first
+      future = Future.wrap o
+      future.result
+    when :os
+      os = args.first
+      futures = os.map do |o|
+        future = Future.wrap o
+        future.multi!
+        future
+      end
+      Future.multi(futures).map do |future|
+        future.result
+      end
+    end
   end
 
-  # Perform many queries in parallel; can be *more than 90% faster* than doing them serially (one after the other).
-  #
-  # See {Carbon.query} for an explanation of the return value, a +Hashie::Mash+.
-  #
-  # @param [Array<Array>] queries Multiple queries like you would pass to {Carbon.query}
-  #
-  # @return [Array<Hashie::Mash>] An array of +Hashie::Mash+ objects in the same order as the queries.
-  #
-  # @note You may get errors like +SOCKET: SET COMM INACTIVITY UNIMPLEMENTED 10+ on JRuby because under the hood we're using {https://github.com/igrigorik/em-http-request em-http-request}, which suffers from {https://github.com/eventmachine/eventmachine/issues/155 an issue with +pending_connect_timeout+}.
-  #
-  # @example Two flights and an automobile trip
-  #   queries = [
-  #     ['Flight', :origin_airport => 'MSN', :destination_airport => 'ORD', :date => '2009-01-01', :timeframe => Timeframe.new(:year => 2009), :comply => [:tcr]],
-  #     ['Flight', :origin_airport => 'SFO', :destination_airport => 'LAX', :date => '2011-09-29', :timeframe => Timeframe.new(:year => 2011), :comply => [:iso]],
-  #     ['AutomobileTrip', :make => 'Nissan', :model => 'Altima', :timeframe => Timeframe.new(:year => 2008), :comply => [:tcr]]
-  #   ]
-  #   Carbon.multi(queries)
-  #
-  # @example Taking advantage of {Carbon::ClassMethods#emit_as} blocks
-  #   queries = MyFlight.all.map do |my_flight|
-  #     my_flight.as_impact_query
-  #   end
-  #   Carbon.multi(queries)
-  def Carbon.multi(queries)
-    futures = queries.map do |emitter, params|
-      future = Future.new emitter, params
-      future.multi!
-      future
-    end
-    Future.multi(futures).map do |future|
-      future.result
+  # Determine if a variable is a +[emitter, param]+ style "query"
+  # @private
+  def Carbon.is_query_array?(query)
+    return false unless query.is_a?(::Array)
+    return false unless query.first.is_a?(::String) or query.first.is_a?(::Symbol)
+    return true if query.length == 1
+    return true if query.length == 2 and query.last.is_a?(::Hash)
+    false
+  end
+
+  # Determine what method signature/overloading/calling style is being used
+  # @private
+  def Carbon.method_signature(*args)
+    first_arg = args.first
+    case args.length
+    when 1
+      if is_query_array?(args)
+        # query('Flight')
+        :query_array
+      elsif first_arg.respond_to?(:as_impact_query)
+        # query(my_flight)
+        :o
+      elsif first_arg.is_a?(::Array) and first_arg.all? { |o| o.respond_to?(:as_impact_query) or is_query_array?(o) }
+        # query([my_flight, my_flight])
+        :os
+      end
+    when 2
+      if is_query_array?(args)
+        # query('Flight', :origin_airport => 'LAX')
+        :query_array
+      end
     end
   end
 
@@ -182,8 +234,9 @@ module Carbon
   # @option extra_params [Timeframe] :timeframe
   # @option extra_params [Array<Symbol>] :comply
   # @option extra_params [String] :key In case you didn't define it globally, or want to use a different one here.
+  # @option extra_params [String, Numeric] <i>characteristic</i> Override pieces of data about an emitter.
   #
-  # @return [Array] Something you could pass into +Carbon.query+ or (along with others) into +Carbon.multi+
+  # @return [Array] Something you could pass into +Carbon.query+.
   def as_impact_query(extra_params = {})
     registration = Registry.instance[self.class.name]
     params = registration.characteristics.inject({}) do |memo, (method_id, translation_options)|
@@ -215,6 +268,7 @@ module Carbon
   # @option extra_params [Timeframe] :timeframe
   # @option extra_params [Array<Symbol>] :comply
   # @option extra_params [String] :key In case you didn't define it globally, or want to use a different one here.
+  # @option extra_params [String, Numeric] <i>characteristic</i> Override pieces of data about an emitter.
   #
   # @return [Hashie::Mash]
   #
@@ -230,7 +284,8 @@ module Carbon
   #   ?> my_impact.methodology
   #   => "http://impact.brighterplanet.com/flights?[...]"
   def impact(extra_params = {})
-    future = Future.new(*as_impact_query(extra_params))
+    query_array = as_impact_query extra_params
+    future = Future.wrap query_array
     future.result
   end
 end
