@@ -104,20 +104,28 @@ describe Carbon do
         @queries << ['Monkey', {:bananas => '3'}]
         @queries = @queries.sort_by { rand }
       end
+      it "is easy to use" do
+        flight = ['Flight']
+        rail_trip = ['RailTrip']
+        results = Carbon.query([flight, rail_trip])
+        results[flight].decisions.must_equal Carbon.query('Flight').decisions
+        results[rail_trip].decisions.must_equal Carbon.query('RailTrip').decisions
+      end
       it "doesn't hang up on 0 queries" do
-        Timeout.timeout(0.5) { Carbon.query([]) }.must_equal []
+        Timeout.timeout(0.5) { Carbon.query([]) }.must_equal(Hash.new)
       end
       it "can be used on objects that respond to #as_impact_query" do
-        Carbon.query([MyNissanAltima.new(2001), MyNissanAltima.new(2006)]).map(&:decisions).must_equal Carbon.query([MyNissanAltima.new(2001).as_impact_query, MyNissanAltima.new(2006).as_impact_query]).map(&:decisions)
+        Carbon.query([MyNissanAltima.new(2001), MyNissanAltima.new(2006)]).values.map(&:decisions).map(&:carbon).map(&:object).map(&:value).must_equal Carbon.query([MyNissanAltima.new(2001).as_impact_query, MyNissanAltima.new(2006).as_impact_query]).values.map(&:decisions).map(&:carbon).map(&:object).map(&:value)
       end
       it "runs multiple queries at once" do
-        reference_results = @queries.map do |query|
-          Carbon.query(*query)
+        reference_results = @queries.inject({}) do |memo, query|
+          memo[query] = Carbon.query(*query)
+          memo
         end
         flush_cache! # important!
         multi_results = Carbon.query(@queries)
         error_count = 0
-        multi_results.each do |result|
+        multi_results.each do |query, result|
           if result.success
             result.decisions.carbon.object.value.must_be :>, 0
             result.decisions.carbon.object.value.must_be :<, 10_000
@@ -126,11 +134,11 @@ describe Carbon do
           end
         end
         error_count.must_equal 3
-        reference_results.each_with_index do |reference_result, idx|
+        reference_results.each do |query, reference_result|
           if reference_result.success
-            multi_results[idx].decisions.must_equal reference_result.decisions
+            multi_results[query].decisions.must_equal reference_result.decisions
           else
-            multi_results[idx].must_equal reference_result
+            multi_results[query].must_equal reference_result
           end
         end
       end
@@ -159,17 +167,18 @@ describe Carbon do
         $stderr.puts "   Cached multi-threaded was #{((multi_threaded_time - cached_multi_threaded_time) / multi_threaded_time * 100).round}% faster than uncached multi-threaded"
       end
       it "safely uniq's and caches queries" do
-        reference_results = @queries.map do |query|
-          Carbon.query(*query)
+        reference_results = @queries.inject({}) do |memo, query|
+          memo[query] = Carbon.query(*query)
+          memo
         end
         flush_cache! # important!
         3.times do
           multi_results = Carbon.query(@queries)
-          reference_results.each_with_index do |reference_result, idx|
+          reference_results.each do |query, reference_result|
             if reference_result.success
-              multi_results[idx].decisions.must_equal reference_result.decisions
+              multi_results[query].decisions.must_equal reference_result.decisions
             else
-              multi_results[idx].must_equal reference_result
+              multi_results[query].must_equal reference_result
             end
           end
         end

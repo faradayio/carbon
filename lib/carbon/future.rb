@@ -10,11 +10,13 @@ module Carbon
   class Future
     class << self
       def wrap(query_array_or_o)
-        if query_array_or_o.is_a?(::Array)
+        future = if query_array_or_o.is_a?(::Array)
           new(*query_array_or_o)
         else
           new(*query_array_or_o.as_impact_query)
         end
+        future.object = query_array_or_o
+        future
       end
 
       def single(future)
@@ -48,6 +50,8 @@ module Carbon
 
     attr_reader :emitter
     attr_reader :params
+
+    attr_accessor :object
 
     def initialize(emitter, params = {})
       @result = nil

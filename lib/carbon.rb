@@ -66,7 +66,7 @@ module Carbon
   # @overload query(os)
   #   Get multiple impact estimates for arrays and/or query-able objects concurrently.
   #   @param [Array<Array, #as_impact_query>] os An array of arrays in +[emitter, params]+ format and/or objects that respond to +#as_impact_query+.
-  #   @return [Array<Hashie::Mash>] An array of +Hashie::Mash+ objects in the same order.
+  #   @return [Hash{Object => Hashie::Mash}] A +Hash+ of +Hashie::Mash+ objects, keyed on the original query object.
   #
   # @note We make up to 16 requests concurrently (hardcoded, per the Brighter Planet Terms of Service) and it can be more than 90% faster than running queries serially!
   #
@@ -109,7 +109,7 @@ module Carbon
   # @example Flights and cars (concurrently, as query-able objects)
   #   Carbon.query(MyFlight.all+MyCar.all)
   #
-  # @example Cars month-by-month
+  # @example Cars month-by-month (note that you won't get MyCar objects back, you'll get Arrays back. This will be fixed soon.)
   #   cars_by_month = MyCar.all.inject([]) do |memo, my_car|
   #     months.each do |first_day_of_the_month|
   #       my_car.as_impact_query(:date => first_day_of_the_month)
@@ -133,8 +133,9 @@ module Carbon
         future.multi!
         future
       end
-      Future.multi(futures).map do |future|
-        future.result
+      Future.multi(futures).inject({}) do |memo, future|
+        memo[future.object] = future.result
+        memo
       end
     else
       raise ::ArgumentError, "Didn't match any of the method signatures. If you want multiple queries, make sure to pass an unsplatted Array."
