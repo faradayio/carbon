@@ -1,3 +1,9 @@
+2.2.1 / 2012-03-21
+
+* Enhancements
+
+  * Switched from EventMachine to pure Ruby threads, a small speed sacrifice that gains us compatibilty with MRI 1.8, MRI 1.9, and JRuby. Also works better in multithreaded environments - no accidentally turning off somebody's EventMachine reactor :)
+
 2.2.0 / 2012-03-20
 
 * Enhancements
