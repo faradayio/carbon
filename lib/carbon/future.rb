@@ -3,7 +3,6 @@ require 'net/http'
 require 'cache_method'
 require 'hashie/mash'
 require 'multi_json'
-require 'em-http-request'
 
 module Carbon
   # @private
@@ -28,20 +27,12 @@ module Carbon
 
       def multi(futures)
         uniq_pending_futures = futures.uniq.select { |future| future.pending? }
-        return futures if uniq_pending_futures.empty?
-        pool_size = [Carbon::CONCURRENCY, uniq_pending_futures.length].min
-        multi = ::EventMachine::MultiRequest.new
-        pool = (0..(pool_size-1)).map { ::EventMachine::HttpRequest.new(Carbon::DOMAIN) }
-        pool_idx = 0
-        ::EventMachine.run do
-          uniq_pending_futures.each do |future|
-            multi.add future, pool[pool_idx].post(:path => "/#{future.emitter.underscore.pluralize}.json", :body => future.params)
-            pool_idx = (pool_idx + 1) % pool_size
+        while (set = uniq_pending_futures.pop(Carbon::CONCURRENCY)).any?
+          ts = set.map do |future|
+            ::Thread.new { single future }
           end
-          multi.callback do
-            multi.responses[:callback].each { |future, http| future.finalize http.response_header.status, http.response }
-            multi.responses[:errback].each  { |future, http| future.finalize http.response_header.status }
-            ::EventMachine.stop
+          ts.each do |t|
+            t.join
           end
         end
         futures

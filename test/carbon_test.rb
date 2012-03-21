@@ -1,5 +1,6 @@
 require File.expand_path("../helper", __FILE__)
 
+Thread.abort_on_exception = true
 Carbon.key = 'carbon_test'
 
 class MyNissan
@@ -122,24 +123,32 @@ describe Carbon do
           memo[query] = Carbon.query(*query)
           memo
         end
-        flush_cache! # important!
-        multi_results = Carbon.query(@queries)
-        error_count = 0
-        multi_results.each do |query, result|
-          if result.success
-            result.decisions.carbon.object.value.must_be :>, 0
-            result.decisions.carbon.object.value.must_be :<, 10_000
-          else
-            error_count += 1
+        ts = []
+        3.times do
+          ts << Thread.new do
+            flush_cache! # important!
+            multi_results = Carbon.query(@queries)
+            error_count = 0
+            multi_results.each do |query, result|
+              if result.success
+                result.decisions.carbon.object.value.must_be :>, 0
+                result.decisions.carbon.object.value.must_be :<, 10_000
+              else
+                error_count += 1
+              end
+            end
+            error_count.must_equal 3
+            reference_results.each do |query, reference_result|
+              if reference_result.success
+                multi_results[query].decisions.must_equal reference_result.decisions
+              else
+                multi_results[query].must_equal reference_result
+              end
+            end
           end
         end
-        error_count.must_equal 3
-        reference_results.each do |query, reference_result|
-          if reference_result.success
-            multi_results[query].decisions.must_equal reference_result.decisions
-          else
-            multi_results[query].must_equal reference_result
-          end
+        ts.each do |t|
+          t.join
         end
       end
       it "is faster than single threaded" do
