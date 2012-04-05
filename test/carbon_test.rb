@@ -127,7 +127,13 @@ describe Carbon do
         Timeout.timeout(0.5) { Carbon.query([]) }.must_equal(Hash.new)
       end
       it "can be used on objects that respond to #as_impact_query" do
-        Carbon.query([MyNissanAltima.new(2001), MyNissanAltima.new(2006)]).values.map(&:decisions).map(&:carbon).map(&:object).map(&:value).must_equal Carbon.query([MyNissanAltima.new(2001).as_impact_query, MyNissanAltima.new(2006).as_impact_query]).values.map(&:decisions).map(&:carbon).map(&:object).map(&:value)
+        a = MyNissanAltima.new(2001)
+        b = MyNissanAltima.new(2006)
+        ab1 = Carbon.query([a, b])
+        ab2 = Carbon.query([a.as_impact_query, b.as_impact_query])
+        ab1.each do |k, v|
+          ab2[k.as_impact_query].must_equal v
+        end
       end
       it "runs multiple queries at once" do
         reference_results = @queries.inject({}) do |memo, query|
