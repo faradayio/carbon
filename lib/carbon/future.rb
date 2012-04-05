@@ -19,7 +19,7 @@ module Carbon
       end
 
       def single(future)
-        uri = ::URI.parse("#{Carbon::DOMAIN}/#{future.emitter.underscore.pluralize}.json")
+        uri = ::URI.parse("#{future.domain}/#{future.emitter.underscore.pluralize}.json")
         raw_result = ::Net::HTTP.post_form(uri, future.params)
         future.finalize raw_result.code.to_i, raw_result.body
         future
@@ -41,14 +41,18 @@ module Carbon
 
     attr_reader :emitter
     attr_reader :params
+    attr_reader :domain
 
     attr_accessor :object
 
     def initialize(emitter, params = {})
       @result = nil
       @emitter = emitter
-      params = params || {}
-      params.reverse_merge(:key => Carbon.key) if Carbon.key
+      params = params.dup || {}
+      @domain = params.delete(:domain) || Carbon.domain
+      if Carbon.key and not params.has_key?(:key)
+        params[:key] = Carbon.key
+      end
       @params = params
     end
 
@@ -90,7 +94,7 @@ module Carbon
     cache_method :result, 3_600 # one hour
 
     def as_cache_key
-      [ @emitter, @params ]
+      [ @domain, @emitter, @params ]
     end
 
     def hash

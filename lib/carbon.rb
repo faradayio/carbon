@@ -4,12 +4,16 @@ require 'carbon/registry'
 require 'carbon/future'
 
 module Carbon
-  DOMAIN = 'http://impact.brighterplanet.com'
+  DOMAIN = 'http://impact.brighterplanet.com'.freeze
   CONCURRENCY = 16
 
   # @private
   # Make sure there are no warnings about class vars.
   @@key = nil unless defined?(@@key)
+
+  # @private
+  # Make sure there are no warnings about class vars.
+  @@domain = nil unless defined?(@@domain)
 
   # Set the Brighter Planet API key that you can get from http://keys.brighterplanet.com
   #
@@ -26,6 +30,23 @@ module Carbon
   # @return [String] The key you set.
   def Carbon.key
     @@key
+  end
+
+  # Set an alternate API endpoint. You probably shouldn't do this.
+  #
+  # @param [String] domain ("http://impact.brighterplanet.com") The API endpoint
+  #
+  # @return [nil]
+  def Carbon.domain=(domain)
+    @@domain = domain
+    nil
+  end
+
+  # Where we send queries.
+  #
+  # @return [String] The API endpoint.
+  def Carbon.domain
+    @@domain || DOMAIN
   end
 
   # Get impact estimates from Brighter Planet CM1; low-level method that does _not_ require you to define {Carbon::ClassMethods#emit_as} blocks; just pass emitter/param or objects that respond to +#as_impact_query+.

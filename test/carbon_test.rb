@@ -73,9 +73,20 @@ describe Carbon do
       end
       it "sends key properly" do
         with_web_mock do
-          WebMock.stub_request(:post, 'http://impact.brighterplanet.com/flights.json').with(:key => 'carbon_test').to_return(:status => 500, :body => 'Good job')
-          result = Carbon.query('Flight')
-          result.errors.first.must_equal 'Good job'
+          WebMock.stub_request(:post, 'http://impact.brighterplanet.com/flights.json').with(:body => hash_including(:key => 'carbon_test')).to_return(:status => 500, :body => 'default')
+          WebMock.stub_request(:post, 'http://impact.brighterplanet.com/flights.json').with(:body => hash_including(:key => 'carbon_test1')).to_return(:status => 500, :body => 'A')
+          WebMock.stub_request(:post, 'http://impact.brighterplanet.com/flights.json').with(:body => hash_including(:key => 'carbon_test2')).to_return(:status => 500, :body => 'B')
+          Carbon.query('Flight', :key => 'carbon_test2').errors.first.must_equal 'B'
+          Carbon.query('Flight').errors.first.must_equal 'default'
+          Carbon.query('Flight', :key => 'carbon_test1').errors.first.must_equal 'A'
+        end
+      end
+      it "allows choosing domain" do
+        with_web_mock do
+          WebMock.stub_request(:post, 'http://impact.brighterplanet.com/flights.json').to_return(:status => 500, :body => 'used impact')
+          WebMock.stub_request(:post, 'http://foo.brighterplanet.com/flights.json').to_return(:status => 500, :body => 'used foo')
+          Carbon.query('Flight', :domain => 'http://foo.brighterplanet.com').errors.first.must_equal 'used foo'
+          Carbon.query('Flight').errors.first.must_equal 'used impact'
         end
       end
       it "raises ArgumentError if args are bad" do
