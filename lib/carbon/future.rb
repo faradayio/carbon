@@ -8,13 +8,13 @@ module Carbon
   # @private
   class Future
     class << self
-      def wrap(query_array_or_o)
-        future = if query_array_or_o.is_a?(::Array)
-          new(*query_array_or_o)
+      def wrap(plain_query_or_o)
+        future = if plain_query_or_o.is_a?(::Array)
+          new(*plain_query_or_o)
         else
-          new(*query_array_or_o.as_impact_query)
+          new(*plain_query_or_o.as_impact_query)
         end
-        future.object = query_array_or_o
+        future.object = plain_query_or_o
         future
       end
 

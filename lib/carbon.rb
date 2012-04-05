@@ -71,7 +71,7 @@ module Carbon
   #     timeframe.startDate
   #
   # @overload query(emitter, params)
-  #   Simplest form.
+  #   The simplest form.
   #   @param [String] emitter The {http://impact.brighterplanet.com/emitters.json emitter name}.
   #   @param [optional, Hash] params Characteristics like airline/airport/etc., your API key (if you didn't set it globally), timeframe, compliance, etc.
   #   @option params [Timeframe] :timeframe (Timeframe.this_year) What time period to focus the calculation on. See {https://github.com/rossmeissl/timeframe timeframe} documentation.
@@ -79,17 +79,19 @@ module Carbon
   #   @option params [String, Numeric] <i>characteristic</i> Pieces of data about an emitter. The {http://impact.brighterplanet.com/flights/options Flight characteristics API} lists valid keys like +:aircraft+, +:origin_airport+, etc.
   #   @return [Hashie::Mash] The API response, contained in an easy-to-use +Hashie::Mash+
   #
-  # @overload query(o)
+  # @overload query(obj)
   #   Pass in a single query-able object.
-  #   @param [#as_impact_query] o An object that responds to +#as_impact_query+, generally because you've declared {Carbon::ClassMethods#emit_as} on its parent class.
+  #   @param [#as_impact_query] obj An object that responds to +#as_impact_query+, generally because you've declared {Carbon::ClassMethods#emit_as} on its parent class.
   #   @return [Hashie::Mash] The API response, contained in an easy-to-use +Hashie::Mash+
   #
-  # @overload query(os)
-  #   Get multiple impact estimates for arrays and/or query-able objects concurrently.
-  #   @param [Array<Array, #as_impact_query>] os An array of arrays in +[emitter, params]+ format and/or objects that respond to +#as_impact_query+.
+  # @overload query(array)
+  #   Get impact estimates for multiple query-able objects concurrently.
+  #   @param [Array<Array, #as_impact_query>] array An array of plain queries and/or objects that respond to +#as_impact_query+.
   #   @return [Hash{Object => Hashie::Mash}] A +Hash+ of +Hashie::Mash+ objects, keyed on the original query object.
   #
   # @note We make up to 16 requests concurrently (hardcoded, per the Brighter Planet Terms of Service) and it can be more than 90% faster than running queries serially!
+  #
+  # @note +[emitter, params]+ is called a "plain query."
   #
   # @raise [ArgumentError] If your arguments don't match any of the method signatures.
   #
@@ -126,29 +128,23 @@ module Carbon
   #   Carbon.query(queries)
   #
   # @example Flights and cars (concurrently, as query-able objects)
-  #   Carbon.query(MyFlight.all+MyCar.all)
-  #
-  # @example Cars month-by-month (note that you won't get MyCar objects back, you'll get Arrays back. This will be fixed soon.)
-  #   cars_by_month = MyCar.all.inject([]) do |memo, my_car|
-  #     months.each do |first_day_of_the_month|
-  #       my_car.as_impact_query(:date => first_day_of_the_month)
-  #     end
+  #   Carbon.query(MyFlight.all+MyCar.all).each do |car_or_flight, impact|
+  #     puts "Carbon emitter by #{car_or_flight} was #{impact.decisions.carbon.object.value.round(1)}"
   #   end
-  #   Carbon.query(cars_by_month)
   def Carbon.query(*args)
     case Carbon.method_signature(*args)
-    when :query_array
-      query_array = args
-      future = Future.wrap query_array
+    when :plain_query
+      plain_query = args
+      future = Future.wrap plain_query
       future.result
-    when :o
-      o = args.first
-      future = Future.wrap o
+    when :obj
+      obj = args.first
+      future = Future.wrap obj
       future.result
-    when :os
-      os = args.first
-      futures = os.map do |o|
-        future = Future.wrap o
+    when :array
+      array = args.first
+      futures = array.map do |obj|
+        future = Future.wrap obj
         future.multi!
         future
       end
@@ -157,13 +153,13 @@ module Carbon
         memo
       end
     else
-      raise ::ArgumentError, "Didn't match any of the method signatures. If you want multiple queries, make sure to pass an unsplatted Array."
+      raise ::ArgumentError, "You must pass one plain query, or one object that responds to #as_impact_query, or an array of such objects. Please check the docs!"
     end
   end
 
   # Determine if a variable is a +[emitter, param]+ style "query"
   # @private
-  def Carbon.is_query_array?(query)
+  def Carbon.is_plain_query?(query)
     return false unless query.is_a?(::Array)
     return false unless query.first.is_a?(::String) or query.first.is_a?(::Symbol)
     return true if query.length == 1
@@ -177,20 +173,20 @@ module Carbon
     first_arg = args.first
     case args.length
     when 1
-      if is_query_array?(args)
+      if is_plain_query?(args)
         # query('Flight')
-        :query_array
+        :plain_query
       elsif first_arg.respond_to?(:as_impact_query)
         # query(my_flight)
-        :o
-      elsif first_arg.is_a?(::Array) and first_arg.all? { |o| o.respond_to?(:as_impact_query) or is_query_array?(o) }
+        :obj
+      elsif first_arg.is_a?(::Array) and first_arg.all? { |obj| obj.respond_to?(:as_impact_query) or is_plain_query?(obj) }
         # query([my_flight, my_flight])
-        :os
+        :array
       end
     when 2
-      if is_query_array?(args)
+      if is_plain_query?(args)
         # query('Flight', :origin_airport => 'LAX')
-        :query_array
+        :plain_query
       end
     end
   end
@@ -308,8 +304,8 @@ module Carbon
   #   ?> my_impact.methodology
   #   => "http://impact.brighterplanet.com/flights?[...]"
   def impact(extra_params = {})
-    query_array = as_impact_query extra_params
-    future = Future.wrap query_array
+    plain_query = as_impact_query extra_params
+    future = Future.wrap plain_query
     future.result
   end
 end

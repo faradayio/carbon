@@ -3,6 +3,7 @@ unreleased
 * Enhancements
 
   * Allow choosing domain (API endpoint)
+  * Slightly improved method signature explanations: query_array -> plain_query, o -> obj, os -> array
 
 * Bug fixes
 

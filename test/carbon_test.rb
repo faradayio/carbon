@@ -214,22 +214,22 @@ describe Carbon do
 
   describe :method_signature do
     it "recognizes emitter_param" do
-      Carbon.method_signature('Flight').must_equal :query_array
-      Carbon.method_signature('Flight', :origin_airport => 'LAX').must_equal :query_array
-      Carbon.method_signature(:flight).must_equal :query_array
-      Carbon.method_signature(:flight, :origin_airport => 'LAX').must_equal :query_array
+      Carbon.method_signature('Flight').must_equal :plain_query
+      Carbon.method_signature('Flight', :origin_airport => 'LAX').must_equal :plain_query
+      Carbon.method_signature(:flight).must_equal :plain_query
+      Carbon.method_signature(:flight, :origin_airport => 'LAX').must_equal :plain_query
     end
-    it "recognizes o" do
-      Carbon.method_signature(MyNissanAltima.new(2006)).must_equal :o
+    it "recognizes obj" do
+      Carbon.method_signature(MyNissanAltima.new(2006)).must_equal :obj
     end
-    it "recognizes os" do
-      Carbon.method_signature([MyNissanAltima.new(2001)]).must_equal :os
-      Carbon.method_signature([['Flight']]).must_equal :os
-      Carbon.method_signature([['Flight', {:origin_airport => 'LAX'}]]).must_equal :os
-      Carbon.method_signature([['Flight'], ['Flight']]).must_equal :os
-      Carbon.method_signature([['Flight', {:origin_airport => 'LAX'}], ['Flight', {:origin_airport => 'LAX'}]]).must_equal :os
+    it "recognizes array" do
+      Carbon.method_signature([MyNissanAltima.new(2001)]).must_equal :array
+      Carbon.method_signature([['Flight']]).must_equal :array
+      Carbon.method_signature([['Flight', {:origin_airport => 'LAX'}]]).must_equal :array
+      Carbon.method_signature([['Flight'], ['Flight']]).must_equal :array
+      Carbon.method_signature([['Flight', {:origin_airport => 'LAX'}], ['Flight', {:origin_airport => 'LAX'}]]).must_equal :array
       [MyNissanAltima.new(2006), ['Flight'], ['Flight', {:origin_airport => 'LAX'}]].permutation.each do |p|
-        Carbon.method_signature(p).must_equal :os
+        Carbon.method_signature(p).must_equal :array
       end
     end
     it "does not want splats for concurrent queries" do
