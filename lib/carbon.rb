@@ -95,6 +95,8 @@ module Carbon
   #
   # @raise [ArgumentError] If your arguments don't match any of the method signatures.
   #
+  # @raise [ArgumentError] If you try to pass a block - you probably want +Carbon.query(array).each {}+ or something.
+  #
   # @example A flight taken in 2009
   #   Carbon.query('Flight', :origin_airport => 'MSN', :destination_airport => 'ORD', :date => '2009-01-01', :timeframe => Timeframe.new(:year => 2009), :comply => [:tcr])
   #
@@ -132,6 +134,7 @@ module Carbon
   #     puts "Carbon emitter by #{car_or_flight} was #{impact.decisions.carbon.object.value.round(1)}"
   #   end
   def Carbon.query(*args)
+    raise ::ArgumentError, "Don't pass a block directly - instead use Carbon.query(array).each (for example)." if block_given?
     case Carbon.method_signature(*args)
     when :plain_query
       plain_query = args

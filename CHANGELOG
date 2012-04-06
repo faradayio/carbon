@@ -1,3 +1,9 @@
+unreleased
+
+* Enhancements
+
+  * Raise an ArgumentError if you make the common mistake of calling Carbon.query(array) {} instead of Carbon.query(array).each {}
+
 2.2.2 / 2012-04-05
 
 * Enhancements

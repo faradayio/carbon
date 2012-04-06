@@ -126,6 +126,11 @@ describe Carbon do
       it "doesn't hang up on 0 queries" do
         Timeout.timeout(0.5) { Carbon.query([]) }.must_equal(Hash.new)
       end
+      it "raises if you pass it a block directly" do
+        lambda {
+          Carbon.query([]) { }
+        }.must_raise(ArgumentError)
+      end
       it "can be used on objects that respond to #as_impact_query" do
         a = MyNissanAltima.new(2001)
         b = MyNissanAltima.new(2006)
