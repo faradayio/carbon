@@ -1,11 +1,22 @@
 require 'uri'
 require 'net/http'
 require 'conversions'
+require 'cache_method'
 
 module Carbon
   class Shell
     # @private
     class Emitter < Bombshell::Environment
+      class << self
+        # @private
+        def characteristics(emitter)
+          ::MultiJson.decode ::Net::HTTP.get(::URI.parse("http://impact.brighterplanet.com/#{emitter.underscore.pluralize}/options.json"))
+        rescue
+          # oops
+        end
+        cache_method :characteristics, 300
+      end
+
       include Bombshell::Shell
       include Carbon
       
@@ -13,10 +24,8 @@ module Carbon
       def initialize(name, input = {})
         @emitter = name.to_s.singularize.camelcase
         @input = input
-        response = ::Net::HTTP.get_response(::URI.parse("http://impact.brighterplanet.com/#{@emitter.underscore.pluralize}/options.json"))
-        if (200..299).include?(response.code.to_i)
-          @characteristics = ::MultiJson.decode response.body
-          @characteristics.keys.each do |characteristic|
+        if characteristics = Emitter.characteristics(@emitter)
+          characteristics.each do |characteristic|
             instance_eval <<-meth
               def #{characteristic}(arg = nil)
                 if arg
@@ -28,12 +37,12 @@ module Carbon
               end
             meth
           end
-          provisions = @characteristics.keys.map { |k| "provide :#{k}"}.join('; ')
+          provisions = characteristics.map { |k| "provide :#{k}"}.join('; ')
           emit_as_block = "emit_as(:#{name}) { #{provisions} }"
           self.class.class_eval emit_as_block
           emission
         else
-          puts "  => Sorry, characteristics couldn't be retrieved for #{@emitter.underscore.pluralize} (via #{url})"
+          puts "  => Sorry, characteristics couldn't be retrieved for #{@emitter.underscore.pluralize}. Please try again later."
           done
         end
       end
@@ -123,7 +132,7 @@ module Carbon
       
       # @private
       def help
-        puts "  => #{@characteristics.keys.join ', '}"
+        puts "  => #{Emitter.characteristics(@emitter).join ', '}"
       end
       
       prompt_with do |emitter|
