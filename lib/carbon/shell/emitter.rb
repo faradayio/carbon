@@ -10,7 +10,7 @@ module Carbon
       class << self
         # @private
         def characteristics(emitter)
-          ::MultiJson.decode ::Net::HTTP.get(::URI.parse("http://impact.brighterplanet.com/#{emitter.underscore.pluralize}/options.json"))
+          ::MultiJson.load ::Net::HTTP.get(::URI.parse("http://impact.brighterplanet.com/#{emitter.underscore.pluralize}/options.json"))
         rescue
           # oops
         end

@@ -74,7 +74,7 @@ module Carbon
       case code
       when (200..299)
         memo.success = true
-        memo.merge! ::MultiJson.decode(body)
+        memo.merge! ::MultiJson.load(body)
       else
         memo.success = false
         memo.errors = [body]

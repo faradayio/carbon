@@ -33,12 +33,12 @@ namespace :avro do
     $stdout.write ary.sort.join("\n")
   end
   task :json => 'avro:setup' do
-    $stdout.write MultiJson.encode(@cm1.avro_response_schema)
+    $stdout.write MultiJson.dump(@cm1.avro_response_schema)
   end
   task :example => 'avro:setup' do
     require 'tempfile'
     file = Tempfile.new('com.brighterplanet.Cm1.example.avr')
-    parsed_schema = Avro::Schema.parse(MultiJson.encode(@cm1.avro_response_schema))
+    parsed_schema = Avro::Schema.parse(MultiJson.dump(@cm1.avro_response_schema))
     writer = Avro::IO::DatumWriter.new(parsed_schema)
     dw = Avro::DataFile::Writer.new(file, writer, parsed_schema)
     dw << AvroHelper.recursively_stringify_keys(@cm1.example)
