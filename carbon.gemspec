@@ -16,12 +16,19 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_runtime_dependency 'activesupport'
-  s.add_runtime_dependency 'multi_json'
-  s.add_runtime_dependency 'hashie'
-  s.add_runtime_dependency 'cache_method'
-
-  # CLI
   s.add_runtime_dependency 'bombshell'
-  s.add_runtime_dependency 'conversions'
   s.add_runtime_dependency 'brighter_planet_metadata'
+  s.add_runtime_dependency 'cache_method'
+  s.add_runtime_dependency 'conversions'
+  s.add_runtime_dependency 'hashie'
+  s.add_runtime_dependency 'multi_json'
+
+  s.add_development_dependency 'aruba'
+  s.add_development_dependency 'avro'
+  s.add_development_dependency 'cucumber'
+  s.add_development_dependency 'fakeweb'
+  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'timeframe'
+  s.add_development_dependency 'vcr'
+  s.add_development_dependency 'yard'
 end

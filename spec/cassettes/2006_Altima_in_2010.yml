@@ -1,0 +1,69 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/automobiles.json
+    body:
+      encoding: US-ASCII
+      string: make=Nissan&model=Altima&year=2006&automobile_fuel%5bcode%5d=R&timeframe=2010-01-01%2f2011-01-01&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 07 Jun 2012 20:41:06 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"4520.8 kg","object":{"value":4520.789934497878,"units":"kilograms"},"methodology":"from
+        co2 emission, ch4 emission, n2o emission, and hfc emission"},"co2_emission":{"description":"4308.585980497603","object":4308.585980497603,"methodology":"from
+        fuel use and automobile fuel"},"co2_biogenic_emission":{"description":"0.0","object":0.0,"methodology":"from
+        fuel use and automobile fuel"},"ch4_emission":{"description":"4.537572120026403","object":4.537572120026403,"methodology":"from
+        fuel use and automobile fuel"},"n2o_emission":{"description":"15.37211589011779","object":15.37211589011779,"methodology":"from
+        fuel use and automobile fuel"},"hfc_emission":{"description":"192.29426599013075","object":192.29426599013075,"methodology":"from
+        fuel use and automobile fuel"},"energy":{"description":"63708.4 MJ","object":{"value":63708.41114166553,"units":"megajoules"},"methodology":"from
+        fuel use and automobile fuel"},"fuel_use":{"description":"1,839.8372129905256
+        l","object":{"value":1839.8372129905256,"units":"litres"},"methodology":"from
+        fuel efficiency and distance"},"distance":{"description":"17845.6","object":17845.6,"methodology":"from
+        annual distance"},"annual_distance":{"description":"17,845.6 km","object":{"value":17845.6,"units":"kilometres"},"methodology":"from
+        automobile fuel"},"speed":{"description":"50.94382232429702 km/h","object":{"value":50.94382232429702,"units":"kilometres_per_hour"},"methodology":"from
+        urbanity and safe country"},"fuel_efficiency":{"description":"9.699553783344362
+        km/l","object":{"value":9.699553783344362,"units":"kilometres_per_litre"},"methodology":"from
+        make model year and urbanity"},"hybridity_multiplier":{"description":"1.0","object":1.0,"methodology":"default"},"urbanity":{"description":"0.43","object":0.43,"methodology":"from
+        safe country"},"safe_country":{"description":null,"object":{"country":{"automobile_city_speed":32.0259,"automobile_city_speed_units":"kilometres_per_hour","automobile_fuel_efficiency":8.226530750610781,"automobile_fuel_efficiency_units":"kilometres_per_litre","automobile_highway_speed":91.8935,"automobile_highway_speed_units":"kilometres_per_hour","automobile_trip_distance":16.3348,"automobile_trip_distance_units":"kilometres","automobile_urbanity":0.43,"cooling_degree_days":null,"cooling_degree_days_units":null,"electricity_emission_factor":0.626089,"electricity_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","electricity_loss_factor":0.096,"flight_route_inefficiency_factor":1.100000023841858,"heating_degree_days":null,"heating_degree_days_units":null,"iso_3166_alpha_3_code":null,"iso_3166_code":null,"iso_3166_numeric_code":null,"lodging_district_heat_intensity":1.7463,"lodging_district_heat_intensity_units":"megajoules_per_occupied_room_night","lodging_electricity_intensity":32.906,"lodging_electricity_intensity_units":"kilowatt_hours_per_occupied_room_night","lodging_fuel_oil_intensity":0.412389,"lodging_fuel_oil_intensity_units":"gallons_per_occupied_room_night","lodging_natural_gas_intensity":1.93316,"lodging_natural_gas_intensity_units":"cubic_metres_per_occupied_room_night","lodging_occupancy_rate":0.601,"name":"fallback","rail_passengers":null,"rail_speed":32.49720001220703,"rail_speed_units":"kilometres_per_hour","rail_trip_co2_emission_factor":0.06364482122342524,"rail_trip_co2_emission_factor_units":"kilograms_per_passenger_kilometre","rail_trip_diesel_intensity":0.008762920291076415,"rail_trip_diesel_intensity_units":"litres_per_passenger_kilometre","rail_trip_distance":37.11446191042177,"rail_trip_distance_units":"kilometres","rail_trip_electricity_intensity":0.10806735200626398,"rail_trip_electricity_intensity_units":"kilowatt_hour_per_passenger_kilometre"}},"methodology":"default"},"active_subtimeframe":{"description":"2010-01-01/2011-01-01","object":"2010-01-01/2011-01-01","methodology":"from
+        acquisition and retirement"},"acquisition":{"description":"2006-01-01","object":"2006-01-01","methodology":"from
+        year"},"retirement":{"description":"2011-01-01","object":"2011-01-01","methodology":"default"},"make_model_year":{"description":"Nissan
+        ALTIMA 2006","object":{"automobile_make_model_year":{"fuel_code":"R","fuel_efficiency_city":8.15793,"fuel_efficiency_city_units":"kilometres_per_litre","fuel_efficiency_highway":11.3122,"fuel_efficiency_highway_units":"kilometres_per_litre","hybridity":false,"make_name":"Nissan","model_name":"ALTIMA","name":"Nissan
+        ALTIMA 2006","year":2006}},"methodology":"from make, model, and year"},"make_year":{"description":"Nissan
+        2006","object":{"automobile_make_year":{"fuel_efficiency":11.2297,"fuel_efficiency_units":"kilometres_per_litre","make_name":"Nissan","name":"Nissan
+        2006","volume":1076456,"year":2006}},"methodology":"from make and year"},"make_model":{"description":"Nissan
+        ALTIMA","object":{"automobile_make_model":{"fuel_efficiency_city":8.47904,"fuel_efficiency_city_units":"kilometres_per_litre","fuel_efficiency_highway":11.65,"fuel_efficiency_highway_units":"kilometres_per_litre","make_name":"Nissan","model_name":"ALTIMA","name":"Nissan
+        ALTIMA"}},"methodology":"from make and model"}},"emitter":"Automobile","equivalents":{"cars_off_the_road_for_a_year":0.8227837680786138,"cars_off_the_road_for_a_month":9.86436363707437,"cars_off_the_road_for_a_week":42.744068830677435,"cars_off_the_road_for_a_day":300.0267447928861,"cars_to_priuses_for_a_year":1.6455675361572275,"cars_to_priuses_for_a_month":19.72872727414874,"cars_to_priuses_for_a_week":85.48813766135487,"cars_to_priuses_for_a_day":600.0534895857722,"one_way_domestic_flight":14.692567287118102,"round_trip_domestic_flight":7.346283643559051,"one_way_cross_country_flight":5.1627421051965765,"round_trip_cross_country_flight":2.5813710525982883,"vegan_meals_instead_of_non_vegan_ones":3637.820890021294,"days_of_veganism":1212.6069633404313,"weeks_of_veganism":173.22762871008968,"months_of_veganism":40.42038280434552,"years_of_veganism":3.32278060185594,"barrels_of_petroleum":10.515357387642064,"canisters_of_bbq_propane":188.36775420072308,"railroad_cars_full_of_coal":0.022603949672489392,"homes_energy_in_a_year":0.4385166236462941,"homes_energy_in_a_month":5.2395955340830405,"homes_energy_in_a_week":22.698886261113845,"homes_energy_in_a_day":159.3442828212467,"homes_electricity_in_a_year":0.664556120371188,"homes_electricity_in_a_month":7.9520694947817665,"homes_electricity_in_a_week":34.45746088074283,"homes_electricity_in_a_day":241.85774070570196,"homes_with_lowered_thermostat_2_degrees_for_a_winter":23.72962636617936,"homes_with_raised_thermostat_3_degrees_for_a_summer":10.669064245414992,"replaced_refrigerators":4.552435464039363,"loads_of_cold_laundry":2073.062473943216,"lightbulbs_for_a_year":8.345378219083083,"lightbulbs_for_a_month":101.55954587849482,"lightbulbs_for_a_week":435.25261331358666,"lightbulbs_for_a_day":3046.7818555649105,"lightbulbs_for_an_evening":18280.695654179395,"lightbulbs_to_CFLs_for_a_day":51860.13323463397,"lightbulbs_to_CFLs_for_a_week":7408.589170436301,"lightbulbs_to_CFLs_for_a_month":1728.6732175231018,"lightbulbs_to_CFLs_for_a_year":142.0839068513338,"days_with_lightbulbs_to_CFLs":1152.448811682068,"weeks_with_lightbulbs_to_CFLs":164.6336070446092,"months_with_lightbulbs_to_CFLs":38.41315207342846,"years_with_lightbulbs_to_CFLs":3.155511374279519,"recycled_kgs_of_trash":3117.785382276134,"recycled_bags_of_trash":1727.5520616193464},"methodology":"http://impact.brighterplanet.com/automobiles?automobile_fuel%5Bcode%5D=R&make=Nissan&model=Altima&timeframe=2010-01-01%2F2011-01-01&year=2006","scope":"The
+        automobile emission estimate is the total anthropogenic emissions from fuel
+        and air conditioning used by the automobile during the timeframe. It includes
+        CO2 emissions from combustion of non-biogenic fuel, CH4 and N2O emissions
+        from combustion of all fuel, and fugitive HFC emissions from air conditioning.","timeframe":"2010-01-01/2011-01-01","characteristics":{"make":{"description":"Nissan","object":{"automobile_make":{"fuel_efficiency":11.9656,"fuel_efficiency_units":"kilometres_per_litre","name":"Nissan"}}},"model":{"description":"ALTIMA","object":{"automobile_model":{"name":"ALTIMA"}}},"year":{"description":2006,"object":{"automobile_year":{"year":2006}}},"automobile_fuel":{"description":"regular
+        gasoline","object":{"automobile_fuel":{"annual_distance":17845.6,"annual_distance_units":"kilometres","base_fuel_name":"Motor
+        Gasoline","blend_fuel_name":null,"blend_portion":null,"ch4_emission_factor":0.00246629,"ch4_emission_factor_units":"kilograms_co2e_per_litre","co2_biogenic_emission_factor":0.0,"co2_biogenic_emission_factor_units":"kilograms_per_litre","co2_emission_factor":2.34183,"co2_emission_factor_units":"kilograms_per_litre","code":"R","distance_key":"gasoline","ef_key":"gasoline","emission_factor":2.45717,"emission_factor_units":"kilograms_co2e_per_litre","energy_content":34.6272,"energy_content_units":"megajoules_per_litre","hfc_emission_factor":0.104517,"hfc_emission_factor_units":"kilograms_co2e_per_litre","n2o_emission_factor":0.00835515,"n2o_emission_factor_units":"kilograms_co2e_per_litre","name":"regular
+        gasoline"}}}},"errors":["API key \"carbon_test\" could not be verified. Please
+        register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Thu, 07 Jun 2012 20:41:06 GMT
+recorded_with: VCR 2.2.0
