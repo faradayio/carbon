@@ -2,10 +2,127 @@
 http_interactions:
 - request:
     method: post
-    uri: http://impact.brighterplanet.com/automobiles.json
+    uri: http://impact.brighterplanet.com/monkeys.json
     body:
       encoding: US-ASCII
-      string: make=Nissan&model=Altima&year=2006&automobile_fuel%5bcode%5d=R&timeframe=2010-01-01%2f2011-01-01&key=carbon_test
+      string: bananas=3&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:18 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 404 Not Found
+      etag:
+      - b0dcd496ec3896280a7c636e2d5b9870
+    body:
+      encoding: US-ASCII
+      string: ! '{name: "HTTPError", message: "404 Not found"}
+
+'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:18 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/monkeys.json
+    body:
+      encoding: US-ASCII
+      string: bananas=2&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:18 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 404 Not Found
+      etag:
+      - b0dcd496ec3896280a7c636e2d5b9870
+    body:
+      encoding: US-ASCII
+      string: ! '{name: "HTTPError", message: "404 Not found"}
+
+'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:18 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/monkeys.json
+    body:
+      encoding: US-ASCII
+      string: bananas=1&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:18 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 404 Not Found
+      etag:
+      - b0dcd496ec3896280a7c636e2d5b9870
+    body:
+      encoding: US-ASCII
+      string: ! '{name: "HTTPError", message: "404 Not found"}
+
+'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:18 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/rail_trips.json
+    body:
+      encoding: US-ASCII
+      string: rail_traction=electric&key=carbon_test
     headers:
       accept:
       - ! '*/*'
@@ -21,7 +138,51 @@ http_interactions:
       server:
       - nginx
       date:
-      - Thu, 07 Jun 2012 20:41:06 GMT
+      - Fri, 08 Jun 2012 21:06:18 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"2.4 kg","object":{"value":2.362143293092419,"units":"kilograms"},"methodology":"from
+        distance, co2 emission factor, date, and timeframe"},"co2_emission_factor":{"description":"0.06364482122342524","object":0.06364482122342524,"methodology":"default"},"diesel_consumption":{"description":"0.32523107136721763","object":0.32523107136721763,"methodology":"from
+        distance and diesel intensity"},"electricity_consumption":{"description":"4.010861619796626","object":4.010861619796626,"methodology":"from
+        distance and electricity intensity"},"diesel_intensity":{"description":"0.008762920291076415","object":0.008762920291076415,"methodology":"default"},"electricity_intensity":{"description":"0.10806735200626398","object":0.10806735200626398,"methodology":"default"},"distance":{"description":"37.11446191042177
+        km","object":{"value":37.11446191042177,"units":"kilometres"},"methodology":"default"},"speed":{"description":"32.49720001220703","object":32.49720001220703,"methodology":"default"},"date":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        timeframe"}},"emitter":"RailTrip","equivalents":{"cars_off_the_road_for_a_year":0.0004299100793428203,"cars_off_the_road_for_a_month":0.005154196665527658,"cars_off_the_road_for_a_week":0.02233406483618882,"cars_off_the_road_for_a_day":0.15676600178937145,"cars_to_priuses_for_a_year":0.0008598201586856405,"cars_to_priuses_for_a_month":0.010308393331055316,"cars_to_priuses_for_a_week":0.04466812967237764,"cars_to_priuses_for_a_day":0.3135320035787429,"one_way_domestic_flight":0.007676965702550361,"round_trip_domestic_flight":0.0038384828512751804,"one_way_cross_country_flight":0.0026975676407115425,"round_trip_cross_country_flight":0.0013487838203557713,"vegan_meals_instead_of_non_vegan_ones":1.9007860000886594,"days_of_veganism":0.6335953333628864,"weeks_of_veganism":0.0905126067047153,"months_of_veganism":0.021119923183539314,"years_of_veganism":0.0017361753204229277,"barrels_of_petroleum":0.005494345299732966,"canisters_of_bbq_propane":0.09842342459328182,"railroad_cars_full_of_coal":1.1810716465462095e-05,"homes_energy_in_a_year":0.00022912789942996462,"homes_energy_in_a_month":0.0027377240766941137,"homes_energy_in_a_week":0.011860321474617037,"homes_energy_in_a_day":0.08325846465162849,"homes_electricity_in_a_year":0.00034723506408458556,"homes_electricity_in_a_month":0.004155010052549564,"homes_electricity_in_a_week":0.01800425617995042,"homes_electricity_in_a_day":0.1263723040371513,"homes_with_lowered_thermostat_2_degrees_for_a_winter":0.012398890145442107,"homes_with_raised_thermostat_3_degrees_for_a_summer":0.0055746581716981086,"replaced_refrigerators":0.002378678296144066,"loads_of_cold_laundry":1.0831891527670459,"lightbulbs_for_a_year":0.004360516519048605,"lightbulbs_for_a_month":0.053065549079321185,"lightbulbs_for_a_week":0.2274224319723519,"lightbulbs_for_a_day":1.5919641102363427,"lightbulbs_for_an_evening":9.551787023561348,"lightbulbs_to_CFLs_for_a_day":27.09727009527065,"lightbulbs_to_CFLs_for_a_week":3.8710379101405805,"lightbulbs_to_CFLs_for_a_month":0.9032434388425583,"lightbulbs_to_CFLs_for_a_year":0.07423980155860163,"days_with_lightbulbs_to_CFLs":0.6021622925617056,"weeks_with_lightbulbs_to_CFLs":0.08602217230454662,"months_with_lightbulbs_to_CFLs":0.02007113156140628,"years_with_lightbulbs_to_CFLs":0.0016487760185785085,"recycled_kgs_of_trash":1.6290639327976522,"recycled_bags_of_trash":0.9026576273058715},"methodology":"http://impact.brighterplanet.com/rail_trips?rail_traction=electric&timeframe=2012-01-01%2F2013-01-01","scope":"The
+        rail trip emission estimate is the anthropogenic emissions per passenger from
+        rail fuel combustion. It includes includes CO2 emissions from direct fuel
+        combustion and indirect fuel combustion to generate purchased electricity.","timeframe":"2012-01-01/2013-01-01","characteristics":{"rail_traction":{"description":"electric","object":{"rail_traction":{"name":"electric"}}}},"errors":["API
+        key \"carbon_test\" could not be verified. Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:18 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/automobiles.json
+    body:
+      encoding: US-ASCII
+      string: make=Nissan&model=Altima&year=2006&automobile_fuel%5Bcode%5D=R&timeframe=2010-01-01%2F2011-01-01&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:18 GMT
       content-type:
       - application/json
       transfer-encoding:
@@ -65,5 +226,5 @@ http_interactions:
         gasoline"}}}},"errors":["API key \"carbon_test\" could not be verified. Please
         register at http://keys.brighterplanet.com"]}'
     http_version: '1.1'
-  recorded_at: Thu, 07 Jun 2012 20:41:06 GMT
+  recorded_at: Fri, 08 Jun 2012 21:06:18 GMT
 recorded_with: VCR 2.2.0

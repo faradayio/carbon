@@ -1,6 +1,8 @@
-require 'carbon/registry'
-require 'carbon/future'
+require 'active_support/core_ext'
+
 require 'carbon/query'
+require 'carbon/query_pool'
+require 'carbon/registry'
 
 module Carbon
   DOMAIN = 'http://impact.brighterplanet.com'.freeze
@@ -134,7 +136,7 @@ module Carbon
   #   end
   def Carbon.query(*args)
     raise ::ArgumentError, "Don't pass a block directly - instead use Carbon.query(array).each (for example)." if block_given?
-    Query.execute(*args)
+    Query.perform(*args)
   end
 
   # Called when you +include Carbon+ and adds the class method +emit_as+.
@@ -220,7 +222,11 @@ module Carbon
       end
       memo
     end
-    [ registration.emitter, params.merge(extra_params) ]
+    params.merge! extra_params
+    if Carbon.key and not params.has_key?(:key)
+      params[:key] = Carbon.key
+    end
+    [ registration.emitter, params ]
   end
 
   # Get an impact estimate from Brighter Planet CM1; high-level convenience method that requires a {Carbon::ClassMethods#emit_as} block.
@@ -250,7 +256,7 @@ module Carbon
   #   ?> my_impact.methodology
   #   => "http://impact.brighterplanet.com/flights?[...]"
   def impact(extra_params = {})
-    query = Carbon::Query.make(self).first
-    extra_params.empty? ? query.result : query.result(extra_params)
+    plain_query = as_impact_query extra_params
+    Carbon.query(*plain_query)
   end
 end

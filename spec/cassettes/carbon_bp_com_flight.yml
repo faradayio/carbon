@@ -21,7 +21,7 @@ http_interactions:
       server:
       - nginx
       date:
-      - Thu, 07 Jun 2012 20:41:05 GMT
+      - Fri, 08 Jun 2012 21:05:43 GMT
       content-type:
       - application/json
       transfer-encoding:
@@ -54,5 +54,5 @@ http_interactions:
         haul"}},"adjusted_distance_per_segment":962.1615428278766,"adjusted_distance":1616.4313919508327,"distance":1262.599964160848,"route_inefficiency_factor":1.100000023841858,"dogleg_factor":1.1638548181950328,"fuel_use_coefficients":{"m3":1.0532072472371498e-07,"m2":-0.00015627733290887285,"m1":7.148223019744806,"b":1650.9061605236384},"fuel":{"fuel":{"biogenic_fraction":0.0,"carbon_content":18.672,"carbon_content_units":"grams_per_megajoule","co2_biogenic_emission_factor":0.0,"co2_biogenic_emission_factor_units":"kilograms_per_litre","co2_emission_factor":2.57607,"co2_emission_factor_units":"kilograms_per_litre","density":0.8156,"density_units":"kilograms_per_litre","energy_content":37.6267,"energy_content_units":"megajoules_per_litre","name":"Jet
         Fuel","oxidation_factor":1.0,"physical_units":null}},"passengers":131,"seats":169.27798641328772,"load_factor":0.7731146349652108,"freight_share":0.06885888622195808,"trips":1.7,"segments_per_trip":1.68,"date":"2012-01-01"}'
     http_version: '1.1'
-  recorded_at: Thu, 07 Jun 2012 20:41:05 GMT
+  recorded_at: Fri, 08 Jun 2012 21:05:43 GMT
 recorded_with: VCR 2.2.0

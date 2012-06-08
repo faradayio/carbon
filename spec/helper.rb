@@ -1,5 +1,9 @@
 require 'bundler/setup'
 
+if ::Bundler.definition.specs['debugger'].first
+  require 'debugger'
+end
+
 require 'carbon'
 
 $:.unshift File.expand_path('../support', __FILE__)

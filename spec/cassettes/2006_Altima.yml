@@ -5,7 +5,7 @@ http_interactions:
     uri: http://impact.brighterplanet.com/automobiles.json
     body:
       encoding: US-ASCII
-      string: make=Nissan&model=Altima&year=2006&automobile_fuel%5bcode%5d=R&key=carbon_test
+      string: make=Nissan&model=Altima&year=2006&automobile_fuel%5Bcode%5D=R&key=carbon_test
     headers:
       accept:
       - ! '*/*'
@@ -21,7 +21,7 @@ http_interactions:
       server:
       - nginx
       date:
-      - Thu, 07 Jun 2012 20:41:03 GMT
+      - Fri, 08 Jun 2012 21:05:39 GMT
       content-type:
       - application/json
       transfer-encoding:
@@ -65,5 +65,5 @@ http_interactions:
         gasoline"}}}},"errors":["API key \"carbon_test\" could not be verified. Please
         register at http://keys.brighterplanet.com"]}'
     http_version: '1.1'
-  recorded_at: Thu, 07 Jun 2012 20:41:03 GMT
+  recorded_at: Fri, 08 Jun 2012 21:05:39 GMT
 recorded_with: VCR 2.2.0
