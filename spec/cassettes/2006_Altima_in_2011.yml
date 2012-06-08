@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: http://impact.brighterplanet.com/automobiles.json
+    uri: http://impact.brighterplanet.com/rail_trips.json
     body:
       encoding: US-ASCII
-      string: make=Nissan&model=Altima&year=2006&automobile_fuel%5bcode%5d=R&timeframe=2011-01-01%2f2012-01-01&key=carbon_test
+      string: distance=25&key=carbon_test
     headers:
       accept:
       - ! '*/*'
@@ -21,7 +21,1177 @@ http_interactions:
       server:
       - nginx
       date:
-      - Thu, 07 Jun 2012 21:06:26 GMT
+      - Fri, 08 Jun 2012 21:06:18 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"1.6 kg","object":{"value":1.591120530585631,"units":"kilograms"},"methodology":"from
+        distance, co2 emission factor, date, and timeframe"},"co2_emission_factor":{"description":"0.06364482122342524","object":0.06364482122342524,"methodology":"default"},"diesel_consumption":{"description":"0.21907300727691037","object":0.21907300727691037,"methodology":"from
+        distance and diesel intensity"},"electricity_consumption":{"description":"2.7016838001565997","object":2.7016838001565997,"methodology":"from
+        distance and electricity intensity"},"diesel_intensity":{"description":"0.008762920291076415","object":0.008762920291076415,"methodology":"default"},"electricity_intensity":{"description":"0.10806735200626398","object":0.10806735200626398,"methodology":"default"},"speed":{"description":"32.49720001220703","object":32.49720001220703,"methodology":"default"},"date":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        timeframe"}},"emitter":"RailTrip","equivalents":{"cars_off_the_road_for_a_year":0.00028958393656658486,"cars_off_the_road_for_a_month":0.003471824997737847,"cars_off_the_road_for_a_week":0.015044044616687142,"cars_off_the_road_for_a_day":0.10559630513284599,"cars_to_priuses_for_a_year":0.0005791678731331697,"cars_to_priuses_for_a_month":0.006943649995475694,"cars_to_priuses_for_a_week":0.030088089233374284,"cars_to_priuses_for_a_day":0.21119261026569197,"one_way_domestic_flight":0.005171141724403301,"round_trip_domestic_flight":0.0025855708622016505,"one_way_cross_country_flight":0.0018170596459287907,"round_trip_cross_country_flight":0.0009085298229643953,"vegan_meals_instead_of_non_vegan_ones":1.2803540063953598,"days_of_veganism":0.4267846687984532,"weeks_of_veganism":0.06096855649098021,"months_of_veganism":0.014226208663966126,"years_of_veganism":0.0011694735899804387,"barrels_of_petroleum":0.003700946354142178,"canisters_of_bbq_propane":0.0662972191479115,"railroad_cars_full_of_coal":7.955602652928155e-06,"homes_energy_in_a_year":0.00015433869146680622,"homes_energy_in_a_month":0.0018441086949487465,"homes_energy_in_a_week":0.007989016184070455,"homes_energy_in_a_day":0.05608222534155174,"homes_electricity_in_a_year":0.00023389471799608775,"homes_electricity_in_a_month":0.002798781013300125,"homes_electricity_in_a_week":0.01212752068412368,"homes_electricity_in_a_day":0.08512335726580067,"homes_with_lowered_thermostat_2_degrees_for_a_winter":0.008351791665043977,"homes_with_raised_thermostat_3_degrees_for_a_summer":0.0037550444521820894,"replaced_refrigerators":0.0016022583742997306,"loads_of_cold_laundry":0.7296274127464082,"lightbulbs_for_a_year":0.002937208499461075,"lightbulbs_for_a_month":0.0357445227196062,"lightbulbs_for_a_week":0.15318990244372338,"lightbulbs_for_a_day":1.0723340904676555,"lightbulbs_for_an_evening":6.434006133926463,"lightbulbs_to_CFLs_for_a_day":18.25250097972033,"lightbulbs_to_CFLs_for_a_week":2.6074996853541816,"lightbulbs_to_CFLs_for_a_month":0.6084174418469254,"lightbulbs_to_CFLs_for_a_year":0.0500073271557758,"days_with_lightbulbs_to_CFLs":0.40561162789795024,"weeks_with_lightbulbs_to_CFLs":0.05794383636233692,"months_with_lightbulbs_to_CFLs":0.013519751148386105,"years_with_lightbulbs_to_CFLs":0.0011106021303487707,"recycled_kgs_of_trash":1.0973242295210335,"recycled_bags_of_trash":0.6080228439553401},"methodology":"http://impact.brighterplanet.com/rail_trips?distance=25&timeframe=2012-01-01%2F2013-01-01","scope":"The
+        rail trip emission estimate is the anthropogenic emissions per passenger from
+        rail fuel combustion. It includes includes CO2 emissions from direct fuel
+        combustion and indirect fuel combustion to generate purchased electricity.","timeframe":"2012-01-01/2013-01-01","characteristics":{"distance":{"description":"25.0
+        km","object":{"value":25.0,"units":"kilometres"}}},"errors":["API key \"carbon_test\"
+        could not be verified. Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:18 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/rail_trips.json
+    body:
+      encoding: US-ASCII
+      string: distance=25&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:18 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"1.6 kg","object":{"value":1.591120530585631,"units":"kilograms"},"methodology":"from
+        distance, co2 emission factor, date, and timeframe"},"co2_emission_factor":{"description":"0.06364482122342524","object":0.06364482122342524,"methodology":"default"},"diesel_consumption":{"description":"0.21907300727691037","object":0.21907300727691037,"methodology":"from
+        distance and diesel intensity"},"electricity_consumption":{"description":"2.7016838001565997","object":2.7016838001565997,"methodology":"from
+        distance and electricity intensity"},"diesel_intensity":{"description":"0.008762920291076415","object":0.008762920291076415,"methodology":"default"},"electricity_intensity":{"description":"0.10806735200626398","object":0.10806735200626398,"methodology":"default"},"speed":{"description":"32.49720001220703","object":32.49720001220703,"methodology":"default"},"date":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        timeframe"}},"emitter":"RailTrip","equivalents":{"cars_off_the_road_for_a_year":0.00028958393656658486,"cars_off_the_road_for_a_month":0.003471824997737847,"cars_off_the_road_for_a_week":0.015044044616687142,"cars_off_the_road_for_a_day":0.10559630513284599,"cars_to_priuses_for_a_year":0.0005791678731331697,"cars_to_priuses_for_a_month":0.006943649995475694,"cars_to_priuses_for_a_week":0.030088089233374284,"cars_to_priuses_for_a_day":0.21119261026569197,"one_way_domestic_flight":0.005171141724403301,"round_trip_domestic_flight":0.0025855708622016505,"one_way_cross_country_flight":0.0018170596459287907,"round_trip_cross_country_flight":0.0009085298229643953,"vegan_meals_instead_of_non_vegan_ones":1.2803540063953598,"days_of_veganism":0.4267846687984532,"weeks_of_veganism":0.06096855649098021,"months_of_veganism":0.014226208663966126,"years_of_veganism":0.0011694735899804387,"barrels_of_petroleum":0.003700946354142178,"canisters_of_bbq_propane":0.0662972191479115,"railroad_cars_full_of_coal":7.955602652928155e-06,"homes_energy_in_a_year":0.00015433869146680622,"homes_energy_in_a_month":0.0018441086949487465,"homes_energy_in_a_week":0.007989016184070455,"homes_energy_in_a_day":0.05608222534155174,"homes_electricity_in_a_year":0.00023389471799608775,"homes_electricity_in_a_month":0.002798781013300125,"homes_electricity_in_a_week":0.01212752068412368,"homes_electricity_in_a_day":0.08512335726580067,"homes_with_lowered_thermostat_2_degrees_for_a_winter":0.008351791665043977,"homes_with_raised_thermostat_3_degrees_for_a_summer":0.0037550444521820894,"replaced_refrigerators":0.0016022583742997306,"loads_of_cold_laundry":0.7296274127464082,"lightbulbs_for_a_year":0.002937208499461075,"lightbulbs_for_a_month":0.0357445227196062,"lightbulbs_for_a_week":0.15318990244372338,"lightbulbs_for_a_day":1.0723340904676555,"lightbulbs_for_an_evening":6.434006133926463,"lightbulbs_to_CFLs_for_a_day":18.25250097972033,"lightbulbs_to_CFLs_for_a_week":2.6074996853541816,"lightbulbs_to_CFLs_for_a_month":0.6084174418469254,"lightbulbs_to_CFLs_for_a_year":0.0500073271557758,"days_with_lightbulbs_to_CFLs":0.40561162789795024,"weeks_with_lightbulbs_to_CFLs":0.05794383636233692,"months_with_lightbulbs_to_CFLs":0.013519751148386105,"years_with_lightbulbs_to_CFLs":0.0011106021303487707,"recycled_kgs_of_trash":1.0973242295210335,"recycled_bags_of_trash":0.6080228439553401},"methodology":"http://impact.brighterplanet.com/rail_trips?distance=25&timeframe=2012-01-01%2F2013-01-01","scope":"The
+        rail trip emission estimate is the anthropogenic emissions per passenger from
+        rail fuel combustion. It includes includes CO2 emissions from direct fuel
+        combustion and indirect fuel combustion to generate purchased electricity.","timeframe":"2012-01-01/2013-01-01","characteristics":{"distance":{"description":"25.0
+        km","object":{"value":25.0,"units":"kilometres"}}},"errors":["API key \"carbon_test\"
+        could not be verified. Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:18 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/rail_trips.json
+    body:
+      encoding: US-ASCII
+      string: rail_class=commuter&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:18 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"2.4 kg","object":{"value":2.362143293092419,"units":"kilograms"},"methodology":"from
+        distance, co2 emission factor, date, and timeframe"},"co2_emission_factor":{"description":"0.06364482122342524","object":0.06364482122342524,"methodology":"default"},"diesel_consumption":{"description":"0.32523107136721763","object":0.32523107136721763,"methodology":"from
+        distance and diesel intensity"},"electricity_consumption":{"description":"4.010861619796626","object":4.010861619796626,"methodology":"from
+        distance and electricity intensity"},"diesel_intensity":{"description":"0.008762920291076415","object":0.008762920291076415,"methodology":"default"},"electricity_intensity":{"description":"0.10806735200626398","object":0.10806735200626398,"methodology":"default"},"distance":{"description":"37.11446191042177
+        km","object":{"value":37.11446191042177,"units":"kilometres"},"methodology":"default"},"speed":{"description":"32.49720001220703","object":32.49720001220703,"methodology":"default"},"date":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        timeframe"}},"emitter":"RailTrip","equivalents":{"cars_off_the_road_for_a_year":0.0004299100793428203,"cars_off_the_road_for_a_month":0.005154196665527658,"cars_off_the_road_for_a_week":0.02233406483618882,"cars_off_the_road_for_a_day":0.15676600178937145,"cars_to_priuses_for_a_year":0.0008598201586856405,"cars_to_priuses_for_a_month":0.010308393331055316,"cars_to_priuses_for_a_week":0.04466812967237764,"cars_to_priuses_for_a_day":0.3135320035787429,"one_way_domestic_flight":0.007676965702550361,"round_trip_domestic_flight":0.0038384828512751804,"one_way_cross_country_flight":0.0026975676407115425,"round_trip_cross_country_flight":0.0013487838203557713,"vegan_meals_instead_of_non_vegan_ones":1.9007860000886594,"days_of_veganism":0.6335953333628864,"weeks_of_veganism":0.0905126067047153,"months_of_veganism":0.021119923183539314,"years_of_veganism":0.0017361753204229277,"barrels_of_petroleum":0.005494345299732966,"canisters_of_bbq_propane":0.09842342459328182,"railroad_cars_full_of_coal":1.1810716465462095e-05,"homes_energy_in_a_year":0.00022912789942996462,"homes_energy_in_a_month":0.0027377240766941137,"homes_energy_in_a_week":0.011860321474617037,"homes_energy_in_a_day":0.08325846465162849,"homes_electricity_in_a_year":0.00034723506408458556,"homes_electricity_in_a_month":0.004155010052549564,"homes_electricity_in_a_week":0.01800425617995042,"homes_electricity_in_a_day":0.1263723040371513,"homes_with_lowered_thermostat_2_degrees_for_a_winter":0.012398890145442107,"homes_with_raised_thermostat_3_degrees_for_a_summer":0.0055746581716981086,"replaced_refrigerators":0.002378678296144066,"loads_of_cold_laundry":1.0831891527670459,"lightbulbs_for_a_year":0.004360516519048605,"lightbulbs_for_a_month":0.053065549079321185,"lightbulbs_for_a_week":0.2274224319723519,"lightbulbs_for_a_day":1.5919641102363427,"lightbulbs_for_an_evening":9.551787023561348,"lightbulbs_to_CFLs_for_a_day":27.09727009527065,"lightbulbs_to_CFLs_for_a_week":3.8710379101405805,"lightbulbs_to_CFLs_for_a_month":0.9032434388425583,"lightbulbs_to_CFLs_for_a_year":0.07423980155860163,"days_with_lightbulbs_to_CFLs":0.6021622925617056,"weeks_with_lightbulbs_to_CFLs":0.08602217230454662,"months_with_lightbulbs_to_CFLs":0.02007113156140628,"years_with_lightbulbs_to_CFLs":0.0016487760185785085,"recycled_kgs_of_trash":1.6290639327976522,"recycled_bags_of_trash":0.9026576273058715},"methodology":"http://impact.brighterplanet.com/rail_trips?rail_class=commuter&timeframe=2012-01-01%2F2013-01-01","scope":"The
+        rail trip emission estimate is the anthropogenic emissions per passenger from
+        rail fuel combustion. It includes includes CO2 emissions from direct fuel
+        combustion and indirect fuel combustion to generate purchased electricity.","timeframe":"2012-01-01/2013-01-01","characteristics":{"rail_class":{"description":"commuter","object":{"rail_class":{"name":"commuter"}}}},"errors":["API
+        key \"carbon_test\" could not be verified. Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:18 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/flights.json
+    body:
+      encoding: US-ASCII
+      string: origin_airport=IAH&destination_airport=DEN&segments_per_trip=1&trips=1&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:18 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"242.5 kg","object":{"value":242.52347122248426,"units":"kilograms"},"methodology":"from
+        fuel use and greenhouse gas emission factor"},"ghg_emission_factor":{"description":"5.15214","object":5.15214,"methodology":"from
+        fuel and aviation multiplier"},"aviation_multiplier":{"description":"2.0","object":2.0,"methodology":"default"},"energy":{"description":"1771.2
+        MJ","object":{"value":1771.178169585269,"units":"megajoules"},"methodology":"from
+        fuel use and fuel"},"fuel_use":{"description":"47.072375987935935","object":47.072375987935935,"methodology":"from
+        fuel per segment, segments per trip, trips, freight_share, passengers, seat
+        class multiplier, fuel, date, and timeframe"},"fuel_per_segment":{"description":"5891.4023971685265","object":5891.4023971685265,"methodology":"from
+        adjusted distance per segment and fuel use coefficients"},"seat_class_multiplier":{"description":"1.0","object":1.0,"methodology":"default"},"distance_class":{"description":"short
+        haul","object":{"flight_distance_class":{"distance":1108.0,"distance_units":"kilometres","max_distance":3700.0,"max_distance_units":"kilometres","min_distance":0.0,"min_distance_units":"kilometres","name":"short
+        haul"}},"methodology":"from adjusted distance per segment"},"adjusted_distance_per_segment":{"description":"802.3565814689595","object":802.3565814689595,"methodology":"from
+        adjusted distance and segments per trip"},"adjusted_distance":{"description":"802.3565814689595","object":802.3565814689595,"methodology":"from
+        distance, route inefficiency factor, and dogleg factor"},"distance":{"description":"749.8659639896817","object":749.8659639896817,"methodology":"from
+        airports"},"route_inefficiency_factor":{"description":"1.07","object":1.07,"methodology":"from
+        country"},"dogleg_factor":{"description":"1.0","object":1.0,"methodology":"from
+        segments per trip"},"fuel_use_coefficients":{"description":"Fuel use equation","object":{"m3":6.230164366685055e-08,"m2":-4.0923005200593856e-05,"m1":5.808528552865584,"b":1225.0553711164655},"methodology":"from
+        cohort"},"fuel":{"description":"Jet Fuel","object":{"fuel":{"biogenic_fraction":0.0,"carbon_content":18.672,"carbon_content_units":"grams_per_megajoule","co2_biogenic_emission_factor":0.0,"co2_biogenic_emission_factor_units":"kilograms_per_litre","co2_emission_factor":2.57607,"co2_emission_factor_units":"kilograms_per_litre","density":0.8156,"density_units":"kilograms_per_litre","energy_content":37.6267,"energy_content_units":"megajoules_per_litre","name":"Jet
+        Fuel","oxidation_factor":1.0,"physical_units":null}},"methodology":"default"},"passengers":{"description":"152","object":152,"methodology":"from
+        seats and load factor"},"seats":{"description":"174.52327350140772","object":174.52327350140772,"methodology":"from
+        cohort"},"load_factor":{"description":"0.8695368648330599","object":0.8695368648330599,"methodology":"from
+        cohort"},"freight_share":{"description":"0.009468621447370996","object":0.009468621447370996,"methodology":"from
+        cohort"},"country":{"description":"US","object":{"country":{"automobile_city_speed":32.0259,"automobile_city_speed_units":"kilometres_per_hour","automobile_fuel_efficiency":9.2669,"automobile_fuel_efficiency_units":"kilometres_per_litre","automobile_highway_speed":91.8935,"automobile_highway_speed_units":"kilometres_per_hour","automobile_trip_distance":16.3348,"automobile_trip_distance_units":"kilometres","automobile_urbanity":0.43,"cooling_degree_days":882.0,"cooling_degree_days_units":"degrees_celsius","electricity_emission_factor":0.589455,"electricity_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","electricity_loss_factor":0.0615633,"flight_route_inefficiency_factor":1.07,"heating_degree_days":2159.0,"heating_degree_days_units":"degrees_celsius","iso_3166_alpha_3_code":"USA","iso_3166_code":"US","iso_3166_numeric_code":840,"lodging_district_heat_intensity":1.7463,"lodging_district_heat_intensity_units":"megajoules_per_occupied_room_night","lodging_electricity_intensity":32.906,"lodging_electricity_intensity_units":"kilowatt_hours_per_occupied_room_night","lodging_fuel_oil_intensity":0.412389,"lodging_fuel_oil_intensity_units":"gallons_per_occupied_room_night","lodging_natural_gas_intensity":1.93316,"lodging_natural_gas_intensity_units":"cubic_metres_per_occupied_room_night","lodging_occupancy_rate":0.601,"name":"United
+        States","rail_passengers":4467000000.0,"rail_speed":32.4972,"rail_speed_units":"kilometres_per_hour","rail_trip_co2_emission_factor":0.0957617,"rail_trip_co2_emission_factor_units":"kilograms_per_passenger_kilometre","rail_trip_diesel_intensity":0.0194247,"rail_trip_diesel_intensity_units":"litres_per_passenger_kilometre","rail_trip_distance":12.9952,"rail_trip_distance_units":"kilometres","rail_trip_electricity_intensity":0.140512,"rail_trip_electricity_intensity_units":"kilowatt_hours_per_passenger_kilometre"}},"methodology":"from
+        origin airport and destination airport"},"cohort":{"description":"BrighterPlanet::Flight::ImpactModel::FlightSegmentCohort","object":{"members":108,"sql":"SELECT
+        * FROM `flight_segments`  WHERE (`flight_segments`.`source` = ''BTS T100''
+        AND `flight_segments`.`year` IN (2011, 2012) AND `flight_segments`.`passengers`
+        > 0) AND `flight_segments`.`origin_airport_iata_code` = ''IAH'' AND `flight_segments`.`destination_airport_iata_code`
+        = ''DEN''"},"methodology":"from segments per trip and input"},"date":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        timeframe"}},"emitter":"Flight","equivalents":{"cars_off_the_road_for_a_year":0.04413927176249214,"cars_off_the_road_for_a_month":0.5291862142074606,"cars_off_the_road_for_a_week":2.293059420408589,"cars_off_the_road_for_a_day":16.09531269115139,"cars_to_priuses_for_a_year":0.08827854352498428,"cars_to_priuses_for_a_month":1.0583724284149212,"cars_to_priuses_for_a_week":4.586118840817178,"cars_to_priuses_for_a_day":32.19062538230278,"one_way_domestic_flight":0.7882012814730738,"round_trip_domestic_flight":0.3941006407365369,"one_way_cross_country_flight":0.276961804136077,"round_trip_cross_country_flight":0.1384809020680385,"vegan_meals_instead_of_non_vegan_ones":195.1554844876072,"days_of_veganism":65.05182816253573,"weeks_of_veganism":9.293014370303151,"months_of_veganism":2.1684023562002315,"years_of_veganism":0.17825475134852592,"barrels_of_petroleum":0.5641095940634984,"canisters_of_bbq_propane":10.105225475427252,"railroad_cars_full_of_coal":0.0012126173561124215,"homes_energy_in_a_year":0.023524776708580972,"homes_energy_in_a_month":0.2810847031468593,"homes_energy_in_a_week":1.2177103490080936,"homes_energy_in_a_day":8.548224790178903,"homes_electricity_in_a_year":0.03565095026970518,"homes_electricity_in_a_month":0.4265987858803498,"homes_electricity_in_a_week":1.848513897657775,"homes_electricity_in_a_day":12.974763186931686,"homes_with_lowered_thermostat_2_degrees_for_a_winter":1.27300570044682,"homes_with_raised_thermostat_3_degrees_for_a_summer":0.5723553920850629,"replaced_refrigerators":0.24422113552104166,"loads_of_cold_laundry":111.21204801072483,"lightbulbs_for_a_year":0.44769832787670594,"lightbulbs_for_a_month":5.448289781013108,"lightbulbs_for_a_week":23.34967476235834,"lightbulbs_for_a_day":163.44845090692206,"lightbulbs_for_an_evening":980.6909479650034,"lightbulbs_to_CFLs_for_a_day":2782.1021795654187,"lightbulbs_to_CFLs_for_a_week":397.4430992169252,"lightbulbs_to_CFLs_for_a_month":92.7368524964672,"lightbulbs_to_CFLs_for_a_year":7.622270177051457,"days_with_lightbulbs_to_CFLs":61.82456833097813,"weeks_with_lightbulbs_to_CFLs":8.831977251509208,"months_with_lightbulbs_to_CFLs":2.060721934977449,"years_with_lightbulbs_to_CFLs":0.16928138291329403,"recycled_kgs_of_trash":167.25752454594237,"recycled_bags_of_trash":92.67670667560402},"methodology":"http://impact.brighterplanet.com/flights?destination_airport=DEN&origin_airport=IAH&segments_per_trip=1&timeframe=2012-01-01%2F2013-01-01&trips=1","scope":"The
+        flight greenhouse gas emission is the anthropogenic greenhouse gas emissions
+        attributed to a single passenger on this flight. It includes CO2 emissions
+        from combustion of non-biogenic fuel and extra forcing effects of high-altitude
+        fuel combustion.","timeframe":"2012-01-01/2013-01-01","characteristics":{"segments_per_trip":{"description":"1","object":1},"trips":{"description":"1","object":1},"origin_airport":{"description":"IAH","object":{"airport":{"city":"Houston","country_iso_3166_code":"US","country_name":"United
+        States","iata_code":"IAH","latitude":29.9844,"longitude":-95.3414,"name":"George
+        Bush Intcntl Houston"}}},"destination_airport":{"description":"DEN","object":{"airport":{"city":"Denver","country_iso_3166_code":"US","country_name":"United
+        States","iata_code":"DEN","latitude":39.8617,"longitude":-104.673,"name":"Denver
+        International"}}}},"errors":["API key \"carbon_test\" could not be verified.
+        Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:18 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/rail_trips.json
+    body:
+      encoding: US-ASCII
+      string: rail_class=commuter&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:18 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"2.4 kg","object":{"value":2.362143293092419,"units":"kilograms"},"methodology":"from
+        distance, co2 emission factor, date, and timeframe"},"co2_emission_factor":{"description":"0.06364482122342524","object":0.06364482122342524,"methodology":"default"},"diesel_consumption":{"description":"0.32523107136721763","object":0.32523107136721763,"methodology":"from
+        distance and diesel intensity"},"electricity_consumption":{"description":"4.010861619796626","object":4.010861619796626,"methodology":"from
+        distance and electricity intensity"},"diesel_intensity":{"description":"0.008762920291076415","object":0.008762920291076415,"methodology":"default"},"electricity_intensity":{"description":"0.10806735200626398","object":0.10806735200626398,"methodology":"default"},"distance":{"description":"37.11446191042177
+        km","object":{"value":37.11446191042177,"units":"kilometres"},"methodology":"default"},"speed":{"description":"32.49720001220703","object":32.49720001220703,"methodology":"default"},"date":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        timeframe"}},"emitter":"RailTrip","equivalents":{"cars_off_the_road_for_a_year":0.0004299100793428203,"cars_off_the_road_for_a_month":0.005154196665527658,"cars_off_the_road_for_a_week":0.02233406483618882,"cars_off_the_road_for_a_day":0.15676600178937145,"cars_to_priuses_for_a_year":0.0008598201586856405,"cars_to_priuses_for_a_month":0.010308393331055316,"cars_to_priuses_for_a_week":0.04466812967237764,"cars_to_priuses_for_a_day":0.3135320035787429,"one_way_domestic_flight":0.007676965702550361,"round_trip_domestic_flight":0.0038384828512751804,"one_way_cross_country_flight":0.0026975676407115425,"round_trip_cross_country_flight":0.0013487838203557713,"vegan_meals_instead_of_non_vegan_ones":1.9007860000886594,"days_of_veganism":0.6335953333628864,"weeks_of_veganism":0.0905126067047153,"months_of_veganism":0.021119923183539314,"years_of_veganism":0.0017361753204229277,"barrels_of_petroleum":0.005494345299732966,"canisters_of_bbq_propane":0.09842342459328182,"railroad_cars_full_of_coal":1.1810716465462095e-05,"homes_energy_in_a_year":0.00022912789942996462,"homes_energy_in_a_month":0.0027377240766941137,"homes_energy_in_a_week":0.011860321474617037,"homes_energy_in_a_day":0.08325846465162849,"homes_electricity_in_a_year":0.00034723506408458556,"homes_electricity_in_a_month":0.004155010052549564,"homes_electricity_in_a_week":0.01800425617995042,"homes_electricity_in_a_day":0.1263723040371513,"homes_with_lowered_thermostat_2_degrees_for_a_winter":0.012398890145442107,"homes_with_raised_thermostat_3_degrees_for_a_summer":0.0055746581716981086,"replaced_refrigerators":0.002378678296144066,"loads_of_cold_laundry":1.0831891527670459,"lightbulbs_for_a_year":0.004360516519048605,"lightbulbs_for_a_month":0.053065549079321185,"lightbulbs_for_a_week":0.2274224319723519,"lightbulbs_for_a_day":1.5919641102363427,"lightbulbs_for_an_evening":9.551787023561348,"lightbulbs_to_CFLs_for_a_day":27.09727009527065,"lightbulbs_to_CFLs_for_a_week":3.8710379101405805,"lightbulbs_to_CFLs_for_a_month":0.9032434388425583,"lightbulbs_to_CFLs_for_a_year":0.07423980155860163,"days_with_lightbulbs_to_CFLs":0.6021622925617056,"weeks_with_lightbulbs_to_CFLs":0.08602217230454662,"months_with_lightbulbs_to_CFLs":0.02007113156140628,"years_with_lightbulbs_to_CFLs":0.0016487760185785085,"recycled_kgs_of_trash":1.6290639327976522,"recycled_bags_of_trash":0.9026576273058715},"methodology":"http://impact.brighterplanet.com/rail_trips?rail_class=commuter&timeframe=2012-01-01%2F2013-01-01","scope":"The
+        rail trip emission estimate is the anthropogenic emissions per passenger from
+        rail fuel combustion. It includes includes CO2 emissions from direct fuel
+        combustion and indirect fuel combustion to generate purchased electricity.","timeframe":"2012-01-01/2013-01-01","characteristics":{"rail_class":{"description":"commuter","object":{"rail_class":{"name":"commuter"}}}},"errors":["API
+        key \"carbon_test\" could not be verified. Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:18 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/rail_trips.json
+    body:
+      encoding: US-ASCII
+      string: rail_traction=electric&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:18 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"2.4 kg","object":{"value":2.362143293092419,"units":"kilograms"},"methodology":"from
+        distance, co2 emission factor, date, and timeframe"},"co2_emission_factor":{"description":"0.06364482122342524","object":0.06364482122342524,"methodology":"default"},"diesel_consumption":{"description":"0.32523107136721763","object":0.32523107136721763,"methodology":"from
+        distance and diesel intensity"},"electricity_consumption":{"description":"4.010861619796626","object":4.010861619796626,"methodology":"from
+        distance and electricity intensity"},"diesel_intensity":{"description":"0.008762920291076415","object":0.008762920291076415,"methodology":"default"},"electricity_intensity":{"description":"0.10806735200626398","object":0.10806735200626398,"methodology":"default"},"distance":{"description":"37.11446191042177
+        km","object":{"value":37.11446191042177,"units":"kilometres"},"methodology":"default"},"speed":{"description":"32.49720001220703","object":32.49720001220703,"methodology":"default"},"date":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        timeframe"}},"emitter":"RailTrip","equivalents":{"cars_off_the_road_for_a_year":0.0004299100793428203,"cars_off_the_road_for_a_month":0.005154196665527658,"cars_off_the_road_for_a_week":0.02233406483618882,"cars_off_the_road_for_a_day":0.15676600178937145,"cars_to_priuses_for_a_year":0.0008598201586856405,"cars_to_priuses_for_a_month":0.010308393331055316,"cars_to_priuses_for_a_week":0.04466812967237764,"cars_to_priuses_for_a_day":0.3135320035787429,"one_way_domestic_flight":0.007676965702550361,"round_trip_domestic_flight":0.0038384828512751804,"one_way_cross_country_flight":0.0026975676407115425,"round_trip_cross_country_flight":0.0013487838203557713,"vegan_meals_instead_of_non_vegan_ones":1.9007860000886594,"days_of_veganism":0.6335953333628864,"weeks_of_veganism":0.0905126067047153,"months_of_veganism":0.021119923183539314,"years_of_veganism":0.0017361753204229277,"barrels_of_petroleum":0.005494345299732966,"canisters_of_bbq_propane":0.09842342459328182,"railroad_cars_full_of_coal":1.1810716465462095e-05,"homes_energy_in_a_year":0.00022912789942996462,"homes_energy_in_a_month":0.0027377240766941137,"homes_energy_in_a_week":0.011860321474617037,"homes_energy_in_a_day":0.08325846465162849,"homes_electricity_in_a_year":0.00034723506408458556,"homes_electricity_in_a_month":0.004155010052549564,"homes_electricity_in_a_week":0.01800425617995042,"homes_electricity_in_a_day":0.1263723040371513,"homes_with_lowered_thermostat_2_degrees_for_a_winter":0.012398890145442107,"homes_with_raised_thermostat_3_degrees_for_a_summer":0.0055746581716981086,"replaced_refrigerators":0.002378678296144066,"loads_of_cold_laundry":1.0831891527670459,"lightbulbs_for_a_year":0.004360516519048605,"lightbulbs_for_a_month":0.053065549079321185,"lightbulbs_for_a_week":0.2274224319723519,"lightbulbs_for_a_day":1.5919641102363427,"lightbulbs_for_an_evening":9.551787023561348,"lightbulbs_to_CFLs_for_a_day":27.09727009527065,"lightbulbs_to_CFLs_for_a_week":3.8710379101405805,"lightbulbs_to_CFLs_for_a_month":0.9032434388425583,"lightbulbs_to_CFLs_for_a_year":0.07423980155860163,"days_with_lightbulbs_to_CFLs":0.6021622925617056,"weeks_with_lightbulbs_to_CFLs":0.08602217230454662,"months_with_lightbulbs_to_CFLs":0.02007113156140628,"years_with_lightbulbs_to_CFLs":0.0016487760185785085,"recycled_kgs_of_trash":1.6290639327976522,"recycled_bags_of_trash":0.9026576273058715},"methodology":"http://impact.brighterplanet.com/rail_trips?rail_traction=electric&timeframe=2012-01-01%2F2013-01-01","scope":"The
+        rail trip emission estimate is the anthropogenic emissions per passenger from
+        rail fuel combustion. It includes includes CO2 emissions from direct fuel
+        combustion and indirect fuel combustion to generate purchased electricity.","timeframe":"2012-01-01/2013-01-01","characteristics":{"rail_traction":{"description":"electric","object":{"rail_traction":{"name":"electric"}}}},"errors":["API
+        key \"carbon_test\" could not be verified. Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:18 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/residences.json
+    body:
+      encoding: US-ASCII
+      string: bathrooms=4&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:18 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"3838.4 kg","object":{"value":3838.3653959969083,"units":"kilograms"},"methodology":"from
+        fuel and electricity use and occupation and residents"},"fuel_oil_consumed":{"description":"199.0748055102","object":199.0748055102,"methodology":"from
+        research"},"natural_gas_consumed":{"description":"42683876171.345726","object":42683876171.345726,"methodology":"from
+        research"},"propane_consumed":{"description":"183.25178426979997","object":183.25178426979997,"methodology":"from
+        research"},"biomass_consumed":{"description":"3798201078.0000005","object":3798201078.0000005,"methodology":"from
+        research"},"kerosene_consumed":{"description":"4.0503906046","object":4.0503906046,"methodology":"from
+        research"},"coal_consumed":{"description":"2.871239704507795","object":2.871239704507795,"methodology":"from
+        research"},"dirty_electricity_generated":{"description":"11458.237337445968","object":11458.237337445968,"methodology":"from
+        electricity generated and green electricity"},"green_electricity":{"description":"0.0","object":0.0,"methodology":"default"},"electricity_generated":{"description":"11458.237337445968","object":11458.237337445968,"methodology":"from
+        electricity used and loss rate"},"electricity_used":{"description":"10752.83","object":10752.83,"methodology":"from
+        research"},"missing_annual_energy":{"description":"0","object":0,"methodology":"from
+        fuel reports"},"electricity_loss_rate":{"description":"0.06156333794384499","object":0.06156333794384499,"methodology":"default"},"electricity_emission_factor":{"description":"0.5894551291830981","object":0.5894551291830981,"methodology":"default"},"occupation":{"description":"0.937","object":0.937,"methodology":"default"},"residents":{"description":"2.57","object":2.57,"methodology":"default"},"air_conditioner_use":{"description":null,"object":{"air_conditioner_use":{"fugitive_emission":0.4994479354338,"fugitive_emission_units":"kilograms_per_square_metre","name":null}},"methodology":"default"},"predicted_fuel_shares":{"description":"{:fuel_oil=>0.4167932348735287,
+        :natural_gas=>0.1613371886801841, :propane=>0.2526592181590731, :kerosene=>0.008254483207514767,
+        :biomass=>0.014356500368116514, :coal=>0.0002819952840317706, :electricity=>0.14631737942755108}","object":{"fuel_oil":0.4167932348735287,"natural_gas":0.1613371886801841,"propane":0.2526592181590731,"kerosene":0.008254483207514767,"biomass":0.014356500368116514,"coal":0.0002819952840317706,"electricity":0.14631737942755108},"methodology":"from
+        research"},"predicted_annual_energy_consumption":{"description":"264563158193.84476","object":264563158193.84476,"methodology":"from
+        research"},"predicted_annual_fuel_oil_consumption":{"description":"199.0748055102","object":199.0748055102,"methodology":"default"},"predicted_annual_natural_gas_consumption":{"description":"42683876171.345726","object":42683876171.345726,"methodology":"default"},"predicted_annual_propane_consumption":{"description":"183.2517842698","object":183.2517842698,"methodology":"default"},"predicted_annual_kerosene_consumption":{"description":"4.0503906046","object":4.0503906046,"methodology":"default"},"predicted_annual_biomass_consumption":{"description":"3798201078.0","object":3798201078.0,"methodology":"default"},"predicted_annual_coal_consumption":{"description":"2.871239704507795","object":2.871239704507795,"methodology":"default"},"predicted_annual_electricity_use":{"description":"10752.83","object":10752.83,"methodology":"default"},"active_subtimeframe":{"description":"2012-01-01/2013-01-01","object":"2012-01-01/2013-01-01","methodology":"from
+        acquisition and retirement"},"acquisition":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        retirement"},"retirement":{"description":"2013-01-01","object":"2013-01-01","methodology":"from
+        acquisition"},"floorspace_estimate":{"description":"214.47688717440002","object":214.47688717440002,"methodology":"default"}},"emitter":"Residence","equivalents":{"cars_off_the_road_for_a_year":0.6985825020714374,"cars_off_the_road_for_a_month":8.375313294065254,"cars_off_the_road_for_a_week":36.291744819150765,"cars_off_the_road_for_a_day":254.7369578707308,"cars_to_priuses_for_a_year":1.3971650041428747,"cars_to_priuses_for_a_month":16.75062658813051,"cars_to_priuses_for_a_week":72.58348963830153,"cars_to_priuses_for_a_day":509.4739157414616,"one_way_domestic_flight":12.47468753698995,"round_trip_domestic_flight":6.237343768494975,"one_way_cross_country_flight":4.383413282228469,"round_trip_cross_country_flight":2.1917066411142345,"vegan_meals_instead_of_non_vegan_ones":3088.6827354085644,"days_of_veganism":1029.5609118028547,"weeks_of_veganism":147.07848524380952,"months_of_veganism":34.31882500560835,"years_of_veganism":2.8211985660577277,"barrels_of_petroleum":8.928037911088808,"canisters_of_bbq_propane":159.9331709550032,"railroad_cars_full_of_coal":0.019191826979984544,"homes_energy_in_a_year":0.3723214434117001,"homes_energy_in_a_month":4.448665493960417,"homes_energy_in_a_week":19.272432653300477,"homes_energy_in_a_day":135.29086511270302,"homes_electricity_in_a_year":0.5642397132115455,"homes_electricity_in_a_month":6.751684731558561,"homes_electricity_in_a_week":29.256021048288435,"homes_electricity_in_a_day":205.34871032043858,"homes_with_lowered_thermostat_2_degrees_for_a_winter":20.147579963587773,"homes_with_raised_thermostat_3_degrees_for_a_summer":9.058542334552705,"replaced_refrigerators":3.865233953768887,"loads_of_cold_laundry":1760.1285127191343,"lightbulbs_for_a_year":7.0856225210102926,"lightbulbs_for_a_month":86.22887862107054,"lightbulbs_for_a_week":369.55014359579036,"lightbulbs_for_a_day":2586.8625202667204,"lightbulbs_for_an_evening":15521.178959965717,"lightbulbs_to_CFLs_for_a_day":44031.71651940903,"lightbulbs_to_CFLs_for_a_week":6290.244120382606,"lightbulbs_to_CFLs_for_a_month":1467.7256752174858,"lightbulbs_to_CFLs_for_a_year":120.63598603078682,"days_with_lightbulbs_to_CFLs":978.4837834783237,"weeks_with_lightbulbs_to_CFLs":139.7817526260194,"months_with_lightbulbs_to_CFLs":32.61459076978573,"years_with_lightbulbs_to_CFLs":2.6791790464058423,"recycled_kgs_of_trash":2647.147887176248,"recycled_bags_of_trash":1466.7737605992786},"methodology":"http://impact.brighterplanet.com/residences?bathrooms=4&timeframe=2012-01-01%2F2013-01-01","scope":null,"timeframe":"2012-01-01/2013-01-01","characteristics":{"bathrooms":{"description":"4.0","object":4.0}},"errors":["API
+        key \"carbon_test\" could not be verified. Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:19 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/flights.json
+    body:
+      encoding: US-ASCII
+      string: origin_airport=MSN&destination_airport=ORD&segments_per_trip=1&trips=1&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:18 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"114.6 kg","object":{"value":114.57907360899101,"units":"kilograms"},"methodology":"from
+        fuel use and greenhouse gas emission factor"},"ghg_emission_factor":{"description":"5.15214","object":5.15214,"methodology":"from
+        fuel and aviation multiplier"},"aviation_multiplier":{"description":"2.0","object":2.0,"methodology":"default"},"energy":{"description":"836.8
+        MJ","object":{"value":836.784797960347,"units":"megajoules"},"methodology":"from
+        fuel use and fuel"},"fuel_use":{"description":"22.239122696392375","object":22.239122696392375,"methodology":"from
+        fuel per segment, segments per trip, trips, freight_share, passengers, seat
+        class multiplier, fuel, date, and timeframe"},"fuel_per_segment":{"description":"798.0839580419192","object":798.0839580419192,"methodology":"from
+        adjusted distance per segment and fuel use coefficients"},"seat_class_multiplier":{"description":"1.0","object":1.0,"methodology":"default"},"distance_class":{"description":"short
+        haul","object":{"flight_distance_class":{"distance":1108.0,"distance_units":"kilometres","max_distance":3700.0,"max_distance_units":"kilometres","min_distance":0.0,"min_distance_units":"kilometres","name":"short
+        haul"}},"methodology":"from adjusted distance per segment"},"adjusted_distance_per_segment":{"description":"100.8961154095222","object":100.8961154095222,"methodology":"from
+        adjusted distance and segments per trip"},"adjusted_distance":{"description":"100.8961154095222","object":100.8961154095222,"methodology":"from
+        distance, route inefficiency factor, and dogleg factor"},"distance":{"description":"94.29543496217028","object":94.29543496217028,"methodology":"from
+        airports"},"route_inefficiency_factor":{"description":"1.07","object":1.07,"methodology":"from
+        country"},"dogleg_factor":{"description":"1.0","object":1.0,"methodology":"from
+        segments per trip"},"fuel_use_coefficients":{"description":"Fuel use equation","object":{"m3":4.046124738717439e-08,"m2":-4.096578631680186e-05,"m1":2.7511987541689704,"b":520.8741650385462},"methodology":"from
+        cohort"},"fuel":{"description":"Jet Fuel","object":{"fuel":{"biogenic_fraction":0.0,"carbon_content":18.672,"carbon_content_units":"grams_per_megajoule","co2_biogenic_emission_factor":0.0,"co2_biogenic_emission_factor_units":"kilograms_per_litre","co2_emission_factor":2.57607,"co2_emission_factor_units":"kilograms_per_litre","density":0.8156,"density_units":"kilograms_per_litre","energy_content":37.6267,"energy_content_units":"megajoules_per_litre","name":"Jet
+        Fuel","oxidation_factor":1.0,"physical_units":null}},"methodology":"default"},"passengers":{"description":"44","object":44,"methodology":"from
+        seats and load factor"},"seats":{"description":"51.614277332823946","object":51.614277332823946,"methodology":"from
+        cohort"},"load_factor":{"description":"0.8511664076308222","object":0.8511664076308222,"methodology":"from
+        cohort"},"freight_share":{"description":"2.3873554715207264e-06","object":2.3873554715207264e-06,"methodology":"from
+        cohort"},"country":{"description":"US","object":{"country":{"automobile_city_speed":32.0259,"automobile_city_speed_units":"kilometres_per_hour","automobile_fuel_efficiency":9.2669,"automobile_fuel_efficiency_units":"kilometres_per_litre","automobile_highway_speed":91.8935,"automobile_highway_speed_units":"kilometres_per_hour","automobile_trip_distance":16.3348,"automobile_trip_distance_units":"kilometres","automobile_urbanity":0.43,"cooling_degree_days":882.0,"cooling_degree_days_units":"degrees_celsius","electricity_emission_factor":0.589455,"electricity_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","electricity_loss_factor":0.0615633,"flight_route_inefficiency_factor":1.07,"heating_degree_days":2159.0,"heating_degree_days_units":"degrees_celsius","iso_3166_alpha_3_code":"USA","iso_3166_code":"US","iso_3166_numeric_code":840,"lodging_district_heat_intensity":1.7463,"lodging_district_heat_intensity_units":"megajoules_per_occupied_room_night","lodging_electricity_intensity":32.906,"lodging_electricity_intensity_units":"kilowatt_hours_per_occupied_room_night","lodging_fuel_oil_intensity":0.412389,"lodging_fuel_oil_intensity_units":"gallons_per_occupied_room_night","lodging_natural_gas_intensity":1.93316,"lodging_natural_gas_intensity_units":"cubic_metres_per_occupied_room_night","lodging_occupancy_rate":0.601,"name":"United
+        States","rail_passengers":4467000000.0,"rail_speed":32.4972,"rail_speed_units":"kilometres_per_hour","rail_trip_co2_emission_factor":0.0957617,"rail_trip_co2_emission_factor_units":"kilograms_per_passenger_kilometre","rail_trip_diesel_intensity":0.0194247,"rail_trip_diesel_intensity_units":"litres_per_passenger_kilometre","rail_trip_distance":12.9952,"rail_trip_distance_units":"kilometres","rail_trip_electricity_intensity":0.140512,"rail_trip_electricity_intensity_units":"kilowatt_hours_per_passenger_kilometre"}},"methodology":"from
+        origin airport and destination airport"},"cohort":{"description":"BrighterPlanet::Flight::ImpactModel::FlightSegmentCohort","object":{"members":91,"sql":"SELECT
+        * FROM `flight_segments`  WHERE (`flight_segments`.`source` = ''BTS T100''
+        AND `flight_segments`.`year` IN (2011, 2012) AND `flight_segments`.`passengers`
+        > 0) AND `flight_segments`.`origin_airport_iata_code` = ''MSN'' AND `flight_segments`.`destination_airport_iata_code`
+        = ''ORD''"},"methodology":"from segments per trip and input"},"date":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        timeframe"}},"emitter":"Flight","equivalents":{"cars_off_the_road_for_a_year":0.020853391396836365,"cars_off_the_road_for_a_month":0.2500115386148184,"cars_off_the_road_for_a_week":1.08334514097301,"cars_off_the_road_for_a_day":7.604154799134297,"cars_to_priuses_for_a_year":0.04170678279367273,"cars_to_priuses_for_a_month":0.5000230772296368,"cars_to_priuses_for_a_week":2.16669028194602,"cars_to_priuses_for_a_day":15.208309598268594,"one_way_domestic_flight":0.3723819892292208,"round_trip_domestic_flight":0.1861909946146104,"one_way_cross_country_flight":0.13084930206146772,"round_trip_cross_country_flight":0.06542465103073386,"vegan_meals_instead_of_non_vegan_ones":92.20029100519815,"days_of_veganism":30.73343033506605,"weeks_of_veganism":4.390440942549318,"months_of_veganism":1.0244514971379886,"years_of_veganism":0.08421561910260839,"barrels_of_petroleum":0.2665109252145131,"canisters_of_bbq_propane":4.774166260065829,"railroad_cars_full_of_coal":0.0005728953680449551,"homes_energy_in_a_year":0.011114170140072127,"homes_energy_in_a_month":0.13279714631282058,"homes_energy_in_a_week":0.5753015285907439,"homes_energy_in_a_day":4.0385686074961065,"homes_electricity_in_a_year":0.016843123820521676,"homes_electricity_in_a_month":0.20154459047821519,"homes_electricity_in_a_week":0.8733216990477295,"homes_electricity_in_a_day":6.12986585900741,"homes_with_lowered_thermostat_2_degrees_for_a_winter":0.6014255573735938,"homes_with_raised_thermostat_3_degrees_for_a_summer":0.2704066137172188,"replaced_refrigerators":0.11538112712425395,"loads_of_cold_laundry":52.541609152286135,"lightbulbs_for_a_year":0.2115129698821974,"lightbulbs_for_a_month":2.5740188886259827,"lightbulbs_for_a_week":11.031444048926437,"lightbulbs_for_a_day":77.22045207970588,"lightbulbs_for_an_evening":463.32282705730887,"lightbulbs_to_CFLs_for_a_day":1314.3910930077736,"lightbulbs_to_CFLs_for_a_week":187.7701234070895,"lightbulbs_to_CFLs_for_a_month":43.81308990382681,"lightbulbs_to_CFLs_for_a_year":3.601105704456978,"days_with_lightbulbs_to_CFLs":29.208726602551206,"weeks_with_lightbulbs_to_CFLs":4.172626123618626,"months_with_lightbulbs_to_CFLs":0.9735783884555965,"years_with_lightbulbs_to_CFLs":0.07997619337907573,"recycled_kgs_of_trash":79.02003100980869,"recycled_bags_of_trash":43.78467429357178},"methodology":"http://impact.brighterplanet.com/flights?destination_airport=ORD&origin_airport=MSN&segments_per_trip=1&timeframe=2012-01-01%2F2013-01-01&trips=1","scope":"The
+        flight greenhouse gas emission is the anthropogenic greenhouse gas emissions
+        attributed to a single passenger on this flight. It includes CO2 emissions
+        from combustion of non-biogenic fuel and extra forcing effects of high-altitude
+        fuel combustion.","timeframe":"2012-01-01/2013-01-01","characteristics":{"segments_per_trip":{"description":"1","object":1},"trips":{"description":"1","object":1},"origin_airport":{"description":"MSN","object":{"airport":{"city":"Madison","country_iso_3166_code":"US","country_name":"United
+        States","iata_code":"MSN","latitude":43.1399,"longitude":-89.3375,"name":"Dane
+        County Regional Truax Field"}}},"destination_airport":{"description":"ORD","object":{"airport":{"city":"Chicago","country_iso_3166_code":"US","country_name":"United
+        States","iata_code":"ORD","latitude":41.9786,"longitude":-87.9048,"name":"Chicago
+        Ohare International"}}}},"errors":["API key \"carbon_test\" could not be verified.
+        Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:19 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/residences.json
+    body:
+      encoding: US-ASCII
+      string: urbanity=City&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:18 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"3838.4 kg","object":{"value":3838.3653959969083,"units":"kilograms"},"methodology":"from
+        fuel and electricity use and occupation and residents"},"fuel_oil_consumed":{"description":"199.0748055102","object":199.0748055102,"methodology":"from
+        research"},"natural_gas_consumed":{"description":"42683876171.345726","object":42683876171.345726,"methodology":"from
+        research"},"propane_consumed":{"description":"183.25178426979997","object":183.25178426979997,"methodology":"from
+        research"},"biomass_consumed":{"description":"3798201078.0000005","object":3798201078.0000005,"methodology":"from
+        research"},"kerosene_consumed":{"description":"4.0503906046","object":4.0503906046,"methodology":"from
+        research"},"coal_consumed":{"description":"2.871239704507795","object":2.871239704507795,"methodology":"from
+        research"},"dirty_electricity_generated":{"description":"11458.237337445968","object":11458.237337445968,"methodology":"from
+        electricity generated and green electricity"},"green_electricity":{"description":"0.0","object":0.0,"methodology":"default"},"electricity_generated":{"description":"11458.237337445968","object":11458.237337445968,"methodology":"from
+        electricity used and loss rate"},"electricity_used":{"description":"10752.83","object":10752.83,"methodology":"from
+        research"},"missing_annual_energy":{"description":"0","object":0,"methodology":"from
+        fuel reports"},"electricity_loss_rate":{"description":"0.06156333794384499","object":0.06156333794384499,"methodology":"default"},"electricity_emission_factor":{"description":"0.5894551291830981","object":0.5894551291830981,"methodology":"default"},"occupation":{"description":"0.937","object":0.937,"methodology":"default"},"residents":{"description":"2.57","object":2.57,"methodology":"default"},"air_conditioner_use":{"description":null,"object":{"air_conditioner_use":{"fugitive_emission":0.4994479354338,"fugitive_emission_units":"kilograms_per_square_metre","name":null}},"methodology":"default"},"predicted_fuel_shares":{"description":"{:fuel_oil=>0.4167932348735287,
+        :natural_gas=>0.1613371886801841, :propane=>0.2526592181590731, :kerosene=>0.008254483207514767,
+        :biomass=>0.014356500368116514, :coal=>0.0002819952840317706, :electricity=>0.14631737942755108}","object":{"fuel_oil":0.4167932348735287,"natural_gas":0.1613371886801841,"propane":0.2526592181590731,"kerosene":0.008254483207514767,"biomass":0.014356500368116514,"coal":0.0002819952840317706,"electricity":0.14631737942755108},"methodology":"from
+        research"},"predicted_annual_energy_consumption":{"description":"264563158193.84476","object":264563158193.84476,"methodology":"from
+        research"},"predicted_annual_fuel_oil_consumption":{"description":"199.0748055102","object":199.0748055102,"methodology":"default"},"predicted_annual_natural_gas_consumption":{"description":"42683876171.345726","object":42683876171.345726,"methodology":"default"},"predicted_annual_propane_consumption":{"description":"183.2517842698","object":183.2517842698,"methodology":"default"},"predicted_annual_kerosene_consumption":{"description":"4.0503906046","object":4.0503906046,"methodology":"default"},"predicted_annual_biomass_consumption":{"description":"3798201078.0","object":3798201078.0,"methodology":"default"},"predicted_annual_coal_consumption":{"description":"2.871239704507795","object":2.871239704507795,"methodology":"default"},"predicted_annual_electricity_use":{"description":"10752.83","object":10752.83,"methodology":"default"},"active_subtimeframe":{"description":"2012-01-01/2013-01-01","object":"2012-01-01/2013-01-01","methodology":"from
+        acquisition and retirement"},"acquisition":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        retirement"},"retirement":{"description":"2013-01-01","object":"2013-01-01","methodology":"from
+        acquisition"},"floorspace_estimate":{"description":"214.47688717440002","object":214.47688717440002,"methodology":"default"}},"emitter":"Residence","equivalents":{"cars_off_the_road_for_a_year":0.6985825020714374,"cars_off_the_road_for_a_month":8.375313294065254,"cars_off_the_road_for_a_week":36.291744819150765,"cars_off_the_road_for_a_day":254.7369578707308,"cars_to_priuses_for_a_year":1.3971650041428747,"cars_to_priuses_for_a_month":16.75062658813051,"cars_to_priuses_for_a_week":72.58348963830153,"cars_to_priuses_for_a_day":509.4739157414616,"one_way_domestic_flight":12.47468753698995,"round_trip_domestic_flight":6.237343768494975,"one_way_cross_country_flight":4.383413282228469,"round_trip_cross_country_flight":2.1917066411142345,"vegan_meals_instead_of_non_vegan_ones":3088.6827354085644,"days_of_veganism":1029.5609118028547,"weeks_of_veganism":147.07848524380952,"months_of_veganism":34.31882500560835,"years_of_veganism":2.8211985660577277,"barrels_of_petroleum":8.928037911088808,"canisters_of_bbq_propane":159.9331709550032,"railroad_cars_full_of_coal":0.019191826979984544,"homes_energy_in_a_year":0.3723214434117001,"homes_energy_in_a_month":4.448665493960417,"homes_energy_in_a_week":19.272432653300477,"homes_energy_in_a_day":135.29086511270302,"homes_electricity_in_a_year":0.5642397132115455,"homes_electricity_in_a_month":6.751684731558561,"homes_electricity_in_a_week":29.256021048288435,"homes_electricity_in_a_day":205.34871032043858,"homes_with_lowered_thermostat_2_degrees_for_a_winter":20.147579963587773,"homes_with_raised_thermostat_3_degrees_for_a_summer":9.058542334552705,"replaced_refrigerators":3.865233953768887,"loads_of_cold_laundry":1760.1285127191343,"lightbulbs_for_a_year":7.0856225210102926,"lightbulbs_for_a_month":86.22887862107054,"lightbulbs_for_a_week":369.55014359579036,"lightbulbs_for_a_day":2586.8625202667204,"lightbulbs_for_an_evening":15521.178959965717,"lightbulbs_to_CFLs_for_a_day":44031.71651940903,"lightbulbs_to_CFLs_for_a_week":6290.244120382606,"lightbulbs_to_CFLs_for_a_month":1467.7256752174858,"lightbulbs_to_CFLs_for_a_year":120.63598603078682,"days_with_lightbulbs_to_CFLs":978.4837834783237,"weeks_with_lightbulbs_to_CFLs":139.7817526260194,"months_with_lightbulbs_to_CFLs":32.61459076978573,"years_with_lightbulbs_to_CFLs":2.6791790464058423,"recycled_kgs_of_trash":2647.147887176248,"recycled_bags_of_trash":1466.7737605992786},"methodology":"http://impact.brighterplanet.com/residences?timeframe=2012-01-01%2F2013-01-01&urbanity=City","scope":null,"timeframe":"2012-01-01/2013-01-01","characteristics":{"urbanity":{"description":"City","object":{"urbanity":{"name":"City"}}}},"errors":["API
+        key \"carbon_test\" could not be verified. Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:19 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/flights.json
+    body:
+      encoding: US-ASCII
+      string: origin_airport=LAX&destination_airport=SFO&segments_per_trip=1&trips=1&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:19 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"158.9 kg","object":{"value":158.88245012544277,"units":"kilograms"},"methodology":"from
+        fuel use and greenhouse gas emission factor"},"ghg_emission_factor":{"description":"5.15214","object":5.15214,"methodology":"from
+        fuel and aviation multiplier"},"aviation_multiplier":{"description":"2.0","object":2.0,"methodology":"default"},"energy":{"description":"1160.3
+        MJ","object":{"value":1160.3377016414531,"units":"megajoules"},"methodology":"from
+        fuel use and fuel"},"fuel_use":{"description":"30.838146891474757","object":30.838146891474757,"methodology":"from
+        fuel per segment, segments per trip, trips, freight_share, passengers, seat
+        class multiplier, fuel, date, and timeframe"},"fuel_per_segment":{"description":"2809.4943974548605","object":2809.4943974548605,"methodology":"from
+        adjusted distance per segment and fuel use coefficients"},"seat_class_multiplier":{"description":"1.0","object":1.0,"methodology":"default"},"distance_class":{"description":"short
+        haul","object":{"flight_distance_class":{"distance":1108.0,"distance_units":"kilometres","max_distance":3700.0,"max_distance_units":"kilometres","min_distance":0.0,"min_distance_units":"kilometres","name":"short
+        haul"}},"methodology":"from adjusted distance per segment"},"adjusted_distance_per_segment":{"description":"314.11399481652126","object":314.11399481652126,"methodology":"from
+        adjusted distance and segments per trip"},"adjusted_distance":{"description":"314.11399481652126","object":314.11399481652126,"methodology":"from
+        distance, route inefficiency factor, and dogleg factor"},"distance":{"description":"293.56448113693574","object":293.56448113693574,"methodology":"from
+        airports"},"route_inefficiency_factor":{"description":"1.07","object":1.07,"methodology":"from
+        country"},"dogleg_factor":{"description":"1.0","object":1.0,"methodology":"from
+        segments per trip"},"fuel_use_coefficients":{"description":"Fuel use equation","object":{"m3":1.0348093300372378e-07,"m2":-0.00023017671642226525,"m1":5.385202868809918,"b":1137.430624447256},"methodology":"from
+        cohort"},"fuel":{"description":"Jet Fuel","object":{"fuel":{"biogenic_fraction":0.0,"carbon_content":18.672,"carbon_content_units":"grams_per_megajoule","co2_biogenic_emission_factor":0.0,"co2_biogenic_emission_factor_units":"kilograms_per_litre","co2_emission_factor":2.57607,"co2_emission_factor_units":"kilograms_per_litre","density":0.8156,"density_units":"kilograms_per_litre","energy_content":37.6267,"energy_content_units":"megajoules_per_litre","name":"Jet
+        Fuel","oxidation_factor":1.0,"physical_units":null}},"methodology":"default"},"passengers":{"description":"110","object":110,"methodology":"from
+        seats and load factor"},"seats":{"description":"141.62026378724536","object":141.62026378724536,"methodology":"from
+        cohort"},"load_factor":{"description":"0.7786548902022515","object":0.7786548902022515,"methodology":"from
+        cohort"},"freight_share":{"description":"0.01524089564944548","object":0.01524089564944548,"methodology":"from
+        cohort"},"country":{"description":"US","object":{"country":{"automobile_city_speed":32.0259,"automobile_city_speed_units":"kilometres_per_hour","automobile_fuel_efficiency":9.2669,"automobile_fuel_efficiency_units":"kilometres_per_litre","automobile_highway_speed":91.8935,"automobile_highway_speed_units":"kilometres_per_hour","automobile_trip_distance":16.3348,"automobile_trip_distance_units":"kilometres","automobile_urbanity":0.43,"cooling_degree_days":882.0,"cooling_degree_days_units":"degrees_celsius","electricity_emission_factor":0.589455,"electricity_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","electricity_loss_factor":0.0615633,"flight_route_inefficiency_factor":1.07,"heating_degree_days":2159.0,"heating_degree_days_units":"degrees_celsius","iso_3166_alpha_3_code":"USA","iso_3166_code":"US","iso_3166_numeric_code":840,"lodging_district_heat_intensity":1.7463,"lodging_district_heat_intensity_units":"megajoules_per_occupied_room_night","lodging_electricity_intensity":32.906,"lodging_electricity_intensity_units":"kilowatt_hours_per_occupied_room_night","lodging_fuel_oil_intensity":0.412389,"lodging_fuel_oil_intensity_units":"gallons_per_occupied_room_night","lodging_natural_gas_intensity":1.93316,"lodging_natural_gas_intensity_units":"cubic_metres_per_occupied_room_night","lodging_occupancy_rate":0.601,"name":"United
+        States","rail_passengers":4467000000.0,"rail_speed":32.4972,"rail_speed_units":"kilometres_per_hour","rail_trip_co2_emission_factor":0.0957617,"rail_trip_co2_emission_factor_units":"kilograms_per_passenger_kilometre","rail_trip_diesel_intensity":0.0194247,"rail_trip_diesel_intensity_units":"litres_per_passenger_kilometre","rail_trip_distance":12.9952,"rail_trip_distance_units":"kilometres","rail_trip_electricity_intensity":0.140512,"rail_trip_electricity_intensity_units":"kilowatt_hours_per_passenger_kilometre"}},"methodology":"from
+        origin airport and destination airport"},"cohort":{"description":"BrighterPlanet::Flight::ImpactModel::FlightSegmentCohort","object":{"members":157,"sql":"SELECT
+        * FROM `flight_segments`  WHERE (`flight_segments`.`source` = ''BTS T100''
+        AND `flight_segments`.`year` IN (2011, 2012) AND `flight_segments`.`passengers`
+        > 0) AND `flight_segments`.`origin_airport_iata_code` = ''LAX'' AND `flight_segments`.`destination_airport_iata_code`
+        = ''SFO''"},"methodology":"from segments per trip and input"},"date":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        timeframe"}},"emitter":"Flight","equivalents":{"cars_off_the_road_for_a_year":0.028916605922830584,"cars_off_the_road_for_a_month":0.3466815061737161,"cars_off_the_road_for_a_week":1.5022335659360615,"cars_off_the_road_for_a_day":10.544392685025134,"cars_to_priuses_for_a_year":0.05783321184566117,"cars_to_priuses_for_a_month":0.6933630123474323,"cars_to_priuses_for_a_week":3.004467131872123,"cars_to_priuses_for_a_day":21.088785370050267,"one_way_domestic_flight":0.5163679629076889,"round_trip_domestic_flight":0.25818398145384447,"one_way_cross_country_flight":0.18144375804325566,"round_trip_cross_country_flight":0.09072187902162783,"vegan_meals_instead_of_non_vegan_ones":127.85064214409218,"days_of_veganism":42.61688071469739,"weeks_of_veganism":6.088057723906716,"months_of_veganism":1.4205679865715837,"years_of_veganism":0.11677860084220043,"barrels_of_petroleum":0.36956057899177985,"canisters_of_bbq_propane":6.620155049376825,"railroad_cars_full_of_coal":0.000794412250627214,"homes_energy_in_a_year":0.01541159766216795,"homes_energy_in_a_month":0.18414475969538818,"homes_energy_in_a_week":0.7977487820798482,"homes_energy_in_a_day":5.600129719571481,"homes_electricity_in_a_year":0.023355720168440088,"homes_electricity_in_a_month":0.27947422977065384,"homes_electricity_in_a_week":1.2110020348561248,"homes_electricity_in_a_day":8.500052199261063,"homes_with_lowered_thermostat_2_degrees_for_a_winter":0.8339739807084492,"homes_with_raised_thermostat_3_degrees_for_a_summer":0.37496258229604496,"replaced_refrigerators":0.15999462727632088,"loads_of_cold_laundry":72.85745409442329,"lightbulbs_for_a_year":0.29329700293156735,"lightbulbs_for_a_month":3.5692942420680716,"lightbulbs_for_a_week":15.29688453317738,"lightbulbs_for_a_day":107.07866837959203,"lightbulbs_for_an_evening":642.4721691600023,"lightbulbs_to_CFLs_for_a_day":1822.6162134352137,"lightbulbs_to_CFLs_for_a_week":260.37369938147333,"lightbulbs_to_CFLs_for_a_month":60.75394792631718,"lightbulbs_to_CFLs_for_a_year":4.993516524992541,"days_with_lightbulbs_to_CFLs":40.50263195087812,"weeks_with_lightbulbs_to_CFLs":5.786022186218249,"months_with_lightbulbs_to_CFLs":1.350024178715887,"years_with_lightbulbs_to_CFLs":0.11089995018755906,"recycled_kgs_of_trash":109.57407614126224,"recycled_bags_of_trash":60.71454507868607},"methodology":"http://impact.brighterplanet.com/flights?destination_airport=SFO&origin_airport=LAX&segments_per_trip=1&timeframe=2012-01-01%2F2013-01-01&trips=1","scope":"The
+        flight greenhouse gas emission is the anthropogenic greenhouse gas emissions
+        attributed to a single passenger on this flight. It includes CO2 emissions
+        from combustion of non-biogenic fuel and extra forcing effects of high-altitude
+        fuel combustion.","timeframe":"2012-01-01/2013-01-01","characteristics":{"segments_per_trip":{"description":"1","object":1},"trips":{"description":"1","object":1},"origin_airport":{"description":"LAX","object":{"airport":{"city":"Los
+        Angeles","country_iso_3166_code":"US","country_name":"United States","iata_code":"LAX","latitude":33.9425,"longitude":-118.408,"name":"Los
+        Angeles International"}}},"destination_airport":{"description":"SFO","object":{"airport":{"city":"San
+        Francisco","country_iso_3166_code":"US","country_name":"United States","iata_code":"SFO","latitude":37.619,"longitude":-122.375,"name":"San
+        Francisco International"}}}},"errors":["API key \"carbon_test\" could not
+        be verified. Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:19 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/residences.json
+    body:
+      encoding: US-ASCII
+      string: zip_code=53703&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:19 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"5347.6 kg","object":{"value":5347.558533487308,"units":"kilograms"},"methodology":"from
+        fuel and electricity use and occupation and residents"},"fuel_oil_consumed":{"description":"5.107308940163401","object":5.107308940163401,"methodology":"from
+        research"},"natural_gas_consumed":{"description":"76177899552.30473","object":76177899552.30473,"methodology":"from
+        research"},"propane_consumed":{"description":"22.944562877620424","object":22.944562877620424,"methodology":"from
+        research"},"biomass_consumed":{"description":"5473676905.856849","object":5473676905.856849,"methodology":"from
+        research"},"kerosene_consumed":{"description":"0.1386025292336304","object":0.1386025292336304,"methodology":"from
+        research"},"coal_consumed":{"description":"2.871239704507795","object":2.871239704507795,"methodology":"from
+        research"},"dirty_electricity_generated":{"description":"12283.618712298754","object":12283.618712298754,"methodology":"from
+        electricity generated and green electricity"},"green_electricity":{"description":"0.0","object":0.0,"methodology":"default"},"electricity_generated":{"description":"12283.618712298754","object":12283.618712298754,"methodology":"from
+        electricity used and loss rate"},"electricity_used":{"description":"11488.771541025197","object":11488.771541025197,"methodology":"from
+        research"},"missing_annual_energy":{"description":"0","object":0,"methodology":"from
+        fuel reports"},"electricity_loss_rate":{"description":"0.0647079","object":0.0647079,"methodology":"from
+        egrid region"},"electricity_emission_factor":{"description":"0.771877","object":0.771877,"methodology":"from
+        egrid subregion"},"egrid_region":{"description":"E","object":{"egrid_region":{"country_name":"US","loss_factor":0.0647079,"name":"E"}},"methodology":"from
+        egrid subregion"},"egrid_subregion":{"description":"MROE","object":{"egrid_subregion":{"abbreviation":"MROE","egrid_region_name":"E","electricity_ch4_emission_factor":0.000326475,"electricity_ch4_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","electricity_co2_biogenic_emission_factor":0.0,"electricity_co2_biogenic_emission_factor_units":"kilograms_per_kilowatt_hour","electricity_co2_emission_factor":0.767624,"electricity_co2_emission_factor_units":"kilograms_per_kilowatt_hour","electricity_emission_factor":0.771877,"electricity_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","electricity_n2o_emission_factor":0.00392646,"electricity_n2o_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","name":"MRO
+        East","nerc_abbreviation":"MRO","net_generation":29585900.0,"net_generation_units":"megawatt_hours"}},"methodology":"from_zip_code"},"occupation":{"description":"0.937","object":0.937,"methodology":"default"},"residents":{"description":"2.529825598664091","object":2.529825598664091,"methodology":"from
+        cohort"},"air_conditioner_use":{"description":null,"object":{"air_conditioner_use":{"fugitive_emission":0.4994479354338,"fugitive_emission_units":"kilograms_per_square_metre","name":null}},"methodology":"default"},"predicted_fuel_shares":{"description":"{:fuel_oil=>0.021055205795588075,
+        :natural_gas=>0.5669733267067846, :propane=>0.062291634223303124, :kerosene=>0.0005561950728947863,
+        :biomass=>0.0407392278189674, :coal=>0.0005552708129138704, :electricity=>0.3078291395695482}","object":{"fuel_oil":0.021055205795588075,"natural_gas":0.5669733267067846,"propane":0.062291634223303124,"kerosene":0.0005561950728947863,"biomass":0.0407392278189674,"coal":0.0005552708129138704,"electricity":0.3078291395695482},"methodology":"from
+        research"},"predicted_annual_energy_consumption":{"description":"134358877153.49408","object":134358877153.49408,"methodology":"from
+        research"},"predicted_annual_fuel_oil_consumption":{"description":"5.107308940163401","object":5.107308940163401,"methodology":"from
+        cohort"},"predicted_annual_natural_gas_consumption":{"description":"76177899552.30473","object":76177899552.30473,"methodology":"from
+        cohort"},"predicted_annual_propane_consumption":{"description":"22.944562877620424","object":22.944562877620424,"methodology":"from
+        cohort"},"predicted_annual_kerosene_consumption":{"description":"0.1386025292336304","object":0.1386025292336304,"methodology":"from
+        cohort"},"predicted_annual_biomass_consumption":{"description":"5473676905.856849","object":5473676905.856849,"methodology":"from
+        cohort"},"predicted_annual_coal_consumption":{"description":"2.871239704507795","object":2.871239704507795,"methodology":"default"},"predicted_annual_electricity_use":{"description":"11488.771541025197","object":11488.771541025197,"methodology":"from
+        cohort"},"active_subtimeframe":{"description":"2012-01-01/2013-01-01","object":"2012-01-01/2013-01-01","methodology":"from
+        acquisition and retirement"},"acquisition":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        retirement"},"retirement":{"description":"2013-01-01","object":"2013-01-01","methodology":"from
+        acquisition"},"floorspace_estimate":{"description":"251.33578577294895","object":251.33578577294895,"methodology":"from
+        cohort"},"cohort":{"description":"Cohort analysis","object":{"count":560,"sql":"SELECT
+        FROM `recs_responses`  WHERE `recs_responses`.`cooling_degree_days` BETWEEN
+        -268.889 AND 1231.1109999999999 AND `recs_responses`.`census_region_number`
+        = 2"},"methodology":"from residential energy consumption survey"},"census_region":{"description":2,"object":{"census_region":{"name":"Midwest
+        Region","number":2}},"methodology":"from census division"},"census_division":{"description":3,"object":{"census_division":{"census_region_name":"Midwest
+        Region","census_region_number":2,"meeting_building_district_heat_intensity":0.0,"meeting_building_district_heat_intensity_units":"megajoules_per_square_metre_hour","meeting_building_electricity_intensity":0.0811925,"meeting_building_electricity_intensity_units":"kilowatt_hours_per_square_metre_hour","meeting_building_fuel_oil_intensity":0.00114088,"meeting_building_fuel_oil_intensity_units":"litres_per_square_metre_hour","meeting_building_natural_gas_intensity":0.0486167,"meeting_building_natural_gas_intensity_units":"cubic_metres_per_square_metre_hour","name":"East
+        North Central Division","number":3}},"methodology":"from state"},"state":{"description":"WI","object":{"state":{"census_division_number":3,"electricity_emission_factor":0.746256,"electricity_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","electricity_loss_factor":0.0647079,"fips_code":55,"name":"Wisconsin","petroleum_administration_for_defense_district_code":"2","population":5687012,"postal_abbreviation":"WI"}},"methodology":"from
+        climate division"},"heating_degree_days":{"description":"2925.0..4425.0","object":[2925.0,4425.0],"methodology":"from
+        climate division"},"cooling_degree_days":{"description":"-268.889..1231.1109999999999","object":[-268.889,1231.1109999999999],"methodology":"from
+        climate division"},"climate_division":{"description":"WI8","object":{"climate_division":{"cooling_degree_days":481.111,"cooling_degree_days_units":"degrees_celsius","heating_degree_days":3675.0,"heating_degree_days_units":"degrees_celsius","name":"WI8","state_postal_abbreviation":"WI"}},"methodology":"from
+        zip code"}},"emitter":"Residence","equivalents":{"cars_off_the_road_for_a_year":0.97325565309469,"cars_off_the_road_for_a_month":11.668372720069305,"cars_off_the_road_for_a_week":50.56116593412249,"cars_off_the_road_for_a_day":354.8960696334186,"cars_to_priuses_for_a_year":1.94651130618938,"cars_to_priuses_for_a_month":23.33674544013861,"cars_to_priuses_for_a_week":101.12233186824498,"cars_to_priuses_for_a_day":709.7921392668372,"one_way_domestic_flight":17.37956523383375,"round_trip_domestic_flight":8.689782616916874,"one_way_cross_country_flight":6.1069118452425055,"round_trip_cross_country_flight":3.0534559226212528,"vegan_meals_instead_of_non_vegan_ones":4303.110833636301,"days_of_veganism":1434.370277878767,"weeks_of_veganism":204.90774788616665,"months_of_veganism":47.812520847910015,"years_of_veganism":3.930455522113171,"barrels_of_petroleum":12.438421148891477,"canisters_of_bbq_propane":222.81672141481567,"railroad_cars_full_of_coal":0.02673779266743654,"homes_energy_in_a_year":0.5187131777482689,"homes_energy_in_a_month":6.19782034031179,"homes_energy_in_a_week":26.850091396639773,"homes_energy_in_a_day":188.48539562982714,"homes_electricity_in_a_year":0.7860911044226342,"homes_electricity_in_a_month":9.406355460404173,"homes_electricity_in_a_week":40.75909114224026,"homes_electricity_in_a_day":286.08903398303744,"homes_with_lowered_thermostat_2_degrees_for_a_winter":28.06933474227488,"homes_with_raised_thermostat_3_degrees_for_a_summer":12.620238139030047,"replaced_refrigerators":5.384991443221719,"loads_of_cold_laundry":2452.187136233007,"lightbulbs_for_a_year":9.87159305281757,"lightbulbs_for_a_month":120.13290245479236,"lightbulbs_for_a_week":514.852240487091,"lightbulbs_for_a_day":3603.9817260852374,"lightbulbs_for_an_evening":21623.895704069957,"lightbulbs_to_CFLs_for_a_day":61344.389375494844,"lightbulbs_to_CFLs_for_a_week":8763.482668625396,"lightbulbs_to_CFLs_for_a_month":2044.815474710477,"lightbulbs_to_CFLs_for_a_year":168.06841714897257,"days_with_lightbulbs_to_CFLs":1363.2103164736513,"weeks_with_lightbulbs_to_CFLs":194.74203911400727,"months_with_lightbulbs_to_CFLs":45.43820485904165,"years_with_lightbulbs_to_CFLs":3.732595856374141,"recycled_kgs_of_trash":3687.9704804121893,"recycled_bags_of_trash":2043.4892801941724},"methodology":"http://impact.brighterplanet.com/residences?timeframe=2012-01-01%2F2013-01-01&zip_code=53703","scope":null,"timeframe":"2012-01-01/2013-01-01","characteristics":{"zip_code":{"description":"53703","object":{"zip_code":{"climate_division_name":"WI8","description":"Madison","egrid_subregion_abbreviation":"MROE","latitude":"43.078646","longitude":"-89.37727","name":"53703","population":27958,"state_postal_abbreviation":"WI"}}}},"errors":["API
+        key \"carbon_test\" could not be verified. Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:19 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/automobile_trips.json
+    body:
+      encoding: US-ASCII
+      string: make=Nissan&model=Altima&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:19 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"4.0 kg","object":{"value":4.013703182098099,"units":"kilograms"},"methodology":"from
+        co2 emission, ch4 emission, n2o emission, and hfc emission"},"co2_emission":{"description":"3.825618174704137","object":3.825618174704137,"methodology":"from
+        fuel use and automobile fuel"},"co2_biogenic_emission":{"description":"0.0","object":0.0,"methodology":"from
+        fuel use and automobile fuel"},"ch4_emission":{"description":"0.003940422073319416","object":0.003940422073319416,"methodology":"from
+        fuel use and automobile fuel"},"n2o_emission":{"description":"0.013398860212759267","object":0.013398860212759267,"methodology":"from
+        fuel use and automobile fuel"},"hfc_emission":{"description":"0.17074572510788322","object":0.17074572510788322,"methodology":"from
+        fuel use and automobile fuel"},"energy":{"description":"56.5 MJ","object":{"value":56.5122465095761,"units":"megajoules"},"methodology":"from
+        fuel use and automobile fuel"},"automobile_fuel":{"description":"fallback","object":{"automobile_fuel":{"annual_distance":17923.116724381467,"annual_distance_units":"kilometres","base_fuel_name":null,"blend_fuel_name":null,"blend_portion":null,"ch4_emission_factor":0.002420994361601003,"ch4_emission_factor_units":"kilograms_co2e_per_litre","co2_biogenic_emission_factor":0.0,"co2_biogenic_emission_factor_units":"kilograms_per_litre","co2_emission_factor":2.3504588742684827,"co2_emission_factor_units":"kilograms_per_litre","code":null,"distance_key":null,"ef_key":null,"emission_factor":null,"emission_factor_units":null,"energy_content":34.72111048394262,"energy_content_units":null,"hfc_emission_factor":0.1049061318970414,"hfc_emission_factor_units":"kilograms_co2e_per_litre","n2o_emission_factor":0.008232256449534075,"n2o_emission_factor_units":"kilograms_co2e_per_litre","name":"fallback"}},"methodology":"default"},"fuel_use":{"description":"1.6276048122283178
+        l","object":{"value":1.6276048122283178,"units":"litres"},"methodology":"from
+        fuel efficiency, distance, date, and timeframe"},"distance":{"description":"16.3348
+        km","object":{"value":16.3348,"units":"kilometres"},"methodology":"from safe
+        country"},"speed":{"description":"50.94382232429702 km/h","object":{"value":50.94382232429702,"units":"kilometres_per_hour"},"methodology":"from
+        urbanity and safe country"},"fuel_efficiency":{"description":"10.036097139351897
+        km/l","object":{"value":10.036097139351897,"units":"kilometres_per_litre"},"methodology":"from
+        make model and urbanity"},"hybridity_multiplier":{"description":"1.0","object":1.0,"methodology":"default"},"urbanity":{"description":"0.43","object":0.43,"methodology":"from
+        safe country"},"safe_country":{"description":null,"object":{"country":{"automobile_city_speed":32.0259,"automobile_city_speed_units":"kilometres_per_hour","automobile_fuel_efficiency":8.226530750610781,"automobile_fuel_efficiency_units":"kilometres_per_litre","automobile_highway_speed":91.8935,"automobile_highway_speed_units":"kilometres_per_hour","automobile_trip_distance":16.3348,"automobile_trip_distance_units":"kilometres","automobile_urbanity":0.43,"cooling_degree_days":null,"cooling_degree_days_units":null,"electricity_emission_factor":0.626089,"electricity_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","electricity_loss_factor":0.096,"flight_route_inefficiency_factor":1.100000023841858,"heating_degree_days":null,"heating_degree_days_units":null,"iso_3166_alpha_3_code":null,"iso_3166_code":null,"iso_3166_numeric_code":null,"lodging_district_heat_intensity":1.7463,"lodging_district_heat_intensity_units":"megajoules_per_occupied_room_night","lodging_electricity_intensity":32.906,"lodging_electricity_intensity_units":"kilowatt_hours_per_occupied_room_night","lodging_fuel_oil_intensity":0.412389,"lodging_fuel_oil_intensity_units":"gallons_per_occupied_room_night","lodging_natural_gas_intensity":1.93316,"lodging_natural_gas_intensity_units":"cubic_metres_per_occupied_room_night","lodging_occupancy_rate":0.601,"name":"fallback","rail_passengers":null,"rail_speed":32.49720001220703,"rail_speed_units":"kilometres_per_hour","rail_trip_co2_emission_factor":0.06364482122342524,"rail_trip_co2_emission_factor_units":"kilograms_per_passenger_kilometre","rail_trip_diesel_intensity":0.008762920291076415,"rail_trip_diesel_intensity_units":"litres_per_passenger_kilometre","rail_trip_distance":37.11446191042177,"rail_trip_distance_units":"kilometres","rail_trip_electricity_intensity":0.10806735200626398,"rail_trip_electricity_intensity_units":"kilowatt_hour_per_passenger_kilometre"}},"methodology":"default"},"make_model":{"description":"Nissan
+        ALTIMA","object":{"automobile_make_model":{"fuel_efficiency_city":8.47904,"fuel_efficiency_city_units":"kilometres_per_litre","fuel_efficiency_highway":11.65,"fuel_efficiency_highway_units":"kilometres_per_litre","make_name":"Nissan","model_name":"ALTIMA","name":"Nissan
+        ALTIMA"}},"methodology":"from make and model"},"date":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        timeframe"}},"emitter":"AutomobileTrip","equivalents":{"cars_off_the_road_for_a_year":0.000730493979141854,"cars_off_the_road_for_a_month":0.008757900343338051,"cars_off_the_road_for_a_week":0.037949563586737525,"cars_off_the_road_for_a_day":0.2663734253831224,"cars_to_priuses_for_a_year":0.001460987958283708,"cars_to_priuses_for_a_month":0.017515800686676103,"cars_to_priuses_for_a_week":0.07589912717347505,"cars_to_priuses_for_a_day":0.5327468507662448,"one_way_domestic_flight":0.013044535341818821,"round_trip_domestic_flight":0.0065222676709094105,"one_way_cross_country_flight":0.0045836490339560285,"round_trip_cross_country_flight":0.0022918245169780142,"vegan_meals_instead_of_non_vegan_ones":3.229774772492973,"days_of_veganism":1.0765915908309909,"weeks_of_veganism":0.15379707853163493,"months_of_veganism":0.0358865201511391,"years_of_veganism":0.0029500718388421024,"barrels_of_petroleum":0.009335873601560178,"canisters_of_bbq_propane":0.1672389704884815,"railroad_cars_full_of_coal":2.0068515910490494e-05,"homes_energy_in_a_year":0.0003893292086635156,"homes_energy_in_a_month":0.004651881988051697,"homes_energy_in_a_week":0.020152803677314556,"homes_energy_in_a_day":0.14147099605941169,"homes_electricity_in_a_year":0.0005900143677684205,"homes_electricity_in_a_month":0.007060103897310556,"homes_electricity_in_a_week":0.03059244565395171,"homes_electricity_in_a_day":0.21472910653906618,"homes_with_lowered_thermostat_2_degrees_for_a_winter":0.02106792800283292,"homes_with_raised_thermostat_3_degrees_for_a_summer":0.009472339509751513,"replaced_refrigerators":0.004041799104372786,"loads_of_cold_laundry":1.8405317585892684,"lightbulbs_for_a_year":0.00740929607415309,"lightbulbs_for_a_month":0.09016784198583379,"lightbulbs_for_a_week":0.3864313149660408,"lightbulbs_for_a_day":2.7050312458718317,"lightbulbs_for_an_evening":16.23019148893417,"lightbulbs_to_CFLs_for_a_day":46.04309972456197,"lightbulbs_to_CFLs_for_a_week":6.577584528165087,"lightbulbs_to_CFLs_for_a_month":1.5347718638802172,"lightbulbs_to_CFLs_for_a_year":0.12614667731016113,"days_with_lightbulbs_to_CFLs":1.0231812425868114,"weeks_with_lightbulbs_to_CFLs":0.14616702878246646,"months_with_lightbulbs_to_CFLs":0.03410443593828754,"years_with_lightbulbs_to_CFLs":0.0028015648211044734,"recycled_kgs_of_trash":2.7680704680498645,"recycled_bags_of_trash":1.533776465491057},"methodology":"http://impact.brighterplanet.com/automobile_trips?make=Nissan&model=Altima&timeframe=2012-01-01%2F2013-01-01","scope":"The
+        automobile trip emission estimate is the total anthropogenic emissions from
+        fuel and air conditioning used by the automobile during the trip. It includes
+        CO2 emissions from combustion of non-biogenic fuel, CH4 and N2O emissions
+        from combustion of all fuel, and fugitive HFC emissions from air conditioning.","timeframe":"2012-01-01/2013-01-01","characteristics":{"make":{"description":"Nissan","object":{"automobile_make":{"fuel_efficiency":11.9656,"fuel_efficiency_units":"kilometres_per_litre","name":"Nissan"}}},"model":{"description":"ALTIMA","object":{"automobile_model":{"name":"ALTIMA"}}}},"errors":["API
+        key \"carbon_test\" could not be verified. Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:19 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/automobile_trips.json
+    body:
+      encoding: US-ASCII
+      string: make=Ford&model=Taurus&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:19 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"4.6 kg","object":{"value":4.563713093427252,"units":"kilograms"},"methodology":"from
+        co2 emission, ch4 emission, n2o emission, and hfc emission"},"co2_emission":{"description":"4.349854227442925","object":4.349854227442925,"methodology":"from
+        fuel use and automobile fuel"},"co2_biogenic_emission":{"description":"0.0","object":0.0,"methodology":"from
+        fuel use and automobile fuel"},"ch4_emission":{"description":"0.004480390052220374","object":0.004480390052220374,"methodology":"from
+        fuel use and automobile fuel"},"n2o_emission":{"description":"0.015234946635492488","object":0.015234946635492488,"methodology":"from
+        fuel use and automobile fuel"},"hfc_emission":{"description":"0.19414352929661446","object":0.19414352929661446,"methodology":"from
+        fuel use and automobile fuel"},"energy":{"description":"64.3 MJ","object":{"value":64.25629091982954,"units":"megajoules"},"methodology":"from
+        fuel use and automobile fuel"},"automobile_fuel":{"description":"fallback","object":{"automobile_fuel":{"annual_distance":17923.116724381467,"annual_distance_units":"kilometres","base_fuel_name":null,"blend_fuel_name":null,"blend_portion":null,"ch4_emission_factor":0.002420994361601003,"ch4_emission_factor_units":"kilograms_co2e_per_litre","co2_biogenic_emission_factor":0.0,"co2_biogenic_emission_factor_units":"kilograms_per_litre","co2_emission_factor":2.3504588742684827,"co2_emission_factor_units":"kilograms_per_litre","code":null,"distance_key":null,"ef_key":null,"emission_factor":null,"emission_factor_units":null,"energy_content":34.72111048394262,"energy_content_units":null,"hfc_emission_factor":0.1049061318970414,"hfc_emission_factor_units":"kilograms_co2e_per_litre","n2o_emission_factor":0.008232256449534075,"n2o_emission_factor_units":"kilograms_co2e_per_litre","name":"fallback"}},"methodology":"default"},"fuel_use":{"description":"1.850640432412033
+        l","object":{"value":1.850640432412033,"units":"litres"},"methodology":"from
+        fuel efficiency, distance, date, and timeframe"},"distance":{"description":"16.3348
+        km","object":{"value":16.3348,"units":"kilometres"},"methodology":"from safe
+        country"},"speed":{"description":"50.94382232429702 km/h","object":{"value":50.94382232429702,"units":"kilometres_per_hour"},"methodology":"from
+        urbanity and safe country"},"fuel_efficiency":{"description":"8.826566043793841
+        km/l","object":{"value":8.826566043793841,"units":"kilometres_per_litre"},"methodology":"from
+        make model and urbanity"},"hybridity_multiplier":{"description":"1.0","object":1.0,"methodology":"default"},"urbanity":{"description":"0.43","object":0.43,"methodology":"from
+        safe country"},"safe_country":{"description":null,"object":{"country":{"automobile_city_speed":32.0259,"automobile_city_speed_units":"kilometres_per_hour","automobile_fuel_efficiency":8.226530750610781,"automobile_fuel_efficiency_units":"kilometres_per_litre","automobile_highway_speed":91.8935,"automobile_highway_speed_units":"kilometres_per_hour","automobile_trip_distance":16.3348,"automobile_trip_distance_units":"kilometres","automobile_urbanity":0.43,"cooling_degree_days":null,"cooling_degree_days_units":null,"electricity_emission_factor":0.626089,"electricity_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","electricity_loss_factor":0.096,"flight_route_inefficiency_factor":1.100000023841858,"heating_degree_days":null,"heating_degree_days_units":null,"iso_3166_alpha_3_code":null,"iso_3166_code":null,"iso_3166_numeric_code":null,"lodging_district_heat_intensity":1.7463,"lodging_district_heat_intensity_units":"megajoules_per_occupied_room_night","lodging_electricity_intensity":32.906,"lodging_electricity_intensity_units":"kilowatt_hours_per_occupied_room_night","lodging_fuel_oil_intensity":0.412389,"lodging_fuel_oil_intensity_units":"gallons_per_occupied_room_night","lodging_natural_gas_intensity":1.93316,"lodging_natural_gas_intensity_units":"cubic_metres_per_occupied_room_night","lodging_occupancy_rate":0.601,"name":"fallback","rail_passengers":null,"rail_speed":32.49720001220703,"rail_speed_units":"kilometres_per_hour","rail_trip_co2_emission_factor":0.06364482122342524,"rail_trip_co2_emission_factor_units":"kilograms_per_passenger_kilometre","rail_trip_diesel_intensity":0.008762920291076415,"rail_trip_diesel_intensity_units":"litres_per_passenger_kilometre","rail_trip_distance":37.11446191042177,"rail_trip_distance_units":"kilometres","rail_trip_electricity_intensity":0.10806735200626398,"rail_trip_electricity_intensity_units":"kilowatt_hour_per_passenger_kilometre"}},"methodology":"default"},"make_model":{"description":"Ford
+        TAURUS","object":{"automobile_make_model":{"fuel_efficiency_city":7.20551,"fuel_efficiency_city_units":"kilometres_per_litre","fuel_efficiency_highway":10.6308,"fuel_efficiency_highway_units":"kilometres_per_litre","make_name":"Ford","model_name":"TAURUS","name":"Ford
+        TAURUS"}},"methodology":"from make and model"},"date":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        timeframe"}},"emitter":"AutomobileTrip","equivalents":{"cars_off_the_road_for_a_year":0.0008305957830037599,"cars_off_the_road_for_a_month":0.009958021969858262,"cars_off_the_road_for_a_week":0.04314990729835466,"cars_off_the_road_for_a_day":0.30287538315839296,"cars_to_priuses_for_a_year":0.0016611915660075197,"cars_to_priuses_for_a_month":0.019916043939716525,"cars_to_priuses_for_a_week":0.08629981459670932,"cars_to_priuses_for_a_day":0.6057507663167859,"one_way_domestic_flight":0.014832067553638566,"round_trip_domestic_flight":0.007416033776819283,"one_way_cross_country_flight":0.005211760352693921,"round_trip_cross_country_flight":0.0026058801763469606,"vegan_meals_instead_of_non_vegan_ones":3.672360598010695,"days_of_veganism":1.2241201993368982,"weeks_of_veganism":0.17487235831394543,"months_of_veganism":0.04080415876833306,"years_of_veganism":0.00335432912366903,"barrels_of_petroleum":0.010615196655311788,"canisters_of_bbq_propane":0.1901562334638333,"railroad_cars_full_of_coal":2.281856546713626e-05,"homes_energy_in_a_year":0.0004426801700624434,"homes_energy_in_a_month":0.005289343475282185,"homes_energy_in_a_week":0.022914403442098233,"homes_energy_in_a_day":0.16085719540403035,"homes_electricity_in_a_year":0.000670865824733806,"homes_electricity_in_a_month":0.008027571331338535,"homes_electricity_in_a_week":0.034784621198102515,"homes_electricity_in_a_day":0.2441540867852645,"homes_with_lowered_thermostat_2_degrees_for_a_winter":0.023954930027399644,"homes_with_raised_thermostat_3_degrees_for_a_summer":0.010770362900488314,"replaced_refrigerators":0.004595659085081243,"loads_of_cold_laundry":2.0927454035481876,"lightbulbs_for_a_year":0.008424614370466706,"lightbulbs_for_a_month":0.1025238146438432,"lightbulbs_for_a_week":0.43938516920898896,"lightbulbs_for_a_day":3.075709875602203,"lightbulbs_for_an_evening":18.454263817326307,"lightbulbs_to_CFLs_for_a_day":52.35252522213647,"lightbulbs_to_CFLs_for_a_week":7.478930870672898,"lightbulbs_to_CFLs_for_a_month":1.7450863038039925,"lightbulbs_to_CFLs_for_a_year":0.14343293881332508,"days_with_lightbulbs_to_CFLs":1.1633908692026618,"weeks_with_lightbulbs_to_CFLs":0.1661967397233402,"months_with_lightbulbs_to_CFLs":0.03877787015485135,"years_with_lightbulbs_to_CFLs":0.003185471739212222,"recycled_kgs_of_trash":3.1473875534475715,"recycled_bags_of_trash":1.7439545029568229},"methodology":"http://impact.brighterplanet.com/automobile_trips?make=Ford&model=Taurus&timeframe=2012-01-01%2F2013-01-01","scope":"The
+        automobile trip emission estimate is the total anthropogenic emissions from
+        fuel and air conditioning used by the automobile during the trip. It includes
+        CO2 emissions from combustion of non-biogenic fuel, CH4 and N2O emissions
+        from combustion of all fuel, and fugitive HFC emissions from air conditioning.","timeframe":"2012-01-01/2013-01-01","characteristics":{"make":{"description":"Ford","object":{"automobile_make":{"fuel_efficiency":10.2999,"fuel_efficiency_units":"kilometres_per_litre","name":"Ford"}}},"model":{"description":"TAURUS","object":{"automobile_model":{"name":"TAURUS"}}}},"errors":["API
+        key \"carbon_test\" could not be verified. Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:19 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/residences.json
+    body:
+      encoding: US-ASCII
+      string: bathrooms=4&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:19 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"3838.4 kg","object":{"value":3838.3653959969083,"units":"kilograms"},"methodology":"from
+        fuel and electricity use and occupation and residents"},"fuel_oil_consumed":{"description":"199.0748055102","object":199.0748055102,"methodology":"from
+        research"},"natural_gas_consumed":{"description":"42683876171.345726","object":42683876171.345726,"methodology":"from
+        research"},"propane_consumed":{"description":"183.25178426979997","object":183.25178426979997,"methodology":"from
+        research"},"biomass_consumed":{"description":"3798201078.0000005","object":3798201078.0000005,"methodology":"from
+        research"},"kerosene_consumed":{"description":"4.0503906046","object":4.0503906046,"methodology":"from
+        research"},"coal_consumed":{"description":"2.871239704507795","object":2.871239704507795,"methodology":"from
+        research"},"dirty_electricity_generated":{"description":"11458.237337445968","object":11458.237337445968,"methodology":"from
+        electricity generated and green electricity"},"green_electricity":{"description":"0.0","object":0.0,"methodology":"default"},"electricity_generated":{"description":"11458.237337445968","object":11458.237337445968,"methodology":"from
+        electricity used and loss rate"},"electricity_used":{"description":"10752.83","object":10752.83,"methodology":"from
+        research"},"missing_annual_energy":{"description":"0","object":0,"methodology":"from
+        fuel reports"},"electricity_loss_rate":{"description":"0.06156333794384499","object":0.06156333794384499,"methodology":"default"},"electricity_emission_factor":{"description":"0.5894551291830981","object":0.5894551291830981,"methodology":"default"},"occupation":{"description":"0.937","object":0.937,"methodology":"default"},"residents":{"description":"2.57","object":2.57,"methodology":"default"},"air_conditioner_use":{"description":null,"object":{"air_conditioner_use":{"fugitive_emission":0.4994479354338,"fugitive_emission_units":"kilograms_per_square_metre","name":null}},"methodology":"default"},"predicted_fuel_shares":{"description":"{:fuel_oil=>0.4167932348735287,
+        :natural_gas=>0.1613371886801841, :propane=>0.2526592181590731, :kerosene=>0.008254483207514767,
+        :biomass=>0.014356500368116514, :coal=>0.0002819952840317706, :electricity=>0.14631737942755108}","object":{"fuel_oil":0.4167932348735287,"natural_gas":0.1613371886801841,"propane":0.2526592181590731,"kerosene":0.008254483207514767,"biomass":0.014356500368116514,"coal":0.0002819952840317706,"electricity":0.14631737942755108},"methodology":"from
+        research"},"predicted_annual_energy_consumption":{"description":"264563158193.84476","object":264563158193.84476,"methodology":"from
+        research"},"predicted_annual_fuel_oil_consumption":{"description":"199.0748055102","object":199.0748055102,"methodology":"default"},"predicted_annual_natural_gas_consumption":{"description":"42683876171.345726","object":42683876171.345726,"methodology":"default"},"predicted_annual_propane_consumption":{"description":"183.2517842698","object":183.2517842698,"methodology":"default"},"predicted_annual_kerosene_consumption":{"description":"4.0503906046","object":4.0503906046,"methodology":"default"},"predicted_annual_biomass_consumption":{"description":"3798201078.0","object":3798201078.0,"methodology":"default"},"predicted_annual_coal_consumption":{"description":"2.871239704507795","object":2.871239704507795,"methodology":"default"},"predicted_annual_electricity_use":{"description":"10752.83","object":10752.83,"methodology":"default"},"active_subtimeframe":{"description":"2012-01-01/2013-01-01","object":"2012-01-01/2013-01-01","methodology":"from
+        acquisition and retirement"},"acquisition":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        retirement"},"retirement":{"description":"2013-01-01","object":"2013-01-01","methodology":"from
+        acquisition"},"floorspace_estimate":{"description":"214.47688717440002","object":214.47688717440002,"methodology":"default"}},"emitter":"Residence","equivalents":{"cars_off_the_road_for_a_year":0.6985825020714374,"cars_off_the_road_for_a_month":8.375313294065254,"cars_off_the_road_for_a_week":36.291744819150765,"cars_off_the_road_for_a_day":254.7369578707308,"cars_to_priuses_for_a_year":1.3971650041428747,"cars_to_priuses_for_a_month":16.75062658813051,"cars_to_priuses_for_a_week":72.58348963830153,"cars_to_priuses_for_a_day":509.4739157414616,"one_way_domestic_flight":12.47468753698995,"round_trip_domestic_flight":6.237343768494975,"one_way_cross_country_flight":4.383413282228469,"round_trip_cross_country_flight":2.1917066411142345,"vegan_meals_instead_of_non_vegan_ones":3088.6827354085644,"days_of_veganism":1029.5609118028547,"weeks_of_veganism":147.07848524380952,"months_of_veganism":34.31882500560835,"years_of_veganism":2.8211985660577277,"barrels_of_petroleum":8.928037911088808,"canisters_of_bbq_propane":159.9331709550032,"railroad_cars_full_of_coal":0.019191826979984544,"homes_energy_in_a_year":0.3723214434117001,"homes_energy_in_a_month":4.448665493960417,"homes_energy_in_a_week":19.272432653300477,"homes_energy_in_a_day":135.29086511270302,"homes_electricity_in_a_year":0.5642397132115455,"homes_electricity_in_a_month":6.751684731558561,"homes_electricity_in_a_week":29.256021048288435,"homes_electricity_in_a_day":205.34871032043858,"homes_with_lowered_thermostat_2_degrees_for_a_winter":20.147579963587773,"homes_with_raised_thermostat_3_degrees_for_a_summer":9.058542334552705,"replaced_refrigerators":3.865233953768887,"loads_of_cold_laundry":1760.1285127191343,"lightbulbs_for_a_year":7.0856225210102926,"lightbulbs_for_a_month":86.22887862107054,"lightbulbs_for_a_week":369.55014359579036,"lightbulbs_for_a_day":2586.8625202667204,"lightbulbs_for_an_evening":15521.178959965717,"lightbulbs_to_CFLs_for_a_day":44031.71651940903,"lightbulbs_to_CFLs_for_a_week":6290.244120382606,"lightbulbs_to_CFLs_for_a_month":1467.7256752174858,"lightbulbs_to_CFLs_for_a_year":120.63598603078682,"days_with_lightbulbs_to_CFLs":978.4837834783237,"weeks_with_lightbulbs_to_CFLs":139.7817526260194,"months_with_lightbulbs_to_CFLs":32.61459076978573,"years_with_lightbulbs_to_CFLs":2.6791790464058423,"recycled_kgs_of_trash":2647.147887176248,"recycled_bags_of_trash":1466.7737605992786},"methodology":"http://impact.brighterplanet.com/residences?bathrooms=4&timeframe=2012-01-01%2F2013-01-01","scope":null,"timeframe":"2012-01-01/2013-01-01","characteristics":{"bathrooms":{"description":"4.0","object":4.0}},"errors":["API
+        key \"carbon_test\" could not be verified. Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:19 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/flights.json
+    body:
+      encoding: US-ASCII
+      string: origin_airport=IAH&destination_airport=DEN&segments_per_trip=1&trips=1&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:19 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"242.5 kg","object":{"value":242.52347122248426,"units":"kilograms"},"methodology":"from
+        fuel use and greenhouse gas emission factor"},"ghg_emission_factor":{"description":"5.15214","object":5.15214,"methodology":"from
+        fuel and aviation multiplier"},"aviation_multiplier":{"description":"2.0","object":2.0,"methodology":"default"},"energy":{"description":"1771.2
+        MJ","object":{"value":1771.178169585269,"units":"megajoules"},"methodology":"from
+        fuel use and fuel"},"fuel_use":{"description":"47.072375987935935","object":47.072375987935935,"methodology":"from
+        fuel per segment, segments per trip, trips, freight_share, passengers, seat
+        class multiplier, fuel, date, and timeframe"},"fuel_per_segment":{"description":"5891.4023971685265","object":5891.4023971685265,"methodology":"from
+        adjusted distance per segment and fuel use coefficients"},"seat_class_multiplier":{"description":"1.0","object":1.0,"methodology":"default"},"distance_class":{"description":"short
+        haul","object":{"flight_distance_class":{"distance":1108.0,"distance_units":"kilometres","max_distance":3700.0,"max_distance_units":"kilometres","min_distance":0.0,"min_distance_units":"kilometres","name":"short
+        haul"}},"methodology":"from adjusted distance per segment"},"adjusted_distance_per_segment":{"description":"802.3565814689595","object":802.3565814689595,"methodology":"from
+        adjusted distance and segments per trip"},"adjusted_distance":{"description":"802.3565814689595","object":802.3565814689595,"methodology":"from
+        distance, route inefficiency factor, and dogleg factor"},"distance":{"description":"749.8659639896817","object":749.8659639896817,"methodology":"from
+        airports"},"route_inefficiency_factor":{"description":"1.07","object":1.07,"methodology":"from
+        country"},"dogleg_factor":{"description":"1.0","object":1.0,"methodology":"from
+        segments per trip"},"fuel_use_coefficients":{"description":"Fuel use equation","object":{"m3":6.230164366685055e-08,"m2":-4.0923005200593856e-05,"m1":5.808528552865584,"b":1225.0553711164655},"methodology":"from
+        cohort"},"fuel":{"description":"Jet Fuel","object":{"fuel":{"biogenic_fraction":0.0,"carbon_content":18.672,"carbon_content_units":"grams_per_megajoule","co2_biogenic_emission_factor":0.0,"co2_biogenic_emission_factor_units":"kilograms_per_litre","co2_emission_factor":2.57607,"co2_emission_factor_units":"kilograms_per_litre","density":0.8156,"density_units":"kilograms_per_litre","energy_content":37.6267,"energy_content_units":"megajoules_per_litre","name":"Jet
+        Fuel","oxidation_factor":1.0,"physical_units":null}},"methodology":"default"},"passengers":{"description":"152","object":152,"methodology":"from
+        seats and load factor"},"seats":{"description":"174.52327350140772","object":174.52327350140772,"methodology":"from
+        cohort"},"load_factor":{"description":"0.8695368648330599","object":0.8695368648330599,"methodology":"from
+        cohort"},"freight_share":{"description":"0.009468621447370996","object":0.009468621447370996,"methodology":"from
+        cohort"},"country":{"description":"US","object":{"country":{"automobile_city_speed":32.0259,"automobile_city_speed_units":"kilometres_per_hour","automobile_fuel_efficiency":9.2669,"automobile_fuel_efficiency_units":"kilometres_per_litre","automobile_highway_speed":91.8935,"automobile_highway_speed_units":"kilometres_per_hour","automobile_trip_distance":16.3348,"automobile_trip_distance_units":"kilometres","automobile_urbanity":0.43,"cooling_degree_days":882.0,"cooling_degree_days_units":"degrees_celsius","electricity_emission_factor":0.589455,"electricity_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","electricity_loss_factor":0.0615633,"flight_route_inefficiency_factor":1.07,"heating_degree_days":2159.0,"heating_degree_days_units":"degrees_celsius","iso_3166_alpha_3_code":"USA","iso_3166_code":"US","iso_3166_numeric_code":840,"lodging_district_heat_intensity":1.7463,"lodging_district_heat_intensity_units":"megajoules_per_occupied_room_night","lodging_electricity_intensity":32.906,"lodging_electricity_intensity_units":"kilowatt_hours_per_occupied_room_night","lodging_fuel_oil_intensity":0.412389,"lodging_fuel_oil_intensity_units":"gallons_per_occupied_room_night","lodging_natural_gas_intensity":1.93316,"lodging_natural_gas_intensity_units":"cubic_metres_per_occupied_room_night","lodging_occupancy_rate":0.601,"name":"United
+        States","rail_passengers":4467000000.0,"rail_speed":32.4972,"rail_speed_units":"kilometres_per_hour","rail_trip_co2_emission_factor":0.0957617,"rail_trip_co2_emission_factor_units":"kilograms_per_passenger_kilometre","rail_trip_diesel_intensity":0.0194247,"rail_trip_diesel_intensity_units":"litres_per_passenger_kilometre","rail_trip_distance":12.9952,"rail_trip_distance_units":"kilometres","rail_trip_electricity_intensity":0.140512,"rail_trip_electricity_intensity_units":"kilowatt_hours_per_passenger_kilometre"}},"methodology":"from
+        origin airport and destination airport"},"cohort":{"description":"BrighterPlanet::Flight::ImpactModel::FlightSegmentCohort","object":{"members":108,"sql":"SELECT
+        * FROM `flight_segments`  WHERE (`flight_segments`.`source` = ''BTS T100''
+        AND `flight_segments`.`year` IN (2011, 2012) AND `flight_segments`.`passengers`
+        > 0) AND `flight_segments`.`origin_airport_iata_code` = ''IAH'' AND `flight_segments`.`destination_airport_iata_code`
+        = ''DEN''"},"methodology":"from segments per trip and input"},"date":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        timeframe"}},"emitter":"Flight","equivalents":{"cars_off_the_road_for_a_year":0.04413927176249214,"cars_off_the_road_for_a_month":0.5291862142074606,"cars_off_the_road_for_a_week":2.293059420408589,"cars_off_the_road_for_a_day":16.09531269115139,"cars_to_priuses_for_a_year":0.08827854352498428,"cars_to_priuses_for_a_month":1.0583724284149212,"cars_to_priuses_for_a_week":4.586118840817178,"cars_to_priuses_for_a_day":32.19062538230278,"one_way_domestic_flight":0.7882012814730738,"round_trip_domestic_flight":0.3941006407365369,"one_way_cross_country_flight":0.276961804136077,"round_trip_cross_country_flight":0.1384809020680385,"vegan_meals_instead_of_non_vegan_ones":195.1554844876072,"days_of_veganism":65.05182816253573,"weeks_of_veganism":9.293014370303151,"months_of_veganism":2.1684023562002315,"years_of_veganism":0.17825475134852592,"barrels_of_petroleum":0.5641095940634984,"canisters_of_bbq_propane":10.105225475427252,"railroad_cars_full_of_coal":0.0012126173561124215,"homes_energy_in_a_year":0.023524776708580972,"homes_energy_in_a_month":0.2810847031468593,"homes_energy_in_a_week":1.2177103490080936,"homes_energy_in_a_day":8.548224790178903,"homes_electricity_in_a_year":0.03565095026970518,"homes_electricity_in_a_month":0.4265987858803498,"homes_electricity_in_a_week":1.848513897657775,"homes_electricity_in_a_day":12.974763186931686,"homes_with_lowered_thermostat_2_degrees_for_a_winter":1.27300570044682,"homes_with_raised_thermostat_3_degrees_for_a_summer":0.5723553920850629,"replaced_refrigerators":0.24422113552104166,"loads_of_cold_laundry":111.21204801072483,"lightbulbs_for_a_year":0.44769832787670594,"lightbulbs_for_a_month":5.448289781013108,"lightbulbs_for_a_week":23.34967476235834,"lightbulbs_for_a_day":163.44845090692206,"lightbulbs_for_an_evening":980.6909479650034,"lightbulbs_to_CFLs_for_a_day":2782.1021795654187,"lightbulbs_to_CFLs_for_a_week":397.4430992169252,"lightbulbs_to_CFLs_for_a_month":92.7368524964672,"lightbulbs_to_CFLs_for_a_year":7.622270177051457,"days_with_lightbulbs_to_CFLs":61.82456833097813,"weeks_with_lightbulbs_to_CFLs":8.831977251509208,"months_with_lightbulbs_to_CFLs":2.060721934977449,"years_with_lightbulbs_to_CFLs":0.16928138291329403,"recycled_kgs_of_trash":167.25752454594237,"recycled_bags_of_trash":92.67670667560402},"methodology":"http://impact.brighterplanet.com/flights?destination_airport=DEN&origin_airport=IAH&segments_per_trip=1&timeframe=2012-01-01%2F2013-01-01&trips=1","scope":"The
+        flight greenhouse gas emission is the anthropogenic greenhouse gas emissions
+        attributed to a single passenger on this flight. It includes CO2 emissions
+        from combustion of non-biogenic fuel and extra forcing effects of high-altitude
+        fuel combustion.","timeframe":"2012-01-01/2013-01-01","characteristics":{"segments_per_trip":{"description":"1","object":1},"trips":{"description":"1","object":1},"origin_airport":{"description":"IAH","object":{"airport":{"city":"Houston","country_iso_3166_code":"US","country_name":"United
+        States","iata_code":"IAH","latitude":29.9844,"longitude":-95.3414,"name":"George
+        Bush Intcntl Houston"}}},"destination_airport":{"description":"DEN","object":{"airport":{"city":"Denver","country_iso_3166_code":"US","country_name":"United
+        States","iata_code":"DEN","latitude":39.8617,"longitude":-104.673,"name":"Denver
+        International"}}}},"errors":["API key \"carbon_test\" could not be verified.
+        Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:19 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/flights.json
+    body:
+      encoding: US-ASCII
+      string: origin_airport=LAX&destination_airport=SFO&segments_per_trip=1&trips=1&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:19 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"158.9 kg","object":{"value":158.88245012544277,"units":"kilograms"},"methodology":"from
+        fuel use and greenhouse gas emission factor"},"ghg_emission_factor":{"description":"5.15214","object":5.15214,"methodology":"from
+        fuel and aviation multiplier"},"aviation_multiplier":{"description":"2.0","object":2.0,"methodology":"default"},"energy":{"description":"1160.3
+        MJ","object":{"value":1160.3377016414531,"units":"megajoules"},"methodology":"from
+        fuel use and fuel"},"fuel_use":{"description":"30.838146891474757","object":30.838146891474757,"methodology":"from
+        fuel per segment, segments per trip, trips, freight_share, passengers, seat
+        class multiplier, fuel, date, and timeframe"},"fuel_per_segment":{"description":"2809.4943974548605","object":2809.4943974548605,"methodology":"from
+        adjusted distance per segment and fuel use coefficients"},"seat_class_multiplier":{"description":"1.0","object":1.0,"methodology":"default"},"distance_class":{"description":"short
+        haul","object":{"flight_distance_class":{"distance":1108.0,"distance_units":"kilometres","max_distance":3700.0,"max_distance_units":"kilometres","min_distance":0.0,"min_distance_units":"kilometres","name":"short
+        haul"}},"methodology":"from adjusted distance per segment"},"adjusted_distance_per_segment":{"description":"314.11399481652126","object":314.11399481652126,"methodology":"from
+        adjusted distance and segments per trip"},"adjusted_distance":{"description":"314.11399481652126","object":314.11399481652126,"methodology":"from
+        distance, route inefficiency factor, and dogleg factor"},"distance":{"description":"293.56448113693574","object":293.56448113693574,"methodology":"from
+        airports"},"route_inefficiency_factor":{"description":"1.07","object":1.07,"methodology":"from
+        country"},"dogleg_factor":{"description":"1.0","object":1.0,"methodology":"from
+        segments per trip"},"fuel_use_coefficients":{"description":"Fuel use equation","object":{"m3":1.0348093300372378e-07,"m2":-0.00023017671642226525,"m1":5.385202868809918,"b":1137.430624447256},"methodology":"from
+        cohort"},"fuel":{"description":"Jet Fuel","object":{"fuel":{"biogenic_fraction":0.0,"carbon_content":18.672,"carbon_content_units":"grams_per_megajoule","co2_biogenic_emission_factor":0.0,"co2_biogenic_emission_factor_units":"kilograms_per_litre","co2_emission_factor":2.57607,"co2_emission_factor_units":"kilograms_per_litre","density":0.8156,"density_units":"kilograms_per_litre","energy_content":37.6267,"energy_content_units":"megajoules_per_litre","name":"Jet
+        Fuel","oxidation_factor":1.0,"physical_units":null}},"methodology":"default"},"passengers":{"description":"110","object":110,"methodology":"from
+        seats and load factor"},"seats":{"description":"141.62026378724536","object":141.62026378724536,"methodology":"from
+        cohort"},"load_factor":{"description":"0.7786548902022515","object":0.7786548902022515,"methodology":"from
+        cohort"},"freight_share":{"description":"0.01524089564944548","object":0.01524089564944548,"methodology":"from
+        cohort"},"country":{"description":"US","object":{"country":{"automobile_city_speed":32.0259,"automobile_city_speed_units":"kilometres_per_hour","automobile_fuel_efficiency":9.2669,"automobile_fuel_efficiency_units":"kilometres_per_litre","automobile_highway_speed":91.8935,"automobile_highway_speed_units":"kilometres_per_hour","automobile_trip_distance":16.3348,"automobile_trip_distance_units":"kilometres","automobile_urbanity":0.43,"cooling_degree_days":882.0,"cooling_degree_days_units":"degrees_celsius","electricity_emission_factor":0.589455,"electricity_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","electricity_loss_factor":0.0615633,"flight_route_inefficiency_factor":1.07,"heating_degree_days":2159.0,"heating_degree_days_units":"degrees_celsius","iso_3166_alpha_3_code":"USA","iso_3166_code":"US","iso_3166_numeric_code":840,"lodging_district_heat_intensity":1.7463,"lodging_district_heat_intensity_units":"megajoules_per_occupied_room_night","lodging_electricity_intensity":32.906,"lodging_electricity_intensity_units":"kilowatt_hours_per_occupied_room_night","lodging_fuel_oil_intensity":0.412389,"lodging_fuel_oil_intensity_units":"gallons_per_occupied_room_night","lodging_natural_gas_intensity":1.93316,"lodging_natural_gas_intensity_units":"cubic_metres_per_occupied_room_night","lodging_occupancy_rate":0.601,"name":"United
+        States","rail_passengers":4467000000.0,"rail_speed":32.4972,"rail_speed_units":"kilometres_per_hour","rail_trip_co2_emission_factor":0.0957617,"rail_trip_co2_emission_factor_units":"kilograms_per_passenger_kilometre","rail_trip_diesel_intensity":0.0194247,"rail_trip_diesel_intensity_units":"litres_per_passenger_kilometre","rail_trip_distance":12.9952,"rail_trip_distance_units":"kilometres","rail_trip_electricity_intensity":0.140512,"rail_trip_electricity_intensity_units":"kilowatt_hours_per_passenger_kilometre"}},"methodology":"from
+        origin airport and destination airport"},"cohort":{"description":"BrighterPlanet::Flight::ImpactModel::FlightSegmentCohort","object":{"members":157,"sql":"SELECT
+        * FROM `flight_segments`  WHERE (`flight_segments`.`source` = ''BTS T100''
+        AND `flight_segments`.`year` IN (2011, 2012) AND `flight_segments`.`passengers`
+        > 0) AND `flight_segments`.`origin_airport_iata_code` = ''LAX'' AND `flight_segments`.`destination_airport_iata_code`
+        = ''SFO''"},"methodology":"from segments per trip and input"},"date":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        timeframe"}},"emitter":"Flight","equivalents":{"cars_off_the_road_for_a_year":0.028916605922830584,"cars_off_the_road_for_a_month":0.3466815061737161,"cars_off_the_road_for_a_week":1.5022335659360615,"cars_off_the_road_for_a_day":10.544392685025134,"cars_to_priuses_for_a_year":0.05783321184566117,"cars_to_priuses_for_a_month":0.6933630123474323,"cars_to_priuses_for_a_week":3.004467131872123,"cars_to_priuses_for_a_day":21.088785370050267,"one_way_domestic_flight":0.5163679629076889,"round_trip_domestic_flight":0.25818398145384447,"one_way_cross_country_flight":0.18144375804325566,"round_trip_cross_country_flight":0.09072187902162783,"vegan_meals_instead_of_non_vegan_ones":127.85064214409218,"days_of_veganism":42.61688071469739,"weeks_of_veganism":6.088057723906716,"months_of_veganism":1.4205679865715837,"years_of_veganism":0.11677860084220043,"barrels_of_petroleum":0.36956057899177985,"canisters_of_bbq_propane":6.620155049376825,"railroad_cars_full_of_coal":0.000794412250627214,"homes_energy_in_a_year":0.01541159766216795,"homes_energy_in_a_month":0.18414475969538818,"homes_energy_in_a_week":0.7977487820798482,"homes_energy_in_a_day":5.600129719571481,"homes_electricity_in_a_year":0.023355720168440088,"homes_electricity_in_a_month":0.27947422977065384,"homes_electricity_in_a_week":1.2110020348561248,"homes_electricity_in_a_day":8.500052199261063,"homes_with_lowered_thermostat_2_degrees_for_a_winter":0.8339739807084492,"homes_with_raised_thermostat_3_degrees_for_a_summer":0.37496258229604496,"replaced_refrigerators":0.15999462727632088,"loads_of_cold_laundry":72.85745409442329,"lightbulbs_for_a_year":0.29329700293156735,"lightbulbs_for_a_month":3.5692942420680716,"lightbulbs_for_a_week":15.29688453317738,"lightbulbs_for_a_day":107.07866837959203,"lightbulbs_for_an_evening":642.4721691600023,"lightbulbs_to_CFLs_for_a_day":1822.6162134352137,"lightbulbs_to_CFLs_for_a_week":260.37369938147333,"lightbulbs_to_CFLs_for_a_month":60.75394792631718,"lightbulbs_to_CFLs_for_a_year":4.993516524992541,"days_with_lightbulbs_to_CFLs":40.50263195087812,"weeks_with_lightbulbs_to_CFLs":5.786022186218249,"months_with_lightbulbs_to_CFLs":1.350024178715887,"years_with_lightbulbs_to_CFLs":0.11089995018755906,"recycled_kgs_of_trash":109.57407614126224,"recycled_bags_of_trash":60.71454507868607},"methodology":"http://impact.brighterplanet.com/flights?destination_airport=SFO&origin_airport=LAX&segments_per_trip=1&timeframe=2012-01-01%2F2013-01-01&trips=1","scope":"The
+        flight greenhouse gas emission is the anthropogenic greenhouse gas emissions
+        attributed to a single passenger on this flight. It includes CO2 emissions
+        from combustion of non-biogenic fuel and extra forcing effects of high-altitude
+        fuel combustion.","timeframe":"2012-01-01/2013-01-01","characteristics":{"segments_per_trip":{"description":"1","object":1},"trips":{"description":"1","object":1},"origin_airport":{"description":"LAX","object":{"airport":{"city":"Los
+        Angeles","country_iso_3166_code":"US","country_name":"United States","iata_code":"LAX","latitude":33.9425,"longitude":-118.408,"name":"Los
+        Angeles International"}}},"destination_airport":{"description":"SFO","object":{"airport":{"city":"San
+        Francisco","country_iso_3166_code":"US","country_name":"United States","iata_code":"SFO","latitude":37.619,"longitude":-122.375,"name":"San
+        Francisco International"}}}},"errors":["API key \"carbon_test\" could not
+        be verified. Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:19 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/automobile_trips.json
+    body:
+      encoding: US-ASCII
+      string: make=Ford&model=Taurus&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:19 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"4.6 kg","object":{"value":4.563713093427252,"units":"kilograms"},"methodology":"from
+        co2 emission, ch4 emission, n2o emission, and hfc emission"},"co2_emission":{"description":"4.349854227442925","object":4.349854227442925,"methodology":"from
+        fuel use and automobile fuel"},"co2_biogenic_emission":{"description":"0.0","object":0.0,"methodology":"from
+        fuel use and automobile fuel"},"ch4_emission":{"description":"0.004480390052220374","object":0.004480390052220374,"methodology":"from
+        fuel use and automobile fuel"},"n2o_emission":{"description":"0.015234946635492488","object":0.015234946635492488,"methodology":"from
+        fuel use and automobile fuel"},"hfc_emission":{"description":"0.19414352929661446","object":0.19414352929661446,"methodology":"from
+        fuel use and automobile fuel"},"energy":{"description":"64.3 MJ","object":{"value":64.25629091982954,"units":"megajoules"},"methodology":"from
+        fuel use and automobile fuel"},"automobile_fuel":{"description":"fallback","object":{"automobile_fuel":{"annual_distance":17923.116724381467,"annual_distance_units":"kilometres","base_fuel_name":null,"blend_fuel_name":null,"blend_portion":null,"ch4_emission_factor":0.002420994361601003,"ch4_emission_factor_units":"kilograms_co2e_per_litre","co2_biogenic_emission_factor":0.0,"co2_biogenic_emission_factor_units":"kilograms_per_litre","co2_emission_factor":2.3504588742684827,"co2_emission_factor_units":"kilograms_per_litre","code":null,"distance_key":null,"ef_key":null,"emission_factor":null,"emission_factor_units":null,"energy_content":34.72111048394262,"energy_content_units":null,"hfc_emission_factor":0.1049061318970414,"hfc_emission_factor_units":"kilograms_co2e_per_litre","n2o_emission_factor":0.008232256449534075,"n2o_emission_factor_units":"kilograms_co2e_per_litre","name":"fallback"}},"methodology":"default"},"fuel_use":{"description":"1.850640432412033
+        l","object":{"value":1.850640432412033,"units":"litres"},"methodology":"from
+        fuel efficiency, distance, date, and timeframe"},"distance":{"description":"16.3348
+        km","object":{"value":16.3348,"units":"kilometres"},"methodology":"from safe
+        country"},"speed":{"description":"50.94382232429702 km/h","object":{"value":50.94382232429702,"units":"kilometres_per_hour"},"methodology":"from
+        urbanity and safe country"},"fuel_efficiency":{"description":"8.826566043793841
+        km/l","object":{"value":8.826566043793841,"units":"kilometres_per_litre"},"methodology":"from
+        make model and urbanity"},"hybridity_multiplier":{"description":"1.0","object":1.0,"methodology":"default"},"urbanity":{"description":"0.43","object":0.43,"methodology":"from
+        safe country"},"safe_country":{"description":null,"object":{"country":{"automobile_city_speed":32.0259,"automobile_city_speed_units":"kilometres_per_hour","automobile_fuel_efficiency":8.226530750610781,"automobile_fuel_efficiency_units":"kilometres_per_litre","automobile_highway_speed":91.8935,"automobile_highway_speed_units":"kilometres_per_hour","automobile_trip_distance":16.3348,"automobile_trip_distance_units":"kilometres","automobile_urbanity":0.43,"cooling_degree_days":null,"cooling_degree_days_units":null,"electricity_emission_factor":0.626089,"electricity_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","electricity_loss_factor":0.096,"flight_route_inefficiency_factor":1.100000023841858,"heating_degree_days":null,"heating_degree_days_units":null,"iso_3166_alpha_3_code":null,"iso_3166_code":null,"iso_3166_numeric_code":null,"lodging_district_heat_intensity":1.7463,"lodging_district_heat_intensity_units":"megajoules_per_occupied_room_night","lodging_electricity_intensity":32.906,"lodging_electricity_intensity_units":"kilowatt_hours_per_occupied_room_night","lodging_fuel_oil_intensity":0.412389,"lodging_fuel_oil_intensity_units":"gallons_per_occupied_room_night","lodging_natural_gas_intensity":1.93316,"lodging_natural_gas_intensity_units":"cubic_metres_per_occupied_room_night","lodging_occupancy_rate":0.601,"name":"fallback","rail_passengers":null,"rail_speed":32.49720001220703,"rail_speed_units":"kilometres_per_hour","rail_trip_co2_emission_factor":0.06364482122342524,"rail_trip_co2_emission_factor_units":"kilograms_per_passenger_kilometre","rail_trip_diesel_intensity":0.008762920291076415,"rail_trip_diesel_intensity_units":"litres_per_passenger_kilometre","rail_trip_distance":37.11446191042177,"rail_trip_distance_units":"kilometres","rail_trip_electricity_intensity":0.10806735200626398,"rail_trip_electricity_intensity_units":"kilowatt_hour_per_passenger_kilometre"}},"methodology":"default"},"make_model":{"description":"Ford
+        TAURUS","object":{"automobile_make_model":{"fuel_efficiency_city":7.20551,"fuel_efficiency_city_units":"kilometres_per_litre","fuel_efficiency_highway":10.6308,"fuel_efficiency_highway_units":"kilometres_per_litre","make_name":"Ford","model_name":"TAURUS","name":"Ford
+        TAURUS"}},"methodology":"from make and model"},"date":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        timeframe"}},"emitter":"AutomobileTrip","equivalents":{"cars_off_the_road_for_a_year":0.0008305957830037599,"cars_off_the_road_for_a_month":0.009958021969858262,"cars_off_the_road_for_a_week":0.04314990729835466,"cars_off_the_road_for_a_day":0.30287538315839296,"cars_to_priuses_for_a_year":0.0016611915660075197,"cars_to_priuses_for_a_month":0.019916043939716525,"cars_to_priuses_for_a_week":0.08629981459670932,"cars_to_priuses_for_a_day":0.6057507663167859,"one_way_domestic_flight":0.014832067553638566,"round_trip_domestic_flight":0.007416033776819283,"one_way_cross_country_flight":0.005211760352693921,"round_trip_cross_country_flight":0.0026058801763469606,"vegan_meals_instead_of_non_vegan_ones":3.672360598010695,"days_of_veganism":1.2241201993368982,"weeks_of_veganism":0.17487235831394543,"months_of_veganism":0.04080415876833306,"years_of_veganism":0.00335432912366903,"barrels_of_petroleum":0.010615196655311788,"canisters_of_bbq_propane":0.1901562334638333,"railroad_cars_full_of_coal":2.281856546713626e-05,"homes_energy_in_a_year":0.0004426801700624434,"homes_energy_in_a_month":0.005289343475282185,"homes_energy_in_a_week":0.022914403442098233,"homes_energy_in_a_day":0.16085719540403035,"homes_electricity_in_a_year":0.000670865824733806,"homes_electricity_in_a_month":0.008027571331338535,"homes_electricity_in_a_week":0.034784621198102515,"homes_electricity_in_a_day":0.2441540867852645,"homes_with_lowered_thermostat_2_degrees_for_a_winter":0.023954930027399644,"homes_with_raised_thermostat_3_degrees_for_a_summer":0.010770362900488314,"replaced_refrigerators":0.004595659085081243,"loads_of_cold_laundry":2.0927454035481876,"lightbulbs_for_a_year":0.008424614370466706,"lightbulbs_for_a_month":0.1025238146438432,"lightbulbs_for_a_week":0.43938516920898896,"lightbulbs_for_a_day":3.075709875602203,"lightbulbs_for_an_evening":18.454263817326307,"lightbulbs_to_CFLs_for_a_day":52.35252522213647,"lightbulbs_to_CFLs_for_a_week":7.478930870672898,"lightbulbs_to_CFLs_for_a_month":1.7450863038039925,"lightbulbs_to_CFLs_for_a_year":0.14343293881332508,"days_with_lightbulbs_to_CFLs":1.1633908692026618,"weeks_with_lightbulbs_to_CFLs":0.1661967397233402,"months_with_lightbulbs_to_CFLs":0.03877787015485135,"years_with_lightbulbs_to_CFLs":0.003185471739212222,"recycled_kgs_of_trash":3.1473875534475715,"recycled_bags_of_trash":1.7439545029568229},"methodology":"http://impact.brighterplanet.com/automobile_trips?make=Ford&model=Taurus&timeframe=2012-01-01%2F2013-01-01","scope":"The
+        automobile trip emission estimate is the total anthropogenic emissions from
+        fuel and air conditioning used by the automobile during the trip. It includes
+        CO2 emissions from combustion of non-biogenic fuel, CH4 and N2O emissions
+        from combustion of all fuel, and fugitive HFC emissions from air conditioning.","timeframe":"2012-01-01/2013-01-01","characteristics":{"make":{"description":"Ford","object":{"automobile_make":{"fuel_efficiency":10.2999,"fuel_efficiency_units":"kilometres_per_litre","name":"Ford"}}},"model":{"description":"TAURUS","object":{"automobile_model":{"name":"TAURUS"}}}},"errors":["API
+        key \"carbon_test\" could not be verified. Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:19 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/automobile_trips.json
+    body:
+      encoding: US-ASCII
+      string: make=Nissan&model=Altima&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:19 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"4.0 kg","object":{"value":4.013703182098099,"units":"kilograms"},"methodology":"from
+        co2 emission, ch4 emission, n2o emission, and hfc emission"},"co2_emission":{"description":"3.825618174704137","object":3.825618174704137,"methodology":"from
+        fuel use and automobile fuel"},"co2_biogenic_emission":{"description":"0.0","object":0.0,"methodology":"from
+        fuel use and automobile fuel"},"ch4_emission":{"description":"0.003940422073319416","object":0.003940422073319416,"methodology":"from
+        fuel use and automobile fuel"},"n2o_emission":{"description":"0.013398860212759267","object":0.013398860212759267,"methodology":"from
+        fuel use and automobile fuel"},"hfc_emission":{"description":"0.17074572510788322","object":0.17074572510788322,"methodology":"from
+        fuel use and automobile fuel"},"energy":{"description":"56.5 MJ","object":{"value":56.5122465095761,"units":"megajoules"},"methodology":"from
+        fuel use and automobile fuel"},"automobile_fuel":{"description":"fallback","object":{"automobile_fuel":{"annual_distance":17923.116724381467,"annual_distance_units":"kilometres","base_fuel_name":null,"blend_fuel_name":null,"blend_portion":null,"ch4_emission_factor":0.002420994361601003,"ch4_emission_factor_units":"kilograms_co2e_per_litre","co2_biogenic_emission_factor":0.0,"co2_biogenic_emission_factor_units":"kilograms_per_litre","co2_emission_factor":2.3504588742684827,"co2_emission_factor_units":"kilograms_per_litre","code":null,"distance_key":null,"ef_key":null,"emission_factor":null,"emission_factor_units":null,"energy_content":34.72111048394262,"energy_content_units":null,"hfc_emission_factor":0.1049061318970414,"hfc_emission_factor_units":"kilograms_co2e_per_litre","n2o_emission_factor":0.008232256449534075,"n2o_emission_factor_units":"kilograms_co2e_per_litre","name":"fallback"}},"methodology":"default"},"fuel_use":{"description":"1.6276048122283178
+        l","object":{"value":1.6276048122283178,"units":"litres"},"methodology":"from
+        fuel efficiency, distance, date, and timeframe"},"distance":{"description":"16.3348
+        km","object":{"value":16.3348,"units":"kilometres"},"methodology":"from safe
+        country"},"speed":{"description":"50.94382232429702 km/h","object":{"value":50.94382232429702,"units":"kilometres_per_hour"},"methodology":"from
+        urbanity and safe country"},"fuel_efficiency":{"description":"10.036097139351897
+        km/l","object":{"value":10.036097139351897,"units":"kilometres_per_litre"},"methodology":"from
+        make model and urbanity"},"hybridity_multiplier":{"description":"1.0","object":1.0,"methodology":"default"},"urbanity":{"description":"0.43","object":0.43,"methodology":"from
+        safe country"},"safe_country":{"description":null,"object":{"country":{"automobile_city_speed":32.0259,"automobile_city_speed_units":"kilometres_per_hour","automobile_fuel_efficiency":8.226530750610781,"automobile_fuel_efficiency_units":"kilometres_per_litre","automobile_highway_speed":91.8935,"automobile_highway_speed_units":"kilometres_per_hour","automobile_trip_distance":16.3348,"automobile_trip_distance_units":"kilometres","automobile_urbanity":0.43,"cooling_degree_days":null,"cooling_degree_days_units":null,"electricity_emission_factor":0.626089,"electricity_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","electricity_loss_factor":0.096,"flight_route_inefficiency_factor":1.100000023841858,"heating_degree_days":null,"heating_degree_days_units":null,"iso_3166_alpha_3_code":null,"iso_3166_code":null,"iso_3166_numeric_code":null,"lodging_district_heat_intensity":1.7463,"lodging_district_heat_intensity_units":"megajoules_per_occupied_room_night","lodging_electricity_intensity":32.906,"lodging_electricity_intensity_units":"kilowatt_hours_per_occupied_room_night","lodging_fuel_oil_intensity":0.412389,"lodging_fuel_oil_intensity_units":"gallons_per_occupied_room_night","lodging_natural_gas_intensity":1.93316,"lodging_natural_gas_intensity_units":"cubic_metres_per_occupied_room_night","lodging_occupancy_rate":0.601,"name":"fallback","rail_passengers":null,"rail_speed":32.49720001220703,"rail_speed_units":"kilometres_per_hour","rail_trip_co2_emission_factor":0.06364482122342524,"rail_trip_co2_emission_factor_units":"kilograms_per_passenger_kilometre","rail_trip_diesel_intensity":0.008762920291076415,"rail_trip_diesel_intensity_units":"litres_per_passenger_kilometre","rail_trip_distance":37.11446191042177,"rail_trip_distance_units":"kilometres","rail_trip_electricity_intensity":0.10806735200626398,"rail_trip_electricity_intensity_units":"kilowatt_hour_per_passenger_kilometre"}},"methodology":"default"},"make_model":{"description":"Nissan
+        ALTIMA","object":{"automobile_make_model":{"fuel_efficiency_city":8.47904,"fuel_efficiency_city_units":"kilometres_per_litre","fuel_efficiency_highway":11.65,"fuel_efficiency_highway_units":"kilometres_per_litre","make_name":"Nissan","model_name":"ALTIMA","name":"Nissan
+        ALTIMA"}},"methodology":"from make and model"},"date":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        timeframe"}},"emitter":"AutomobileTrip","equivalents":{"cars_off_the_road_for_a_year":0.000730493979141854,"cars_off_the_road_for_a_month":0.008757900343338051,"cars_off_the_road_for_a_week":0.037949563586737525,"cars_off_the_road_for_a_day":0.2663734253831224,"cars_to_priuses_for_a_year":0.001460987958283708,"cars_to_priuses_for_a_month":0.017515800686676103,"cars_to_priuses_for_a_week":0.07589912717347505,"cars_to_priuses_for_a_day":0.5327468507662448,"one_way_domestic_flight":0.013044535341818821,"round_trip_domestic_flight":0.0065222676709094105,"one_way_cross_country_flight":0.0045836490339560285,"round_trip_cross_country_flight":0.0022918245169780142,"vegan_meals_instead_of_non_vegan_ones":3.229774772492973,"days_of_veganism":1.0765915908309909,"weeks_of_veganism":0.15379707853163493,"months_of_veganism":0.0358865201511391,"years_of_veganism":0.0029500718388421024,"barrels_of_petroleum":0.009335873601560178,"canisters_of_bbq_propane":0.1672389704884815,"railroad_cars_full_of_coal":2.0068515910490494e-05,"homes_energy_in_a_year":0.0003893292086635156,"homes_energy_in_a_month":0.004651881988051697,"homes_energy_in_a_week":0.020152803677314556,"homes_energy_in_a_day":0.14147099605941169,"homes_electricity_in_a_year":0.0005900143677684205,"homes_electricity_in_a_month":0.007060103897310556,"homes_electricity_in_a_week":0.03059244565395171,"homes_electricity_in_a_day":0.21472910653906618,"homes_with_lowered_thermostat_2_degrees_for_a_winter":0.02106792800283292,"homes_with_raised_thermostat_3_degrees_for_a_summer":0.009472339509751513,"replaced_refrigerators":0.004041799104372786,"loads_of_cold_laundry":1.8405317585892684,"lightbulbs_for_a_year":0.00740929607415309,"lightbulbs_for_a_month":0.09016784198583379,"lightbulbs_for_a_week":0.3864313149660408,"lightbulbs_for_a_day":2.7050312458718317,"lightbulbs_for_an_evening":16.23019148893417,"lightbulbs_to_CFLs_for_a_day":46.04309972456197,"lightbulbs_to_CFLs_for_a_week":6.577584528165087,"lightbulbs_to_CFLs_for_a_month":1.5347718638802172,"lightbulbs_to_CFLs_for_a_year":0.12614667731016113,"days_with_lightbulbs_to_CFLs":1.0231812425868114,"weeks_with_lightbulbs_to_CFLs":0.14616702878246646,"months_with_lightbulbs_to_CFLs":0.03410443593828754,"years_with_lightbulbs_to_CFLs":0.0028015648211044734,"recycled_kgs_of_trash":2.7680704680498645,"recycled_bags_of_trash":1.533776465491057},"methodology":"http://impact.brighterplanet.com/automobile_trips?make=Nissan&model=Altima&timeframe=2012-01-01%2F2013-01-01","scope":"The
+        automobile trip emission estimate is the total anthropogenic emissions from
+        fuel and air conditioning used by the automobile during the trip. It includes
+        CO2 emissions from combustion of non-biogenic fuel, CH4 and N2O emissions
+        from combustion of all fuel, and fugitive HFC emissions from air conditioning.","timeframe":"2012-01-01/2013-01-01","characteristics":{"make":{"description":"Nissan","object":{"automobile_make":{"fuel_efficiency":11.9656,"fuel_efficiency_units":"kilometres_per_litre","name":"Nissan"}}},"model":{"description":"ALTIMA","object":{"automobile_model":{"name":"ALTIMA"}}}},"errors":["API
+        key \"carbon_test\" could not be verified. Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:19 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/residences.json
+    body:
+      encoding: US-ASCII
+      string: urbanity=City&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:19 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"3838.4 kg","object":{"value":3838.3653959969083,"units":"kilograms"},"methodology":"from
+        fuel and electricity use and occupation and residents"},"fuel_oil_consumed":{"description":"199.0748055102","object":199.0748055102,"methodology":"from
+        research"},"natural_gas_consumed":{"description":"42683876171.345726","object":42683876171.345726,"methodology":"from
+        research"},"propane_consumed":{"description":"183.25178426979997","object":183.25178426979997,"methodology":"from
+        research"},"biomass_consumed":{"description":"3798201078.0000005","object":3798201078.0000005,"methodology":"from
+        research"},"kerosene_consumed":{"description":"4.0503906046","object":4.0503906046,"methodology":"from
+        research"},"coal_consumed":{"description":"2.871239704507795","object":2.871239704507795,"methodology":"from
+        research"},"dirty_electricity_generated":{"description":"11458.237337445968","object":11458.237337445968,"methodology":"from
+        electricity generated and green electricity"},"green_electricity":{"description":"0.0","object":0.0,"methodology":"default"},"electricity_generated":{"description":"11458.237337445968","object":11458.237337445968,"methodology":"from
+        electricity used and loss rate"},"electricity_used":{"description":"10752.83","object":10752.83,"methodology":"from
+        research"},"missing_annual_energy":{"description":"0","object":0,"methodology":"from
+        fuel reports"},"electricity_loss_rate":{"description":"0.06156333794384499","object":0.06156333794384499,"methodology":"default"},"electricity_emission_factor":{"description":"0.5894551291830981","object":0.5894551291830981,"methodology":"default"},"occupation":{"description":"0.937","object":0.937,"methodology":"default"},"residents":{"description":"2.57","object":2.57,"methodology":"default"},"air_conditioner_use":{"description":null,"object":{"air_conditioner_use":{"fugitive_emission":0.4994479354338,"fugitive_emission_units":"kilograms_per_square_metre","name":null}},"methodology":"default"},"predicted_fuel_shares":{"description":"{:fuel_oil=>0.4167932348735287,
+        :natural_gas=>0.1613371886801841, :propane=>0.2526592181590731, :kerosene=>0.008254483207514767,
+        :biomass=>0.014356500368116514, :coal=>0.0002819952840317706, :electricity=>0.14631737942755108}","object":{"fuel_oil":0.4167932348735287,"natural_gas":0.1613371886801841,"propane":0.2526592181590731,"kerosene":0.008254483207514767,"biomass":0.014356500368116514,"coal":0.0002819952840317706,"electricity":0.14631737942755108},"methodology":"from
+        research"},"predicted_annual_energy_consumption":{"description":"264563158193.84476","object":264563158193.84476,"methodology":"from
+        research"},"predicted_annual_fuel_oil_consumption":{"description":"199.0748055102","object":199.0748055102,"methodology":"default"},"predicted_annual_natural_gas_consumption":{"description":"42683876171.345726","object":42683876171.345726,"methodology":"default"},"predicted_annual_propane_consumption":{"description":"183.2517842698","object":183.2517842698,"methodology":"default"},"predicted_annual_kerosene_consumption":{"description":"4.0503906046","object":4.0503906046,"methodology":"default"},"predicted_annual_biomass_consumption":{"description":"3798201078.0","object":3798201078.0,"methodology":"default"},"predicted_annual_coal_consumption":{"description":"2.871239704507795","object":2.871239704507795,"methodology":"default"},"predicted_annual_electricity_use":{"description":"10752.83","object":10752.83,"methodology":"default"},"active_subtimeframe":{"description":"2012-01-01/2013-01-01","object":"2012-01-01/2013-01-01","methodology":"from
+        acquisition and retirement"},"acquisition":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        retirement"},"retirement":{"description":"2013-01-01","object":"2013-01-01","methodology":"from
+        acquisition"},"floorspace_estimate":{"description":"214.47688717440002","object":214.47688717440002,"methodology":"default"}},"emitter":"Residence","equivalents":{"cars_off_the_road_for_a_year":0.6985825020714374,"cars_off_the_road_for_a_month":8.375313294065254,"cars_off_the_road_for_a_week":36.291744819150765,"cars_off_the_road_for_a_day":254.7369578707308,"cars_to_priuses_for_a_year":1.3971650041428747,"cars_to_priuses_for_a_month":16.75062658813051,"cars_to_priuses_for_a_week":72.58348963830153,"cars_to_priuses_for_a_day":509.4739157414616,"one_way_domestic_flight":12.47468753698995,"round_trip_domestic_flight":6.237343768494975,"one_way_cross_country_flight":4.383413282228469,"round_trip_cross_country_flight":2.1917066411142345,"vegan_meals_instead_of_non_vegan_ones":3088.6827354085644,"days_of_veganism":1029.5609118028547,"weeks_of_veganism":147.07848524380952,"months_of_veganism":34.31882500560835,"years_of_veganism":2.8211985660577277,"barrels_of_petroleum":8.928037911088808,"canisters_of_bbq_propane":159.9331709550032,"railroad_cars_full_of_coal":0.019191826979984544,"homes_energy_in_a_year":0.3723214434117001,"homes_energy_in_a_month":4.448665493960417,"homes_energy_in_a_week":19.272432653300477,"homes_energy_in_a_day":135.29086511270302,"homes_electricity_in_a_year":0.5642397132115455,"homes_electricity_in_a_month":6.751684731558561,"homes_electricity_in_a_week":29.256021048288435,"homes_electricity_in_a_day":205.34871032043858,"homes_with_lowered_thermostat_2_degrees_for_a_winter":20.147579963587773,"homes_with_raised_thermostat_3_degrees_for_a_summer":9.058542334552705,"replaced_refrigerators":3.865233953768887,"loads_of_cold_laundry":1760.1285127191343,"lightbulbs_for_a_year":7.0856225210102926,"lightbulbs_for_a_month":86.22887862107054,"lightbulbs_for_a_week":369.55014359579036,"lightbulbs_for_a_day":2586.8625202667204,"lightbulbs_for_an_evening":15521.178959965717,"lightbulbs_to_CFLs_for_a_day":44031.71651940903,"lightbulbs_to_CFLs_for_a_week":6290.244120382606,"lightbulbs_to_CFLs_for_a_month":1467.7256752174858,"lightbulbs_to_CFLs_for_a_year":120.63598603078682,"days_with_lightbulbs_to_CFLs":978.4837834783237,"weeks_with_lightbulbs_to_CFLs":139.7817526260194,"months_with_lightbulbs_to_CFLs":32.61459076978573,"years_with_lightbulbs_to_CFLs":2.6791790464058423,"recycled_kgs_of_trash":2647.147887176248,"recycled_bags_of_trash":1466.7737605992786},"methodology":"http://impact.brighterplanet.com/residences?timeframe=2012-01-01%2F2013-01-01&urbanity=City","scope":null,"timeframe":"2012-01-01/2013-01-01","characteristics":{"urbanity":{"description":"City","object":{"urbanity":{"name":"City"}}}},"errors":["API
+        key \"carbon_test\" could not be verified. Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:19 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/flights.json
+    body:
+      encoding: US-ASCII
+      string: origin_airport=MSN&destination_airport=ORD&segments_per_trip=1&trips=1&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:19 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"114.6 kg","object":{"value":114.57907360899101,"units":"kilograms"},"methodology":"from
+        fuel use and greenhouse gas emission factor"},"ghg_emission_factor":{"description":"5.15214","object":5.15214,"methodology":"from
+        fuel and aviation multiplier"},"aviation_multiplier":{"description":"2.0","object":2.0,"methodology":"default"},"energy":{"description":"836.8
+        MJ","object":{"value":836.784797960347,"units":"megajoules"},"methodology":"from
+        fuel use and fuel"},"fuel_use":{"description":"22.239122696392375","object":22.239122696392375,"methodology":"from
+        fuel per segment, segments per trip, trips, freight_share, passengers, seat
+        class multiplier, fuel, date, and timeframe"},"fuel_per_segment":{"description":"798.0839580419192","object":798.0839580419192,"methodology":"from
+        adjusted distance per segment and fuel use coefficients"},"seat_class_multiplier":{"description":"1.0","object":1.0,"methodology":"default"},"distance_class":{"description":"short
+        haul","object":{"flight_distance_class":{"distance":1108.0,"distance_units":"kilometres","max_distance":3700.0,"max_distance_units":"kilometres","min_distance":0.0,"min_distance_units":"kilometres","name":"short
+        haul"}},"methodology":"from adjusted distance per segment"},"adjusted_distance_per_segment":{"description":"100.8961154095222","object":100.8961154095222,"methodology":"from
+        adjusted distance and segments per trip"},"adjusted_distance":{"description":"100.8961154095222","object":100.8961154095222,"methodology":"from
+        distance, route inefficiency factor, and dogleg factor"},"distance":{"description":"94.29543496217028","object":94.29543496217028,"methodology":"from
+        airports"},"route_inefficiency_factor":{"description":"1.07","object":1.07,"methodology":"from
+        country"},"dogleg_factor":{"description":"1.0","object":1.0,"methodology":"from
+        segments per trip"},"fuel_use_coefficients":{"description":"Fuel use equation","object":{"m3":4.046124738717439e-08,"m2":-4.096578631680186e-05,"m1":2.7511987541689704,"b":520.8741650385462},"methodology":"from
+        cohort"},"fuel":{"description":"Jet Fuel","object":{"fuel":{"biogenic_fraction":0.0,"carbon_content":18.672,"carbon_content_units":"grams_per_megajoule","co2_biogenic_emission_factor":0.0,"co2_biogenic_emission_factor_units":"kilograms_per_litre","co2_emission_factor":2.57607,"co2_emission_factor_units":"kilograms_per_litre","density":0.8156,"density_units":"kilograms_per_litre","energy_content":37.6267,"energy_content_units":"megajoules_per_litre","name":"Jet
+        Fuel","oxidation_factor":1.0,"physical_units":null}},"methodology":"default"},"passengers":{"description":"44","object":44,"methodology":"from
+        seats and load factor"},"seats":{"description":"51.614277332823946","object":51.614277332823946,"methodology":"from
+        cohort"},"load_factor":{"description":"0.8511664076308222","object":0.8511664076308222,"methodology":"from
+        cohort"},"freight_share":{"description":"2.3873554715207264e-06","object":2.3873554715207264e-06,"methodology":"from
+        cohort"},"country":{"description":"US","object":{"country":{"automobile_city_speed":32.0259,"automobile_city_speed_units":"kilometres_per_hour","automobile_fuel_efficiency":9.2669,"automobile_fuel_efficiency_units":"kilometres_per_litre","automobile_highway_speed":91.8935,"automobile_highway_speed_units":"kilometres_per_hour","automobile_trip_distance":16.3348,"automobile_trip_distance_units":"kilometres","automobile_urbanity":0.43,"cooling_degree_days":882.0,"cooling_degree_days_units":"degrees_celsius","electricity_emission_factor":0.589455,"electricity_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","electricity_loss_factor":0.0615633,"flight_route_inefficiency_factor":1.07,"heating_degree_days":2159.0,"heating_degree_days_units":"degrees_celsius","iso_3166_alpha_3_code":"USA","iso_3166_code":"US","iso_3166_numeric_code":840,"lodging_district_heat_intensity":1.7463,"lodging_district_heat_intensity_units":"megajoules_per_occupied_room_night","lodging_electricity_intensity":32.906,"lodging_electricity_intensity_units":"kilowatt_hours_per_occupied_room_night","lodging_fuel_oil_intensity":0.412389,"lodging_fuel_oil_intensity_units":"gallons_per_occupied_room_night","lodging_natural_gas_intensity":1.93316,"lodging_natural_gas_intensity_units":"cubic_metres_per_occupied_room_night","lodging_occupancy_rate":0.601,"name":"United
+        States","rail_passengers":4467000000.0,"rail_speed":32.4972,"rail_speed_units":"kilometres_per_hour","rail_trip_co2_emission_factor":0.0957617,"rail_trip_co2_emission_factor_units":"kilograms_per_passenger_kilometre","rail_trip_diesel_intensity":0.0194247,"rail_trip_diesel_intensity_units":"litres_per_passenger_kilometre","rail_trip_distance":12.9952,"rail_trip_distance_units":"kilometres","rail_trip_electricity_intensity":0.140512,"rail_trip_electricity_intensity_units":"kilowatt_hours_per_passenger_kilometre"}},"methodology":"from
+        origin airport and destination airport"},"cohort":{"description":"BrighterPlanet::Flight::ImpactModel::FlightSegmentCohort","object":{"members":91,"sql":"SELECT
+        * FROM `flight_segments`  WHERE (`flight_segments`.`source` = ''BTS T100''
+        AND `flight_segments`.`year` IN (2011, 2012) AND `flight_segments`.`passengers`
+        > 0) AND `flight_segments`.`origin_airport_iata_code` = ''MSN'' AND `flight_segments`.`destination_airport_iata_code`
+        = ''ORD''"},"methodology":"from segments per trip and input"},"date":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        timeframe"}},"emitter":"Flight","equivalents":{"cars_off_the_road_for_a_year":0.020853391396836365,"cars_off_the_road_for_a_month":0.2500115386148184,"cars_off_the_road_for_a_week":1.08334514097301,"cars_off_the_road_for_a_day":7.604154799134297,"cars_to_priuses_for_a_year":0.04170678279367273,"cars_to_priuses_for_a_month":0.5000230772296368,"cars_to_priuses_for_a_week":2.16669028194602,"cars_to_priuses_for_a_day":15.208309598268594,"one_way_domestic_flight":0.3723819892292208,"round_trip_domestic_flight":0.1861909946146104,"one_way_cross_country_flight":0.13084930206146772,"round_trip_cross_country_flight":0.06542465103073386,"vegan_meals_instead_of_non_vegan_ones":92.20029100519815,"days_of_veganism":30.73343033506605,"weeks_of_veganism":4.390440942549318,"months_of_veganism":1.0244514971379886,"years_of_veganism":0.08421561910260839,"barrels_of_petroleum":0.2665109252145131,"canisters_of_bbq_propane":4.774166260065829,"railroad_cars_full_of_coal":0.0005728953680449551,"homes_energy_in_a_year":0.011114170140072127,"homes_energy_in_a_month":0.13279714631282058,"homes_energy_in_a_week":0.5753015285907439,"homes_energy_in_a_day":4.0385686074961065,"homes_electricity_in_a_year":0.016843123820521676,"homes_electricity_in_a_month":0.20154459047821519,"homes_electricity_in_a_week":0.8733216990477295,"homes_electricity_in_a_day":6.12986585900741,"homes_with_lowered_thermostat_2_degrees_for_a_winter":0.6014255573735938,"homes_with_raised_thermostat_3_degrees_for_a_summer":0.2704066137172188,"replaced_refrigerators":0.11538112712425395,"loads_of_cold_laundry":52.541609152286135,"lightbulbs_for_a_year":0.2115129698821974,"lightbulbs_for_a_month":2.5740188886259827,"lightbulbs_for_a_week":11.031444048926437,"lightbulbs_for_a_day":77.22045207970588,"lightbulbs_for_an_evening":463.32282705730887,"lightbulbs_to_CFLs_for_a_day":1314.3910930077736,"lightbulbs_to_CFLs_for_a_week":187.7701234070895,"lightbulbs_to_CFLs_for_a_month":43.81308990382681,"lightbulbs_to_CFLs_for_a_year":3.601105704456978,"days_with_lightbulbs_to_CFLs":29.208726602551206,"weeks_with_lightbulbs_to_CFLs":4.172626123618626,"months_with_lightbulbs_to_CFLs":0.9735783884555965,"years_with_lightbulbs_to_CFLs":0.07997619337907573,"recycled_kgs_of_trash":79.02003100980869,"recycled_bags_of_trash":43.78467429357178},"methodology":"http://impact.brighterplanet.com/flights?destination_airport=ORD&origin_airport=MSN&segments_per_trip=1&timeframe=2012-01-01%2F2013-01-01&trips=1","scope":"The
+        flight greenhouse gas emission is the anthropogenic greenhouse gas emissions
+        attributed to a single passenger on this flight. It includes CO2 emissions
+        from combustion of non-biogenic fuel and extra forcing effects of high-altitude
+        fuel combustion.","timeframe":"2012-01-01/2013-01-01","characteristics":{"segments_per_trip":{"description":"1","object":1},"trips":{"description":"1","object":1},"origin_airport":{"description":"MSN","object":{"airport":{"city":"Madison","country_iso_3166_code":"US","country_name":"United
+        States","iata_code":"MSN","latitude":43.1399,"longitude":-89.3375,"name":"Dane
+        County Regional Truax Field"}}},"destination_airport":{"description":"ORD","object":{"airport":{"city":"Chicago","country_iso_3166_code":"US","country_name":"United
+        States","iata_code":"ORD","latitude":41.9786,"longitude":-87.9048,"name":"Chicago
+        Ohare International"}}}},"errors":["API key \"carbon_test\" could not be verified.
+        Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Fri, 08 Jun 2012 21:06:19 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/automobiles.json
+    body:
+      encoding: US-ASCII
+      string: make=Nissan&model=Altima&year=2006&automobile_fuel%5Bcode%5D=R&timeframe=2011-01-01%2F2012-01-01&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 08 Jun 2012 21:06:19 GMT
       content-type:
       - application/json
       transfer-encoding:
@@ -65,5 +1235,5 @@ http_interactions:
         gasoline"}}}},"errors":["API key \"carbon_test\" could not be verified. Please
         register at http://keys.brighterplanet.com"]}'
     http_version: '1.1'
-  recorded_at: Thu, 07 Jun 2012 21:06:25 GMT
+  recorded_at: Fri, 08 Jun 2012 21:06:19 GMT
 recorded_with: VCR 2.2.0
