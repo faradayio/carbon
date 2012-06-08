@@ -2,6 +2,7 @@
 
 * Enhancements
 
+  * When doing multiple queries, use Celluloid [worker] pools instead of creating new threads
 	* Use RSpec as the API testing framework
 
 2.2.3 / 2012-04-12
