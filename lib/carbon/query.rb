@@ -7,7 +7,9 @@ require 'cache_method'
 module Carbon
   class Query
     def Query.pool
-      @pool ||= QueryPool.pool(:size => Carbon::CONCURRENCY)
+      @pool || Thread.exclusive do
+        @pool ||= QueryPool.pool(:size => CONCURRENCY)
+      end
     end
 
     def Query.make(*args)
