@@ -252,7 +252,7 @@ module Carbon
   #   ?> my_impact.methodology
   #   => "http://impact.brighterplanet.com/flights?[...]"
   def impact(extra_params = {})
-    query = Carbon::Query.make(self).first
-    extra_params.empty? ? query.result : query.result(extra_params)
+    plain_query = as_impact_query extra_params
+    Carbon.query(*plain_query)
   end
 end
