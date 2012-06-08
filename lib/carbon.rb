@@ -222,7 +222,11 @@ module Carbon
       end
       memo
     end
-    [ registration.emitter, params.merge(extra_params) ]
+    params.merge! extra_params
+    if Carbon.key and not params.has_key?(:key)
+      params[:key] = Carbon.key
+    end
+    [ registration.emitter, params ]
   end
 
   # Get an impact estimate from Brighter Planet CM1; high-level convenience method that requires a {Carbon::ClassMethods#emit_as} block.

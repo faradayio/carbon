@@ -44,10 +44,10 @@ describe Carbon::Query do
     end
   end
 
-  describe '.object_to_query' do
+  describe '#as_impact_query' do
     it 'sets up an query to be run by Carbon.query' do
       a = MyNissanAltima.new(2006)
-      a.as_impact_query.should == ["Automobile", {:make=>"Nissan", :model=>"Altima", :year=>2006, "automobile_fuel[code]"=>"R"}]
+      a.as_impact_query.should == ["Automobile", {:make=>"Nissan", :model=>"Altima", :year=>2006, "automobile_fuel[code]"=>"R", :key=>Carbon.key}]
     end
     it 'only includes non-nil params' do
       a = MyNissanAltima.new(2006)
@@ -55,6 +55,29 @@ describe Carbon::Query do
       a.as_impact_query[1].keys.should_not include(:nil_model)
       a.as_impact_query[1].keys.should_not include(:nil_make)
     end
+    it 'includes Carbon.key' do
+      begin
+        random_key = rand(1e11)
+        old_carbon_key = Carbon.key
+        Carbon.key = random_key
+        a = MyNissanAltima.new(2006)
+        a.as_impact_query[1][:key].should == random_key
+      ensure
+        Carbon.key = old_carbon_key
+      end
+    end
+    it "allows key to be set" do
+      begin
+        random_key = rand(1e11)
+        old_carbon_key = Carbon.key
+        Carbon.key = random_key
+        a = MyNissanAltima.new(2006)
+        a.as_impact_query(:key => 'i want to use this key!')[1][:key].should == 'i want to use this key!'
+      ensure
+        Carbon.key = old_carbon_key
+      end
+    end
+
   end
 
   describe '.method_signature' do
