@@ -118,6 +118,8 @@ describe Carbon do
         b = MyNissanAltima.new(2006)
         ab1 = Carbon.query([a, b])
         ab2 = Carbon.query([a.as_impact_query, b.as_impact_query])
+        ab1.keys.should == [a, b]
+        ab2.keys.should == [a.as_impact_query, b.as_impact_query]
         ab1.each do |k, v|
           ab2[k.as_impact_query].should == v
         end

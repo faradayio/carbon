@@ -135,9 +135,7 @@ describe Carbon::Query do
         results = Carbon::Query.perform([['Flight'], ['Automobile']])
       end
       results.length.should == 2
-      results.keys.each do |key|
-        key.should be_a(Array)
-      end
+      results.keys.should == [['Flight'], ['Automobile']]
       results.values.each do |val|
         val.should be_a(Hashie::Mash)
       end
