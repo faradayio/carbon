@@ -5,45 +5,6 @@ require 'my_nissan_altima'
 describe Carbon::Query do
   let(:query) { Carbon::Query.new 'Flight' }
 
-  describe '.make' do
-    it 'makes a single query from standard arguments' do
-      queries = Carbon::Query.make('Flight', :origin_airport => 'LAX', :destination_airport => 'SFO', :segments_per_trip => 1, :trips => 1)
-      queries.length.should == 1
-      queries.first.should be_a(Carbon::Query)
-    end
-    it 'makes a single query from a Carbonized object' do
-      queries = Carbon::Query.make MyNissanAltima.new(2009)
-      queries.length.should == 1
-      queries.first.should be_a(Carbon::Query)
-    end
-    it 'makes a list of queries from an array of standard params' do
-      queries = Carbon::Query.make [['Flight'], ['Flight']]
-      queries.length.should == 2
-      queries.first.should be_a(Carbon::Query)
-      queries.first.emitter.should == 'Flight'
-      queries.last.should be_a(Carbon::Query)
-    end
-    it 'makes a list of queries from an array of objects' do
-      queries = Carbon::Query.make [MyNissanAltima.new(2009), MyNissanAltima.new(2009)]
-      queries.length.should == 2
-      queries.first.should be_a(Carbon::Query)
-      queries.first.emitter.should == 'Automobile'
-      queries.last.should be_a(Carbon::Query)
-      queries.last.emitter.should == 'Automobile'
-    end
-    it 'makes a list of queries from an array of params and objects' do
-      queries = Carbon::Query.make [['Flight'], MyNissanAltima.new(2009)]
-      queries.length.should == 2
-      queries.first.should be_a(Carbon::Query)
-      queries.last.should be_a(Carbon::Query)
-    end
-    it 'rejects invalid arguments' do
-      expect do
-        Carbon::Query.make MyNissanAltima.new(2001), MyNissanAltima.new(2000)
-      end.should raise_error(ArgumentError)
-    end
-  end
-
   describe '#as_impact_query' do
     it 'sets up an query to be run by Carbon.query' do
       a = MyNissanAltima.new(2006)

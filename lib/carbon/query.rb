@@ -5,6 +5,7 @@ require 'hashie/mash'
 require 'cache_method'
 
 module Carbon
+  # @private
   class Query
     def Query.pool
       @pool || Thread.exclusive do
@@ -12,35 +13,27 @@ module Carbon
       end
     end
 
-    def Query.make(*args)
+    def Query.perform(*args)
       case method_signature(*args)
-      when :plain_query
-        params = args[1] || {}
-        [new(args.first, params, args)]
-      when :obj
-        obj = args.first
-        new_args = obj.as_impact_query
-        new_args << obj
-        [new(*new_args)]
+      when :plain_query, :obj
+        new(*args).result
       when :array
-        args.first.map do |obj|
-          make(*obj)
-        end.flatten
+        queries = args.first.map do |plain_query_or_obj|
+          query = new(*plain_query_or_obj)
+          pool.perform! query
+          query
+        end
+        ticks = 0
+        begin
+          sleep(0.1*(2**ticks)) # exponential wait
+          ticks += 1
+        end until queries.all? { |query| query.done? }
+        queries.inject({}) do |memo, query|
+          memo[query.object] = query.result
+          memo
+        end
       else
         raise ::ArgumentError, "You must pass one plain query, or one object that responds to #as_impact_query, or an array of such objects. Please check the docs!"
-      end
-    end
-
-    def Query.perform(*args)
-      queries = make(*args)
-
-      if queries.length == 1
-        queries.first.result
-      else
-        queries.inject({}) do |hsh, query|
-          hsh[query.method_signature] = pool.future(:perform, query).value
-          hsh
-        end
       end
     end
 
@@ -81,41 +74,34 @@ module Carbon
     attr_reader :emitter
     attr_reader :params
     attr_reader :domain
-    attr_reader :method_signature
     attr_reader :uri
+    attr_reader :object
 
-    attr_accessor :object
-
-    def initialize(emitter, params = {}, method_signature = nil)
-      @result = nil
-      @emitter = emitter
-      params = params.dup || {}
+    def initialize(*args)
+      case Query.method_signature(*args)
+      when :plain_query
+        @object = args
+        @emitter, @params = *args
+      when :obj
+        @object = args.first
+        @emitter, @params = *object.as_impact_query
+      else
+        raise ArgumentError, "Carbon::Query.new must be called with a plain query or an object that responds to #as_impact_query"
+      end
+      @params ||= {}
       @domain = params.delete(:domain) || Carbon.domain
       if Carbon.key and not params.has_key?(:key)
         params[:key] = Carbon.key
       end
-      @params = params
       @uri = URI.parse("#{domain}/#{emitter.underscore.pluralize}.json")
-      @method_signature = method_signature
     end
 
-    def finalize(code, body = nil)
-      memo = Hashie::Mash.new
-      memo.code = code
-      case code
-      when (200..299)
-        memo.success = true
-        memo.merge! MultiJson.load(body)
-      else
-        memo.success = false
-        memo.errors = [body]
-      end
-      memo
+    def done?
+      not @result.nil? or cache_method_cached?(:result)
     end
 
     def result(extra_params = {})
-      raw_result = Net::HTTP.post_form(uri, params.merge(extra_params))
-      finalize raw_result.code.to_i, raw_result.body
+      @result ||= get_result(extra_params)
     end
     cache_method :result, 3_600 # one hour
 
@@ -131,5 +117,24 @@ module Carbon
       as_cache_key == other.as_cache_key
     end
     alias :== :eql?
+
+    private
+
+    def get_result(extra_params = {})
+      raw = Net::HTTP.post_form uri, params.merge(extra_params)
+      code = raw.code.to_i
+      body = raw.body
+      memo = Hashie::Mash.new
+      memo.code = code
+      case code
+      when (200..299)
+        memo.success = true
+        memo.merge! MultiJson.load(body)
+      else
+        memo.success = false
+        memo.errors = [body]
+      end
+      memo
+    end
   end
 end
