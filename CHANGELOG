@@ -2,11 +2,15 @@
 
 * Breaking changes
 
-  * Ruby 1.9 only because it uses celluloid / fibers.
+  * Ruby 1.9 only because it uses celluloid / fibers. Use ~2 if you are on Ruby 1.8
+
+* Bug fixes
+
+  * Make sure #as_impact_query includes API key if it's been set globally
 
 * Enhancements
 
-  * When doing multiple queries, use Celluloid [worker] pools instead of creating new threads
+  * When doing multiple queries, use Celluloid [worker] pools instead of creating new threads and using a homegrown futures class
 	* Use RSpec as the API testing framework
 
 2.2.3 / 2012-04-12
