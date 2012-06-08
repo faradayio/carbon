@@ -1,0 +1,74 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/flights.json
+    body:
+      encoding: US-ASCII
+      string: origin_airport=LAX&destination_airport=SFO&segments_per_trip=1&trips=1&key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 07 Jun 2012 20:41:03 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"158.9 kg","object":{"value":158.88245012544277,"units":"kilograms"},"methodology":"from
+        fuel use and greenhouse gas emission factor"},"ghg_emission_factor":{"description":"5.15214","object":5.15214,"methodology":"from
+        fuel and aviation multiplier"},"aviation_multiplier":{"description":"2.0","object":2.0,"methodology":"default"},"energy":{"description":"1160.3
+        MJ","object":{"value":1160.3377016414531,"units":"megajoules"},"methodology":"from
+        fuel use and fuel"},"fuel_use":{"description":"30.838146891474757","object":30.838146891474757,"methodology":"from
+        fuel per segment, segments per trip, trips, freight_share, passengers, seat
+        class multiplier, fuel, date, and timeframe"},"fuel_per_segment":{"description":"2809.4943974548605","object":2809.4943974548605,"methodology":"from
+        adjusted distance per segment and fuel use coefficients"},"seat_class_multiplier":{"description":"1.0","object":1.0,"methodology":"default"},"distance_class":{"description":"short
+        haul","object":{"flight_distance_class":{"distance":1108.0,"distance_units":"kilometres","max_distance":3700.0,"max_distance_units":"kilometres","min_distance":0.0,"min_distance_units":"kilometres","name":"short
+        haul"}},"methodology":"from adjusted distance per segment"},"adjusted_distance_per_segment":{"description":"314.11399481652126","object":314.11399481652126,"methodology":"from
+        adjusted distance and segments per trip"},"adjusted_distance":{"description":"314.11399481652126","object":314.11399481652126,"methodology":"from
+        distance, route inefficiency factor, and dogleg factor"},"distance":{"description":"293.56448113693574","object":293.56448113693574,"methodology":"from
+        airports"},"route_inefficiency_factor":{"description":"1.07","object":1.07,"methodology":"from
+        country"},"dogleg_factor":{"description":"1.0","object":1.0,"methodology":"from
+        segments per trip"},"fuel_use_coefficients":{"description":"Fuel use equation","object":{"m3":1.0348093300372378e-07,"m2":-0.00023017671642226525,"m1":5.385202868809918,"b":1137.430624447256},"methodology":"from
+        cohort"},"fuel":{"description":"Jet Fuel","object":{"fuel":{"biogenic_fraction":0.0,"carbon_content":18.672,"carbon_content_units":"grams_per_megajoule","co2_biogenic_emission_factor":0.0,"co2_biogenic_emission_factor_units":"kilograms_per_litre","co2_emission_factor":2.57607,"co2_emission_factor_units":"kilograms_per_litre","density":0.8156,"density_units":"kilograms_per_litre","energy_content":37.6267,"energy_content_units":"megajoules_per_litre","name":"Jet
+        Fuel","oxidation_factor":1.0,"physical_units":null}},"methodology":"default"},"passengers":{"description":"110","object":110,"methodology":"from
+        seats and load factor"},"seats":{"description":"141.62026378724536","object":141.62026378724536,"methodology":"from
+        cohort"},"load_factor":{"description":"0.7786548902022515","object":0.7786548902022515,"methodology":"from
+        cohort"},"freight_share":{"description":"0.01524089564944548","object":0.01524089564944548,"methodology":"from
+        cohort"},"country":{"description":"US","object":{"country":{"automobile_city_speed":32.0259,"automobile_city_speed_units":"kilometres_per_hour","automobile_fuel_efficiency":9.2669,"automobile_fuel_efficiency_units":"kilometres_per_litre","automobile_highway_speed":91.8935,"automobile_highway_speed_units":"kilometres_per_hour","automobile_trip_distance":16.3348,"automobile_trip_distance_units":"kilometres","automobile_urbanity":0.43,"cooling_degree_days":882.0,"cooling_degree_days_units":"degrees_celsius","electricity_emission_factor":0.589455,"electricity_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","electricity_loss_factor":0.0615633,"flight_route_inefficiency_factor":1.07,"heating_degree_days":2159.0,"heating_degree_days_units":"degrees_celsius","iso_3166_alpha_3_code":"USA","iso_3166_code":"US","iso_3166_numeric_code":840,"lodging_district_heat_intensity":1.7463,"lodging_district_heat_intensity_units":"megajoules_per_occupied_room_night","lodging_electricity_intensity":32.906,"lodging_electricity_intensity_units":"kilowatt_hours_per_occupied_room_night","lodging_fuel_oil_intensity":0.412389,"lodging_fuel_oil_intensity_units":"gallons_per_occupied_room_night","lodging_natural_gas_intensity":1.93316,"lodging_natural_gas_intensity_units":"cubic_metres_per_occupied_room_night","lodging_occupancy_rate":0.601,"name":"United
+        States","rail_passengers":4467000000.0,"rail_speed":32.4972,"rail_speed_units":"kilometres_per_hour","rail_trip_co2_emission_factor":0.0957617,"rail_trip_co2_emission_factor_units":"kilograms_per_passenger_kilometre","rail_trip_diesel_intensity":0.0194247,"rail_trip_diesel_intensity_units":"litres_per_passenger_kilometre","rail_trip_distance":12.9952,"rail_trip_distance_units":"kilometres","rail_trip_electricity_intensity":0.140512,"rail_trip_electricity_intensity_units":"kilowatt_hours_per_passenger_kilometre"}},"methodology":"from
+        origin airport and destination airport"},"cohort":{"description":"BrighterPlanet::Flight::ImpactModel::FlightSegmentCohort","object":{"members":157,"sql":"SELECT
+        * FROM `flight_segments`  WHERE (`flight_segments`.`source` = ''BTS T100''
+        AND `flight_segments`.`year` IN (2011, 2012) AND `flight_segments`.`passengers`
+        > 0) AND `flight_segments`.`origin_airport_iata_code` = ''LAX'' AND `flight_segments`.`destination_airport_iata_code`
+        = ''SFO''"},"methodology":"from segments per trip and input"},"date":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        timeframe"}},"emitter":"Flight","equivalents":{"cars_off_the_road_for_a_year":0.028916605922830584,"cars_off_the_road_for_a_month":0.3466815061737161,"cars_off_the_road_for_a_week":1.5022335659360615,"cars_off_the_road_for_a_day":10.544392685025134,"cars_to_priuses_for_a_year":0.05783321184566117,"cars_to_priuses_for_a_month":0.6933630123474323,"cars_to_priuses_for_a_week":3.004467131872123,"cars_to_priuses_for_a_day":21.088785370050267,"one_way_domestic_flight":0.5163679629076889,"round_trip_domestic_flight":0.25818398145384447,"one_way_cross_country_flight":0.18144375804325566,"round_trip_cross_country_flight":0.09072187902162783,"vegan_meals_instead_of_non_vegan_ones":127.85064214409218,"days_of_veganism":42.61688071469739,"weeks_of_veganism":6.088057723906716,"months_of_veganism":1.4205679865715837,"years_of_veganism":0.11677860084220043,"barrels_of_petroleum":0.36956057899177985,"canisters_of_bbq_propane":6.620155049376825,"railroad_cars_full_of_coal":0.000794412250627214,"homes_energy_in_a_year":0.01541159766216795,"homes_energy_in_a_month":0.18414475969538818,"homes_energy_in_a_week":0.7977487820798482,"homes_energy_in_a_day":5.600129719571481,"homes_electricity_in_a_year":0.023355720168440088,"homes_electricity_in_a_month":0.27947422977065384,"homes_electricity_in_a_week":1.2110020348561248,"homes_electricity_in_a_day":8.500052199261063,"homes_with_lowered_thermostat_2_degrees_for_a_winter":0.8339739807084492,"homes_with_raised_thermostat_3_degrees_for_a_summer":0.37496258229604496,"replaced_refrigerators":0.15999462727632088,"loads_of_cold_laundry":72.85745409442329,"lightbulbs_for_a_year":0.29329700293156735,"lightbulbs_for_a_month":3.5692942420680716,"lightbulbs_for_a_week":15.29688453317738,"lightbulbs_for_a_day":107.07866837959203,"lightbulbs_for_an_evening":642.4721691600023,"lightbulbs_to_CFLs_for_a_day":1822.6162134352137,"lightbulbs_to_CFLs_for_a_week":260.37369938147333,"lightbulbs_to_CFLs_for_a_month":60.75394792631718,"lightbulbs_to_CFLs_for_a_year":4.993516524992541,"days_with_lightbulbs_to_CFLs":40.50263195087812,"weeks_with_lightbulbs_to_CFLs":5.786022186218249,"months_with_lightbulbs_to_CFLs":1.350024178715887,"years_with_lightbulbs_to_CFLs":0.11089995018755906,"recycled_kgs_of_trash":109.57407614126224,"recycled_bags_of_trash":60.71454507868607},"methodology":"http://impact.brighterplanet.com/flights?destination_airport=SFO&origin_airport=LAX&segments_per_trip=1&timeframe=2012-01-01%2F2013-01-01&trips=1","scope":"The
+        flight greenhouse gas emission is the anthropogenic greenhouse gas emissions
+        attributed to a single passenger on this flight. It includes CO2 emissions
+        from combustion of non-biogenic fuel and extra forcing effects of high-altitude
+        fuel combustion.","timeframe":"2012-01-01/2013-01-01","characteristics":{"segments_per_trip":{"description":"1","object":1},"trips":{"description":"1","object":1},"origin_airport":{"description":"LAX","object":{"airport":{"city":"Los
+        Angeles","country_iso_3166_code":"US","country_name":"United States","iata_code":"LAX","latitude":33.9425,"longitude":-118.408,"name":"Los
+        Angeles International"}}},"destination_airport":{"description":"SFO","object":{"airport":{"city":"San
+        Francisco","country_iso_3166_code":"US","country_name":"United States","iata_code":"SFO","latitude":37.619,"longitude":-122.375,"name":"San
+        Francisco International"}}}},"errors":["API key \"carbon_test\" could not
+        be verified. Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Thu, 07 Jun 2012 20:41:03 GMT
+recorded_with: VCR 2.2.0
