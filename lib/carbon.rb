@@ -1,7 +1,6 @@
-require 'active_support/core_ext'
-
 require 'carbon/registry'
 require 'carbon/future'
+require 'carbon/query'
 
 module Carbon
   DOMAIN = 'http://impact.brighterplanet.com'.freeze
@@ -135,63 +134,7 @@ module Carbon
   #   end
   def Carbon.query(*args)
     raise ::ArgumentError, "Don't pass a block directly - instead use Carbon.query(array).each (for example)." if block_given?
-    case Carbon.method_signature(*args)
-    when :plain_query
-      plain_query = args
-      future = Future.wrap plain_query
-      future.result
-    when :obj
-      obj = args.first
-      future = Future.wrap obj
-      future.result
-    when :array
-      array = args.first
-      futures = array.map do |obj|
-        future = Future.wrap obj
-        future.multi!
-        future
-      end
-      Future.multi(futures).inject({}) do |memo, future|
-        memo[future.object] = future.result
-        memo
-      end
-    else
-      raise ::ArgumentError, "You must pass one plain query, or one object that responds to #as_impact_query, or an array of such objects. Please check the docs!"
-    end
-  end
-
-  # Determine if a variable is a +[emitter, param]+ style "query"
-  # @private
-  def Carbon.is_plain_query?(query)
-    return false unless query.is_a?(::Array)
-    return false unless query.first.is_a?(::String) or query.first.is_a?(::Symbol)
-    return true if query.length == 1
-    return true if query.length == 2 and query.last.is_a?(::Hash)
-    false
-  end
-
-  # Determine what method signature/overloading/calling style is being used
-  # @private
-  def Carbon.method_signature(*args)
-    first_arg = args.first
-    case args.length
-    when 1
-      if is_plain_query?(args)
-        # query('Flight')
-        :plain_query
-      elsif first_arg.respond_to?(:as_impact_query)
-        # query(my_flight)
-        :obj
-      elsif first_arg.is_a?(::Array) and first_arg.all? { |obj| obj.respond_to?(:as_impact_query) or is_plain_query?(obj) }
-        # query([my_flight, my_flight])
-        :array
-      end
-    when 2
-      if is_plain_query?(args)
-        # query('Flight', :origin_airport => 'LAX')
-        :plain_query
-      end
-    end
+    Query.execute(*args)
   end
 
   # Called when you +include Carbon+ and adds the class method +emit_as+.
@@ -307,8 +250,7 @@ module Carbon
   #   ?> my_impact.methodology
   #   => "http://impact.brighterplanet.com/flights?[...]"
   def impact(extra_params = {})
-    plain_query = as_impact_query extra_params
-    future = Future.wrap plain_query
-    future.result
+    query = Carbon::Query.make(self).first
+    extra_params.empty? ? query.result : query.result(extra_params)
   end
 end

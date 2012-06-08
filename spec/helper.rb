@@ -2,6 +2,8 @@ require 'bundler/setup'
 
 require 'carbon'
 
+$:.unshift File.expand_path('../support', __FILE__)
+
 module Utilities
   def flush_cache!
     CacheMethod.config.storage.flush

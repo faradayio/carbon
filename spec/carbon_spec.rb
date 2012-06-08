@@ -2,45 +2,10 @@ require 'helper'
 require 'timeframe'
 require 'benchmark'
 
+require 'my_nissan_altima'
+
 Thread.abort_on_exception = true
 Carbon.key = 'carbon_test'
-
-class MyNissan
-  def name
-    'Nissan'
-  end
-  def to_s
-    raise "Not fair!"
-  end
-  alias :inspect :to_s
-end
-
-class MyNissanAltima
-  class << self
-    def all(options)
-      raise unless options == { :order => :year }
-      [ new(2000), new(2001), new(2002), new(2003), new(2004) ]
-    end
-  end
-  def initialize(model_year)
-    @model_year = model_year
-  end
-  def       make; MyNissan.new end
-  def      model; 'Altima'     end
-  def model_year; @model_year  end # what BP knows as "year"
-  def  fuel_type; 'R'          end # what BP knows as "automobile_fuel" and keys on "code"
-  def   nil_make; nil          end
-  def  nil_model; nil          end
-  include Carbon
-  emit_as 'Automobile' do
-    provide(:make) { |my_nissan_altima| my_nissan_altima.make.try(:name) }
-    provide :model
-    provide :model_year, :as => :year
-    provide :fuel_type, :as => :automobile_fuel, :key => :code
-    provide(:nil_make) { |my_nissan_altima| my_nissan_altima.nil_make.try(:blam!) }
-    provide :nil_model
-  end
-end
 
 describe Carbon do
   before do
@@ -234,49 +199,6 @@ describe Carbon do
     end
   end
 
-  describe '.method_signature' do
-    it 'recognizes emitter_param' do
-      Carbon.method_signature('Flight').should == :plain_query
-      Carbon.method_signature('Flight', :origin_airport => 'LAX').should == :plain_query
-      Carbon.method_signature(:flight).should == :plain_query
-      Carbon.method_signature(:flight, :origin_airport => 'LAX').should == :plain_query
-    end
-    it 'recognizes an object' do
-      Carbon.method_signature(MyNissanAltima.new(2006)).should == :obj
-    end
-    it 'recognizes an array of signatures' do
-      Carbon.method_signature([MyNissanAltima.new(2001)]).should == :array
-      Carbon.method_signature([['Flight']]).should == :array
-      Carbon.method_signature([['Flight', {:origin_airport => 'LAX'}]]).should == :array
-      Carbon.method_signature([['Flight'], ['Flight']]).should == :array
-      Carbon.method_signature([['Flight', {:origin_airport => 'LAX'}], ['Flight', {:origin_airport => 'LAX'}]]).should == :array
-      [MyNissanAltima.new(2006), ['Flight'], ['Flight', {:origin_airport => 'LAX'}]].permutation.each do |p|
-        Carbon.method_signature(p).should == :array
-      end
-    end
-    it "does not accept splats for concurrent queries" do
-      Carbon.method_signature(['Flight'], ['Flight']).should be_nil
-      Carbon.method_signature(MyNissanAltima.new(2001), MyNissanAltima.new(2001)).should be_nil
-      [MyNissanAltima.new(2006), ['Flight'], ['Flight', {:origin_airport => 'LAX'}]].permutation.each do |p|
-        Carbon.method_signature(*p).should be_nil
-      end
-    end
-    it "does not like weirdness" do
-      Carbon.method_signature('Flight', 'Flight').should be_nil
-      Carbon.method_signature('Flight', ['Flight']).should be_nil
-      Carbon.method_signature(['Flight'], 'Flight').should be_nil
-      Carbon.method_signature(['Flight', 'Flight']).should be_nil
-      Carbon.method_signature(['Flight', ['Flight']]).should be_nil
-      Carbon.method_signature([['Flight'], 'Flight']).should be_nil
-      Carbon.method_signature(MyNissanAltima.new(2001), [MyNissanAltima.new(2001)]).should be_nil
-      Carbon.method_signature([MyNissanAltima.new(2001)], MyNissanAltima.new(2001)).should be_nil
-      Carbon.method_signature([MyNissanAltima.new(2001)], [MyNissanAltima.new(2001)]).should be_nil
-      Carbon.method_signature([MyNissanAltima.new(2001), [MyNissanAltima.new(2001)]]).should be_nil
-      Carbon.method_signature([[MyNissanAltima.new(2001)], MyNissanAltima.new(2001)]).should be_nil
-      Carbon.method_signature([[MyNissanAltima.new(2001)], [MyNissanAltima.new(2001)]]).should be_nil
-    end
-  end
-
   describe "mixin" do
     describe :emit_as do
       it "overwrites old emit_as blocks" do
@@ -285,18 +207,6 @@ describe Carbon do
         Carbon::Registry.instance['MyFoo'].characteristics.keys.should == [:make]
         MyFoo.emit_as('Automobile') { provide(:model) }
         Carbon::Registry.instance['MyFoo'].characteristics.keys.should == [:model]
-      end
-    end
-    describe '#as_impact_query' do
-      it 'sets up an query to be run by Carbon.query' do
-        a = MyNissanAltima.new(2006)
-        a.as_impact_query.should == ["Automobile", {:make=>"Nissan", :model=>"Altima", :year=>2006, "automobile_fuel[code]"=>"R"}]
-      end
-      it 'only includes non-nil params' do
-        a = MyNissanAltima.new(2006)
-        a.as_impact_query[1].keys.should include(:year)
-        a.as_impact_query[1].keys.should_not include(:nil_model)
-        a.as_impact_query[1].keys.should_not include(:nil_make)
       end
     end
     describe '#impact' do
