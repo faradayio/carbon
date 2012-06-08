@@ -1,5 +1,4 @@
 require 'carbon/registry'
-require 'carbon/future'
 require 'carbon/query'
 
 module Carbon
