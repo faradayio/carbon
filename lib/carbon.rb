@@ -1,5 +1,8 @@
-require 'carbon/registry'
+require 'active_support/core_ext'
+
 require 'carbon/query'
+require 'carbon/query_pool'
+require 'carbon/registry'
 
 module Carbon
   DOMAIN = 'http://impact.brighterplanet.com'.freeze

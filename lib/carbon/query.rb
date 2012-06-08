@@ -1,5 +1,8 @@
-require 'carbon/query_pool'
-require 'active_support/core_ext'
+require 'uri'
+require 'net/http'
+require 'multi_json'
+require 'hashie/mash'
+require 'cache_method'
 
 module Carbon
   class Query

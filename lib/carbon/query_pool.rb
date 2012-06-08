@@ -1,3 +1,5 @@
+require 'celluloid'
+
 module Carbon
   class QueryPool
     include Celluloid
