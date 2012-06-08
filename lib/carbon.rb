@@ -136,7 +136,7 @@ module Carbon
   #   end
   def Carbon.query(*args)
     raise ::ArgumentError, "Don't pass a block directly - instead use Carbon.query(array).each (for example)." if block_given?
-    Query.execute(*args)
+    Query.perform(*args)
   end
 
   # Called when you +include Carbon+ and adds the class method +emit_as+.

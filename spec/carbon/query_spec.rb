@@ -100,16 +100,16 @@ describe Carbon::Query do
     end
   end
 
-  describe '.execute' do
+  describe '.perform' do
     it 'returns a single result for a single query' do
       VCR.use_cassette 'Flight', :record => :once do
-        Carbon::Query.execute('Flight').should be_a(Hashie::Mash)
+        Carbon::Query.perform('Flight').should be_a(Hashie::Mash)
       end
     end
     it 'returns a hash of queries and results for multiple queries' do
       results = nil
       VCR.use_cassette 'Flight and Automobile', :record => :once do
-        results = Carbon::Query.execute([['Flight'], ['Automobile']])
+        results = Carbon::Query.perform([['Flight'], ['Automobile']])
       end
       results.length.should == 2
       results.keys.each do |key|

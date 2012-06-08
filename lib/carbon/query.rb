@@ -31,14 +31,14 @@ module Carbon
       end
     end
 
-    def Query.execute(*args)
+    def Query.perform(*args)
       queries = make(*args)
 
       if queries.length == 1
         queries.first.result
       else
         queries.inject({}) do |hsh, query|
-          hsh[query.method_signature] = pool.future(:process, query).value
+          hsh[query.method_signature] = pool.future(:perform, query).value
           hsh
         end
       end
