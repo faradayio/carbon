@@ -1,7 +1,6 @@
 #!/usr/bin/env rake
 
-require 'bundler'
-Bundler.setup
+require 'bundler/setup'
 
 require 'bundler/gem_tasks'
 
