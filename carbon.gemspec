@@ -33,4 +33,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'timeframe'
   s.add_development_dependency 'vcr'
   s.add_development_dependency 'yard'
+  if RUBY_PLATFORM == 'java'
+    s.add_development_dependency 'jruby-openssl'
+  end
 end
