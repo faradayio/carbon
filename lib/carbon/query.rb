@@ -82,6 +82,7 @@ module Carbon
     attr_reader :params
     attr_reader :domain
     attr_reader :method_signature
+    attr_reader :uri
 
     attr_accessor :object
 
@@ -94,6 +95,7 @@ module Carbon
         params[:key] = Carbon.key
       end
       @params = params
+      @uri = URI.parse("#{domain}/#{emitter.underscore.pluralize}.json")
       @method_signature = method_signature
     end
 
@@ -109,10 +111,6 @@ module Carbon
         memo.errors = [body]
       end
       memo
-    end
-
-    def uri
-      @uri ||= URI.parse("#{domain}/#{emitter.underscore.pluralize}.json")
     end
 
     def result(extra_params = {})
