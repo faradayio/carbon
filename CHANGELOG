@@ -1,7 +1,12 @@
-2012-06-08
+3.0.0 / 2012-06-08
+
+* Breaking changes
+
+  * Ruby 1.9 only because it uses celluloid / fibers.
 
 * Enhancements
 
+  * When doing multiple queries, use Celluloid [worker] pools instead of creating new threads
 	* Use RSpec as the API testing framework
 
 2.2.3 / 2012-04-12
