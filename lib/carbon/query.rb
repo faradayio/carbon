@@ -47,10 +47,10 @@ module Carbon
     # Determine if a variable is a +[emitter, param]+ style "query"
     # @private
     def Query.is_plain_query?(query)
-      return false unless query.is_a?(::Array)
-      return false unless query.first.is_a?(::String) or query.first.is_a?(::Symbol)
+      return false unless query.is_a?(Array)
+      return false unless query.first.is_a?(String) or query.first.is_a?(Symbol)
       return true if query.length == 1
-      return true if query.length == 2 and query.last.is_a?(::Hash)
+      return true if query.length == 2 and query.last.is_a?(Hash)
       false
     end
 
