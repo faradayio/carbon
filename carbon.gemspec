@@ -25,7 +25,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'multi_json'
 
   s.add_development_dependency 'aruba'
-  s.add_development_dependency 'avro'
   s.add_development_dependency 'cucumber'
   s.add_development_dependency 'fakeweb'
   s.add_development_dependency 'rake'
