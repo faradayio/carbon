@@ -60,9 +60,9 @@ describe Carbon do
         end
       end
       it "allows choosing domain" do
-        VCR.use_cassette 'carbon.bp.com flight', :record => :once do
-          result = Carbon.query('Flight', :domain => 'http://carbon.brighterplanet.com')
-          result.carbon.value.should > 0
+        VCR.use_cassette 'staging flight', :record => :once do
+          Carbon.query('Flight', :domain => 'http://impact-staging.brighterplanet.com')
+          # todo how to distinguish?
         end
       end
       it "raises ArgumentError if args are bad" do

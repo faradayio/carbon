@@ -1,0 +1,59 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://impact-staging.brighterplanet.com/flights.json
+    body:
+      encoding: US-ASCII
+      string: key=carbon_test
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 20 Jun 2012 18:47:53 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"1083.7 kg","object":{"value":1083.698273768567,"units":"kilograms"},"methodology":"from
+        fuel use and greenhouse gas emission factor"},"ghg_emission_factor":{"description":"5.15214","object":5.15214,"methodology":"from
+        fuel and aviation multiplier"},"aviation_multiplier":{"description":"2.0","object":2.0,"methodology":"default"},"energy":{"description":"7914.4
+        MJ","object":{"value":7914.379236124745,"units":"megajoules"},"methodology":"from
+        fuel use and fuel"},"fuel_use":{"description":"210.3394460881434","object":210.3394460881434,"methodology":"from
+        fuel per segment, segments per trip, trips, freight_share, passengers, seat
+        class multiplier, fuel, date, and timeframe"},"fuel_per_segment":{"description":"8445.966049630008","object":8445.966049630008,"methodology":"from
+        adjusted distance per segment and fuel use coefficients"},"seat_class_multiplier":{"description":"1.0","object":1.0,"methodology":"default"},"distance_class":{"description":"short
+        haul","object":{"flight_distance_class":{"distance":1108.0,"distance_units":"kilometres","max_distance":3700.0,"max_distance_units":"kilometres","min_distance":0.0,"min_distance_units":"kilometres","name":"short
+        haul"}},"methodology":"from adjusted distance per segment"},"adjusted_distance_per_segment":{"description":"960.3994767189461","object":960.3994767189461,"methodology":"from
+        adjusted distance and segments per trip"},"adjusted_distance":{"description":"1613.4711208878293","object":1613.4711208878293,"methodology":"from
+        distance, route inefficiency factor, and dogleg factor"},"distance":{"description":"1260.2876865370242","object":1260.2876865370242,"methodology":"default"},"route_inefficiency_factor":{"description":"1.100000023841858","object":1.100000023841858,"methodology":"default"},"dogleg_factor":{"description":"1.1638548181950328","object":1.1638548181950328,"methodology":"from
+        segments per trip"},"fuel_use_coefficients":{"description":"BrighterPlanet::Flight::ImpactModel::FuelUseEquation::Given","object":{"m3":1.0556339103368821e-07,"m2":-0.00015742440317753937,"m1":7.133528077660993,"b":1646.6201427598814},"methodology":"default"},"fuel":{"description":"Jet
+        Fuel","object":{"fuel":{"biogenic_fraction":0.0,"carbon_content":18.672,"carbon_content_units":"grams_per_megajoule","co2_biogenic_emission_factor":0.0,"co2_biogenic_emission_factor_units":"kilograms_per_litre","co2_emission_factor":2.57607,"co2_emission_factor_units":"kilograms_per_litre","density":0.8156,"density_units":"kilograms_per_litre","energy_content":37.6267,"energy_content_units":"megajoules_per_litre","name":"Jet
+        Fuel","oxidation_factor":1.0,"physical_units":null}},"methodology":"default"},"passengers":{"description":"131","object":131,"methodology":"from
+        seats and load factor"},"seats":{"description":"168.86581244109524","object":168.86581244109524,"methodology":"default"},"load_factor":{"description":"0.7737229384911943","object":0.7737229384911943,"methodology":"default"},"freight_share":{"description":"0.06833087336503851","object":0.06833087336503851,"methodology":"default"},"trips":{"description":"1.7","object":1.7,"methodology":"default"},"segments_per_trip":{"description":"1.68","object":1.68,"methodology":"default"},"date":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        timeframe"}},"emitter":"Flight","equivalents":{"cars_off_the_road_for_a_year":0.19723308582587923,"cars_off_the_road_for_a_month":2.3646296333630135,"cars_off_the_road_for_a_week":10.246367178481801,"cars_off_the_road_for_a_day":71.92071963692472,"cars_to_priuses_for_a_year":0.39446617165175846,"cars_to_priuses_for_a_month":4.729259266726027,"cars_to_priuses_for_a_week":20.492734356963602,"cars_to_priuses_for_a_day":143.84143927384943,"one_way_domestic_flight":3.522019389747843,"round_trip_domestic_flight":1.7610096948739216,"one_way_cross_country_flight":1.2375834286437037,"round_trip_cross_country_flight":0.6187917143218519,"vegan_meals_instead_of_non_vegan_ones":872.037912824007,"days_of_veganism":290.679304274669,"weeks_of_veganism":41.52515045426395,"months_of_veganism":9.689346265764758,"years_of_veganism":0.7965182312198968,"barrels_of_petroleum":2.520682184785687,"canisters_of_bbq_propane":45.154455973114885,"railroad_cars_full_of_coal":0.005418491368842836,"homes_energy_in_a_year":0.10511873255555101,"homes_energy_in_a_month":1.2560062992977694,"homes_energy_in_a_week":5.441249032591975,"homes_energy_in_a_day":38.19711305552069,"homes_electricity_in_a_year":0.15930364624397936,"homes_electricity_in_a_month":1.9062252635589094,"homes_electricity_in_a_week":8.259948242664018,"homes_electricity_in_a_day":57.97677394834457,"homes_with_lowered_thermostat_2_degrees_for_a_winter":5.688332239011209,"homes_with_raised_thermostat_3_degrees_for_a_summer":2.5575279260938184,"replaced_refrigerators":1.0912841616849471,"loads_of_cold_laundry":496.9428478158617,"lightbulbs_for_a_year":2.000507013376775,"lightbulbs_for_a_month":24.34528172021086,"lightbulbs_for_a_week":104.33630240189011,"lightbulbs_for_a_day":730.3573679080521,"lightbulbs_for_an_evening":4382.145291146586,"lightbulbs_to_CFLs_for_a_day":12431.618738777546,"lightbulbs_to_CFLs_for_a_week":1775.945224483,"lightbulbs_to_CFLs_for_a_month":414.38779701844595,"lightbulbs_to_CFLs_for_a_year":34.05955304627229,"days_with_lightbulbs_to_CFLs":276.2585313456307,"weeks_with_lightbulbs_to_CFLs":39.46504003582991,"months_with_lightbulbs_to_CFLs":9.208184232211513,"years_with_lightbulbs_to_CFLs":0.7564213950904599,"recycled_kgs_of_trash":747.3779329958612,"recycled_bags_of_trash":414.1190398465514},"methodology":"http://impact.brighterplanet.com/flights?timeframe=2012-01-01%2F2013-01-01","scope":"The
+        flight greenhouse gas emission is the anthropogenic greenhouse gas emissions
+        attributed to a single passenger on this flight. It includes CO2 emissions
+        from combustion of non-biogenic fuel and extra forcing effects of high-altitude
+        fuel combustion.","timeframe":"2012-01-01/2013-01-01","characteristics":{},"errors":["API
+        key \"carbon_test\" could not be verified. Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Wed, 20 Jun 2012 18:47:53 GMT
+recorded_with: VCR 2.2.2
