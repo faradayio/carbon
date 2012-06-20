@@ -71,6 +71,8 @@ module Carbon
       end
     end
 
+    QUICK_DECISIONS = [:carbon, :energy]
+
     attr_reader :emitter
     attr_reader :params
     attr_reader :domain
@@ -130,6 +132,11 @@ module Carbon
       when (200..299)
         memo.success = true
         memo.merge! MultiJson.load(body)
+        QUICK_DECISIONS.each do |decision|
+          if node = memo.decisions[decision]
+            memo[decision] = node.object.value
+          end
+        end
       else
         memo.success = false
         memo.errors = [body]

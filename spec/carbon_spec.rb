@@ -20,6 +20,18 @@ describe Carbon do
           result.decisions.carbon.object.value.should be_within(50).of(200)
         end
       end
+      it "provides #carbon helper method to return carbon emission in kg" do
+        VCR.use_cassette 'Flight', :record => :once do
+          result = Carbon.query('Flight')
+          result.carbon.should == result.decisions.carbon.object.value
+        end
+      end
+      it "provides #energy helper method to return energy usage in MJ" do
+        VCR.use_cassette 'Flight', :record => :once do
+          result = Carbon.query('Flight')
+          result.energy.should == result.decisions.energy.object.value
+        end
+      end
       it "can be used on an object that responds to #as_impact_query" do
         VCR.use_cassette '2006 Altima', :record => :once do
           Carbon.query(MyNissanAltima.new(2006)).decisions.should == MyNissanAltima.new(2006).impact.decisions

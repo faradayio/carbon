@@ -1,3 +1,11 @@
+3.0.1 / 2012-06-20
+
+* Enhancements
+
+  * Provide "quick decisions" shortcuts
+    - result.decisions.carbon.object.value -> result.carbon
+    - result.decisions.energy.object.value -> result.energy
+
 3.0.0 / 2012-06-08
 
 * Breaking changes
