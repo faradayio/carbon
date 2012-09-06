@@ -1,0 +1,236 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://impact.brighterplanet.com/emitters.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 06 Sep 2012 21:32:59 GMT
+      content-type:
+      - application/json
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+      content-length:
+      - '200'
+      x-varnish:
+      - '1981209413'
+      age:
+      - '0'
+      via:
+      - 1.1 varnish
+    body:
+      encoding: US-ASCII
+      string: ! '{"emitters":["Automobile","AutomobileTrip","BusTrip","Computation","Diet","ElectricityUse","Flight","FuelPurchase","Lodging","Meeting","Motorcycle","Pet","Purchase","RailTrip","Residence","Shipment"]}'
+    http_version: '1.1'
+  recorded_at: Thu, 06 Sep 2012 21:32:59 GMT
+- request:
+    method: get
+    uri: http://impact.brighterplanet.com/computations/options.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 06 Sep 2012 21:33:16 GMT
+      content-type:
+      - application/json
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+      etag:
+      - d07a4c31cf07e29e3b7add6682629e19
+      content-length:
+      - '134'
+      x-varnish:
+      - '147830111'
+      age:
+      - '0'
+      via:
+      - 1.1 varnish
+    body:
+      encoding: US-ASCII
+      string: ! '["carrier","carrier_region","carrier_instance_class","zip_code","date","duration","electricity_intensity","power_usage_effectiveness"]'
+    http_version: '1.1'
+  recorded_at: Thu, 06 Sep 2012 21:33:16 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/computations.json
+    body:
+      encoding: US-ASCII
+      string: timeframe
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 06 Sep 2012 21:33:16 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"0.1 kg","object":{"value":0.09338533312344462,"units":"kilograms"},"methodology":"from
+        co2 emission, ch4 emission, and n2o emission"},"co2_emission":{"description":"0.09292776157812689","object":0.09292776157812689,"methodology":"from
+        electricity use, co2 emission factor, date, and timeframe"},"ch4_emission":{"description":"4.59118592601502e-05","object":4.59118592601502e-05,"methodology":"from
+        electricity use, ch4 emission factor, date, and timeframe"},"n2o_emission":{"description":"0.00041165968605758226","object":0.00041165968605758226,"methodology":"from
+        electricity use, n2o emission factor, date, and timeframe"},"co2_emission_factor":{"description":"0.5516490476149729","object":0.5516490476149729,"methodology":"from
+        eGRID subregion"},"ch4_emission_factor":{"description":"0.0002725475466639885","object":0.0002725475466639885,"methodology":"from
+        eGRID subregion"},"n2o_emission_factor":{"description":"0.002443744150279805","object":0.002443744150279805,"methodology":"from
+        eGRID subregion"},"electricity_use":{"description":"0.1684544947188714","object":0.1684544947188714,"methodology":"from
+        duration, electricity intensity, PUE, and electricity loss factor"},"electricity_loss_factor":{"description":"0.0650294","object":0.0650294,"methodology":"from
+        eGRID region"},"egrid_region":{"description":"fallback","object":{"egrid_region":{"consumption":null,"consumption_units":null,"domestic_interchange":null,"domestic_interchange_units":null,"foreign_interchange":null,"foreign_interchange_units":null,"generation":null,"generation_units":null,"loss_factor":0.0650294,"name":"fallback"}},"methodology":"from
+        eGRID subregion"},"egrid_subregion":{"description":null,"object":{"egrid_subregion":{"abbreviation":null,"ch4_emission_factor":0.0002725475466639885,"ch4_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","co2_biogenic_emission_factor":null,"co2_biogenic_emission_factor_units":"kilograms_per_kilowatt_hour","co2_emission_factor":0.5516490476149729,"co2_emission_factor_units":"kilograms_per_kilowatt_hour","egrid_region_name":"fallback","electricity_emission_factor":0.554365536465505,"electricity_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","n2o_emission_factor":0.002443744150279805,"n2o_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","name":"fallback","nerc_abbreviation":null,"net_generation":null,"net_generation_units":null}},"methodology":"default"},"power_usage_effectiveness":{"description":"1.5","object":1.5,"methodology":"from
+        carrier"},"electricity_intensity":{"description":"0.105","object":0.105,"methodology":"from
+        carrier instance class"},"carrier_instance_class":{"description":"Amazon m1.small","object":{"computation_carrier_instance_class":{"computation_carrier_name":"Amazon","electricity_intensity":0.105,"electricity_intensity_units":"kilowatts","instance_class":"m1.small","name":"Amazon
+        m1.small"}},"methodology":"default"},"carrier":{"description":"fallback","object":{"computation_carrier":{"name":"fallback","power_usage_effectiveness":1.5}},"methodology":"default"},"duration":{"description":"3,600.0
+        s","object":{"value":3600.0,"units":"seconds"},"methodology":"default"},"date":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        timeframe"}},"emitter":"Computation","equivalents":{"cars_off_the_road_for_a_year":1.699613062846692e-05,"cars_off_the_road_for_a_month":0.00020376679687535615,"cars_off_the_road_for_a_week":0.0008829583246821688,"cars_off_the_road_for_a_day":0.006197611018070525,"cars_to_priuses_for_a_year":3.399226125693384e-05,"cars_to_priuses_for_a_month":0.0004075335937507123,"cars_to_priuses_for_a_week":0.0017659166493643377,"cars_to_priuses_for_a_day":0.01239522203614105,"one_way_domestic_flight":0.000303502332651195,"round_trip_domestic_flight":0.0001517511663255975,"one_way_cross_country_flight":0.00010664605042697375,"round_trip_cross_country_flight":5.3323025213486874e-05,"vegan_meals_instead_of_non_vegan_ones":0.07514596355510528,"days_of_veganism":0.025048654518368425,"weeks_of_veganism":0.003578339194624151,"months_of_veganism":0.0008349582634567183,"years_of_veganism":6.863821984573179e-05,"barrels_of_petroleum":0.00021721428484513218,"canisters_of_bbq_propane":0.003891086675254567,"railroad_cars_full_of_coal":4.669266656172231e-07,"homes_energy_in_a_year":9.058377312974127e-06,"homes_energy_in_a_month":0.00010823360109007232,"homes_energy_in_a_week":0.00046888775761281544,"homes_energy_in_a_day":0.0032915528366020525,"homes_electricity_in_a_year":1.3727643969146358e-05,"homes_electricity_in_a_month":0.00016426480096413907,"homes_electricity_in_a_week":0.0007117830090668949,"homes_electricity_in_a_day":0.004996021936771163,"homes_with_lowered_thermostat_2_degrees_for_a_winter":0.0004901796135649608,"homes_with_raised_thermostat_3_degrees_for_a_summer":0.0002203893861713293,"replaced_refrigerators":9.403903045530874e-05,"loads_of_cold_laundry":0.042822965127753014,"lightbulbs_for_a_year":0.00017238932494587875,"lightbulbs_for_a_month":0.0020979015086181833,"lightbulbs_for_a_week":0.008990953102459,"lightbulbs_for_a_day":0.06293695187321238,"lightbulbs_for_an_evening":0.3776218046246073,"lightbulbs_to_CFLs_for_a_day":1.0712676076775998,"lightbulbs_to_CFLs_for_a_week":0.1530382029867048,"lightbulbs_to_CFLs_for_a_month":0.03570896383574212,"lightbulbs_to_CFLs_for_a_year":0.002935007634736741,"days_with_lightbulbs_to_CFLs":0.023805975890494747,"weeks_with_lightbulbs_to_CFLs":0.0034008136763564825,"months_with_lightbulbs_to_CFLs":0.0007934951755499089,"years_with_lightbulbs_to_CFLs":6.518296252016435e-05,"recycled_kgs_of_trash":0.0644036619152492,"recycled_bags_of_trash":0.03568580427312751},"methodology":"http://impact.brighterplanet.com/computations?timeframe=2012-01-01%2F2013-01-01","scope":null,"timeframe":"2012-01-01/2013-01-01","characteristics":{},"errors":["No
+        API key was specified. Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Thu, 06 Sep 2012 21:33:17 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/computations.json
+    body:
+      encoding: US-ASCII
+      string: duration=10&timeframe
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 06 Sep 2012 21:33:36 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"0.0 kg","object":{"value":0.00025940370312067953,"units":"kilograms"},"methodology":"from
+        co2 emission, ch4 emission, and n2o emission"},"co2_emission":{"description":"0.0002581326710503525","object":0.0002581326710503525,"methodology":"from
+        electricity use, co2 emission factor, date, and timeframe"},"ch4_emission":{"description":"1.2753294238930612e-07","object":1.2753294238930612e-07,"methodology":"from
+        electricity use, ch4 emission factor, date, and timeframe"},"n2o_emission":{"description":"1.1434991279377286e-06","object":1.1434991279377286e-06,"methodology":"from
+        electricity use, n2o emission factor, date, and timeframe"},"co2_emission_factor":{"description":"0.5516490476149729","object":0.5516490476149729,"methodology":"from
+        eGRID subregion"},"ch4_emission_factor":{"description":"0.0002725475466639885","object":0.0002725475466639885,"methodology":"from
+        eGRID subregion"},"n2o_emission_factor":{"description":"0.002443744150279805","object":0.002443744150279805,"methodology":"from
+        eGRID subregion"},"electricity_use":{"description":"0.00046792915199686503","object":0.00046792915199686503,"methodology":"from
+        duration, electricity intensity, PUE, and electricity loss factor"},"electricity_loss_factor":{"description":"0.0650294","object":0.0650294,"methodology":"from
+        eGRID region"},"egrid_region":{"description":"fallback","object":{"egrid_region":{"consumption":null,"consumption_units":null,"domestic_interchange":null,"domestic_interchange_units":null,"foreign_interchange":null,"foreign_interchange_units":null,"generation":null,"generation_units":null,"loss_factor":0.0650294,"name":"fallback"}},"methodology":"from
+        eGRID subregion"},"egrid_subregion":{"description":null,"object":{"egrid_subregion":{"abbreviation":null,"ch4_emission_factor":0.0002725475466639885,"ch4_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","co2_biogenic_emission_factor":null,"co2_biogenic_emission_factor_units":"kilograms_per_kilowatt_hour","co2_emission_factor":0.5516490476149729,"co2_emission_factor_units":"kilograms_per_kilowatt_hour","egrid_region_name":"fallback","electricity_emission_factor":0.554365536465505,"electricity_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","n2o_emission_factor":0.002443744150279805,"n2o_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","name":"fallback","nerc_abbreviation":null,"net_generation":null,"net_generation_units":null}},"methodology":"default"},"power_usage_effectiveness":{"description":"1.5","object":1.5,"methodology":"from
+        carrier"},"electricity_intensity":{"description":"0.105","object":0.105,"methodology":"from
+        carrier instance class"},"carrier_instance_class":{"description":"Amazon m1.small","object":{"computation_carrier_instance_class":{"computation_carrier_name":"Amazon","electricity_intensity":0.105,"electricity_intensity_units":"kilowatts","instance_class":"m1.small","name":"Amazon
+        m1.small"}},"methodology":"default"},"carrier":{"description":"fallback","object":{"computation_carrier":{"name":"fallback","power_usage_effectiveness":1.5}},"methodology":"default"},"date":{"description":"2012-01-01","object":"2012-01-01","methodology":"from
+        timeframe"}},"emitter":"Computation","equivalents":{"cars_off_the_road_for_a_year":4.7211473967963676e-08,"cars_off_the_road_for_a_month":5.660188802093227e-07,"cars_off_the_road_for_a_week":2.452662013006025e-06,"cars_off_the_road_for_a_day":1.7215586161307016e-05,"cars_to_priuses_for_a_year":9.442294793592735e-08,"cars_to_priuses_for_a_month":1.1320377604186455e-06,"cars_to_priuses_for_a_week":4.90532402601205e-06,"cars_to_priuses_for_a_day":3.443117232261403e-05,"one_way_domestic_flight":8.430620351422084e-07,"round_trip_domestic_flight":4.215310175711042e-07,"one_way_cross_country_flight":2.96239028963816e-07,"round_trip_cross_country_flight":1.48119514481908e-07,"vegan_meals_instead_of_non_vegan_ones":0.00020873878765307027,"days_of_veganism":6.957959588435674e-05,"weeks_of_veganism":9.939831096178198e-06,"months_of_veganism":2.3193285096019956e-06,"years_of_veganism":1.9066172179369945e-07,"barrels_of_petroleum":6.033730134587006e-07,"canisters_of_bbq_propane":1.0808574097929354e-05,"railroad_cars_full_of_coal":1.2970185156033977e-09,"homes_energy_in_a_year":2.5162159202705915e-08,"homes_energy_in_a_month":3.006488919168676e-07,"homes_energy_in_a_week":1.302465993368932e-06,"homes_energy_in_a_day":9.143202323894592e-06,"homes_electricity_in_a_year":3.813234435873989e-08,"homes_electricity_in_a_month":4.562911137892753e-07,"homes_electricity_in_a_week":1.9771750251858194e-06,"homes_electricity_in_a_day":1.3877838713253233e-05,"homes_with_lowered_thermostat_2_degrees_for_a_winter":1.3616100376804469e-06,"homes_with_raised_thermostat_3_degrees_for_a_summer":6.121927393648037e-07,"replaced_refrigerators":2.6121952904252433e-07,"loads_of_cold_laundry":0.00011895268091042506,"lightbulbs_for_a_year":4.788592359607745e-07,"lightbulbs_for_a_month":5.8275041906060655e-06,"lightbulbs_for_a_week":2.4974869729052783e-05,"lightbulbs_for_a_day":0.00017482486631447886,"lightbulbs_for_an_evening":0.001048949457290576,"lightbulbs_to_CFLs_for_a_day":0.00297574335466,"lightbulbs_to_CFLs_for_a_week":0.0004251061194075134,"lightbulbs_to_CFLs_for_a_month":9.919156621039479e-05,"lightbulbs_to_CFLs_for_a_year":8.152798985379837e-06,"days_with_lightbulbs_to_CFLs":6.612771080692986e-05,"weeks_with_lightbulbs_to_CFLs":9.446704656545786e-06,"months_with_lightbulbs_to_CFLs":2.204153265416414e-06,"years_with_lightbulbs_to_CFLs":1.8106378477823433e-07,"recycled_kgs_of_trash":0.00017889906087569223,"recycled_bags_of_trash":9.912723409202087e-05},"methodology":"http://impact.brighterplanet.com/computations?duration=10&timeframe=2012-01-01%2F2013-01-01","scope":null,"timeframe":"2012-01-01/2013-01-01","characteristics":{"duration":{"description":"10.0
+        s","object":{"value":10.0,"units":"seconds"}}},"errors":["No API key was specified.
+        Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Thu, 06 Sep 2012 21:33:36 GMT
+- request:
+    method: post
+    uri: http://impact.brighterplanet.com/computations.json
+    body:
+      encoding: US-ASCII
+      string: timeframe=2009
+    headers:
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      content-type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 06 Sep 2012 21:35:47 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+    body:
+      encoding: US-ASCII
+      string: ! '{"compliance":[],"decisions":{"carbon":{"description":"0.1 kg","object":{"value":0.09338533312344462,"units":"kilograms"},"methodology":"from
+        co2 emission, ch4 emission, and n2o emission"},"co2_emission":{"description":"0.09292776157812689","object":0.09292776157812689,"methodology":"from
+        electricity use, co2 emission factor, date, and timeframe"},"ch4_emission":{"description":"4.59118592601502e-05","object":4.59118592601502e-05,"methodology":"from
+        electricity use, ch4 emission factor, date, and timeframe"},"n2o_emission":{"description":"0.00041165968605758226","object":0.00041165968605758226,"methodology":"from
+        electricity use, n2o emission factor, date, and timeframe"},"co2_emission_factor":{"description":"0.5516490476149729","object":0.5516490476149729,"methodology":"from
+        eGRID subregion"},"ch4_emission_factor":{"description":"0.0002725475466639885","object":0.0002725475466639885,"methodology":"from
+        eGRID subregion"},"n2o_emission_factor":{"description":"0.002443744150279805","object":0.002443744150279805,"methodology":"from
+        eGRID subregion"},"electricity_use":{"description":"0.1684544947188714","object":0.1684544947188714,"methodology":"from
+        duration, electricity intensity, PUE, and electricity loss factor"},"electricity_loss_factor":{"description":"0.0650294","object":0.0650294,"methodology":"from
+        eGRID region"},"egrid_region":{"description":"fallback","object":{"egrid_region":{"consumption":null,"consumption_units":null,"domestic_interchange":null,"domestic_interchange_units":null,"foreign_interchange":null,"foreign_interchange_units":null,"generation":null,"generation_units":null,"loss_factor":0.0650294,"name":"fallback"}},"methodology":"from
+        eGRID subregion"},"egrid_subregion":{"description":null,"object":{"egrid_subregion":{"abbreviation":null,"ch4_emission_factor":0.0002725475466639885,"ch4_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","co2_biogenic_emission_factor":null,"co2_biogenic_emission_factor_units":"kilograms_per_kilowatt_hour","co2_emission_factor":0.5516490476149729,"co2_emission_factor_units":"kilograms_per_kilowatt_hour","egrid_region_name":"fallback","electricity_emission_factor":0.554365536465505,"electricity_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","n2o_emission_factor":0.002443744150279805,"n2o_emission_factor_units":"kilograms_co2e_per_kilowatt_hour","name":"fallback","nerc_abbreviation":null,"net_generation":null,"net_generation_units":null}},"methodology":"default"},"power_usage_effectiveness":{"description":"1.5","object":1.5,"methodology":"from
+        carrier"},"electricity_intensity":{"description":"0.105","object":0.105,"methodology":"from
+        carrier instance class"},"carrier_instance_class":{"description":"Amazon m1.small","object":{"computation_carrier_instance_class":{"computation_carrier_name":"Amazon","electricity_intensity":0.105,"electricity_intensity_units":"kilowatts","instance_class":"m1.small","name":"Amazon
+        m1.small"}},"methodology":"default"},"carrier":{"description":"fallback","object":{"computation_carrier":{"name":"fallback","power_usage_effectiveness":1.5}},"methodology":"default"},"duration":{"description":"3,600.0
+        s","object":{"value":3600.0,"units":"seconds"},"methodology":"default"},"date":{"description":"2009-01-01","object":"2009-01-01","methodology":"from
+        timeframe"}},"emitter":"Computation","equivalents":{"cars_off_the_road_for_a_year":1.699613062846692e-05,"cars_off_the_road_for_a_month":0.00020376679687535615,"cars_off_the_road_for_a_week":0.0008829583246821688,"cars_off_the_road_for_a_day":0.006197611018070525,"cars_to_priuses_for_a_year":3.399226125693384e-05,"cars_to_priuses_for_a_month":0.0004075335937507123,"cars_to_priuses_for_a_week":0.0017659166493643377,"cars_to_priuses_for_a_day":0.01239522203614105,"one_way_domestic_flight":0.000303502332651195,"round_trip_domestic_flight":0.0001517511663255975,"one_way_cross_country_flight":0.00010664605042697375,"round_trip_cross_country_flight":5.3323025213486874e-05,"vegan_meals_instead_of_non_vegan_ones":0.07514596355510528,"days_of_veganism":0.025048654518368425,"weeks_of_veganism":0.003578339194624151,"months_of_veganism":0.0008349582634567183,"years_of_veganism":6.863821984573179e-05,"barrels_of_petroleum":0.00021721428484513218,"canisters_of_bbq_propane":0.003891086675254567,"railroad_cars_full_of_coal":4.669266656172231e-07,"homes_energy_in_a_year":9.058377312974127e-06,"homes_energy_in_a_month":0.00010823360109007232,"homes_energy_in_a_week":0.00046888775761281544,"homes_energy_in_a_day":0.0032915528366020525,"homes_electricity_in_a_year":1.3727643969146358e-05,"homes_electricity_in_a_month":0.00016426480096413907,"homes_electricity_in_a_week":0.0007117830090668949,"homes_electricity_in_a_day":0.004996021936771163,"homes_with_lowered_thermostat_2_degrees_for_a_winter":0.0004901796135649608,"homes_with_raised_thermostat_3_degrees_for_a_summer":0.0002203893861713293,"replaced_refrigerators":9.403903045530874e-05,"loads_of_cold_laundry":0.042822965127753014,"lightbulbs_for_a_year":0.00017238932494587875,"lightbulbs_for_a_month":0.0020979015086181833,"lightbulbs_for_a_week":0.008990953102459,"lightbulbs_for_a_day":0.06293695187321238,"lightbulbs_for_an_evening":0.3776218046246073,"lightbulbs_to_CFLs_for_a_day":1.0712676076775998,"lightbulbs_to_CFLs_for_a_week":0.1530382029867048,"lightbulbs_to_CFLs_for_a_month":0.03570896383574212,"lightbulbs_to_CFLs_for_a_year":0.002935007634736741,"days_with_lightbulbs_to_CFLs":0.023805975890494747,"weeks_with_lightbulbs_to_CFLs":0.0034008136763564825,"months_with_lightbulbs_to_CFLs":0.0007934951755499089,"years_with_lightbulbs_to_CFLs":6.518296252016435e-05,"recycled_kgs_of_trash":0.0644036619152492,"recycled_bags_of_trash":0.03568580427312751},"methodology":"http://impact.brighterplanet.com/computations?timeframe=2009-01-01%2F2010-01-01","scope":null,"timeframe":"2009-01-01/2010-01-01","characteristics":{},"errors":["No
+        API key was specified. Please register at http://keys.brighterplanet.com"]}'
+    http_version: '1.1'
+  recorded_at: Thu, 06 Sep 2012 21:35:47 GMT
+recorded_with: VCR 2.2.4

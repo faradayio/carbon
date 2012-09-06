@@ -4,4 +4,15 @@ require 'rubygems'
 $LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__)) unless $LOAD_PATH.include?(File.expand_path('../../lib', __FILE__))
 require 'carbon/shell'
 
+if ENV['VCR_CASSETTES']
+  require 'vcr'
+  VCR.configure do |c|
+    c.cassette_library_dir = ENV['VCR_CASSETTES']
+    c.hook_into :fakeweb
+    c.around_http_request do |request|
+      VCR.use_cassette('global', :record => :once, :match_requests_on => [:uri, :body], &request)
+    end
+  end
+end
+
 Bombshell.launch(Carbon::Shell)
