@@ -4,6 +4,8 @@ Carbon is a Ruby API client and command-line console for the [Brighter Planet im
 
 Full documentation: [RDoc](http://rdoc.info/projects/brighterplanet/carbon) 
 
+[![Build Status](https://secure.travis-ci.org/brighterplanet/carbon.png)](http://travis-ci.org/brighterplanet/carbon)
+
 ## Quick start 1: experimenting with the console
 
 <b>You'll need a Brighter Planet API key. See the "API keys" section below for details.</b>
