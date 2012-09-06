@@ -80,7 +80,7 @@ describe Carbon do
       it "raises ArgumentError if args are bad" do
         expect do
           Carbon.query(['Flight'])
-        end.should raise_error(ArgumentError)
+        end.to raise_error(ArgumentError)
       end
     end
 
@@ -123,7 +123,7 @@ describe Carbon do
       it "raises if you pass it a block directly" do
         expect do
           Carbon.query([]) { }
-        end.should raise_error(ArgumentError)
+        end.to raise_error(ArgumentError)
       end
       it "can be used on objects that respond to #as_impact_query" do
         a = MyNissanAltima.new(2001)
